@@ -59,14 +59,14 @@ public class StructurePlacement : MonoBehaviour {
                 Vector3 formatPos = (hitPosition - gridCenter.transform.position) / cellWidth;
                 Vector2 cornerPos = new Vector2(Mathf.Floor(formatPos.x + 0.5f), Mathf.Floor(formatPos.z + 0.5f));
 
-                cornerPos.x = Mathf.Max(0, cornerPos.x);
-                cornerPos.y = Mathf.Max(0, cornerPos.y);
+                //cornerPos.x = Mathf.Max(0, cornerPos.x);
+                //cornerPos.y = Mathf.Max(0, cornerPos.y);
 
                 currentStructure.position = new Vector3(cornerPos.x* cellWidth, hitPosition.y, cornerPos.y* cellWidth) + gridCenter.transform.position;
 
                 // Check collision
-                int cornerPosX = (int)cornerPos.x;
-                int cornerPosY = (int)cornerPos.y;
+                int cornerPosX = (int)cornerPos.x + gridHalfLength;
+                int cornerPosY = (int)cornerPos.y + gridHalfLength;
 
                 bool occopied = false;
 
@@ -80,7 +80,17 @@ public class StructurePlacement : MonoBehaviour {
                         int gridPosY = cornerPosY + y;
 
                         if (gridPosX < 0 || gridPosY < 0)
+                        {
+                            Debug.Log("outside1" + " " + gridPosX +" " + gridPosY);
                             continue;
+                        }
+                        if (gridPosX > gridHalfLength*2 - 1 || gridPosY > gridHalfLength*2 - 1)
+                        {
+                            Debug.Log("outside2" + " " + gridPosX + " " + gridPosY);
+                            continue;
+                        }
+
+
 
                         //Debug.Log(gridPosX + " " +  gridPosY);
 
