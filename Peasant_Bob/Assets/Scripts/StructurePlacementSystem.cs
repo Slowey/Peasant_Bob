@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StructurePlacement : MonoBehaviour {
+public class StructurePlacementSystem : MonoBehaviour {
 
     public Transform gridCenter;
     static public int gridHalfLength = 50;
@@ -10,8 +10,13 @@ public class StructurePlacement : MonoBehaviour {
     
     int[,] grid = new int[gridHalfLength*2, gridHalfLength*2];
 
-    bool placing = true;
-    public Transform currentStructure;
+
+    bool placing = false;
+    GameObject currentStructurePrefab;
+    public GameObject currentStructure;
+
+    public GameObject placeStructurePrefab;
+    public GameObject buildingStructurePrefab;
 
     struct StructureGridSize
     {
@@ -62,7 +67,7 @@ public class StructurePlacement : MonoBehaviour {
                 //cornerPos.x = Mathf.Max(0, cornerPos.x);
                 //cornerPos.y = Mathf.Max(0, cornerPos.y);
 
-                currentStructure.position = new Vector3(cornerPos.x* cellWidth, hitPosition.y, cornerPos.y* cellWidth) + gridCenter.transform.position;
+                currentStructure.transform.position = new Vector3(cornerPos.x* cellWidth, hitPosition.y, cornerPos.y* cellWidth) + gridCenter.transform.position;
 
                 // Check collision
                 int cornerPosX = (int)cornerPos.x + gridHalfLength;
@@ -128,8 +133,8 @@ public class StructurePlacement : MonoBehaviour {
                         }
                     }
 
-                    Transform obj = Instantiate(currentStructure);
-                    currentStructure = obj.transform;
+                    GameObject obj = Instantiate(currentStructure);
+                    currentStructure = obj;
                 }
 
             }
@@ -141,13 +146,36 @@ public class StructurePlacement : MonoBehaviour {
 
 	}
 
-    void AttemptPlace()
+    public void AttemptPlace()
     {
 
     }
 
-    void StartPlacing()
+    public void CancelPlace()
     {
+        if (currentStructure)
+        {
+            Destroy(currentStructure);
+        }
+    }
+
+    public void StartPlacing(GameObject obj)
+    {
+        // Cancel any previous
+        CancelPlace();
+
+        currentStructurePrefab = obj;
+        currentStructure = Instantiate(placeStructurePrefab, transform.position, Quaternion.identity);
+
+        // Get data
+        MeshFilter filter = currentStructure.GetComponent<MeshFilter>();
+        MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
+        if (filter == null || filterObj == null)
+            Debug.LogWarning("No filter on structure");
+
+        filter.mesh = filterObj.mesh;
+
+
         placing = true;
     }
 }
