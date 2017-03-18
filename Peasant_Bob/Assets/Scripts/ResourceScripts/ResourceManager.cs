@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour {
-    Dictionary<ResourceType, List<GameObject>> m_allResources; // This should perhaps be in a resource manager or something
+    Dictionary<ResourceType, List<GameObject>> m_allResources = new Dictionary<ResourceType, List<GameObject>>(); // This should perhaps be in a resource manager or something
+
+
+
     // Use this for initialization
     void Start() {
-        m_allResources = new Dictionary<ResourceType, List<GameObject>>();
     }
 
     // Update is called once per frame
