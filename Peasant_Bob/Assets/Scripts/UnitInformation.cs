@@ -6,6 +6,7 @@ public class UnitInformation : MonoBehaviour {
 
     public int resourceCost = 0;
     public float spawnTime = 0;
+    public int requireBeds = 0;
 
 	// Use this for initialization
 	void Start () {

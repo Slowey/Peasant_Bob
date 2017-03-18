@@ -20,12 +20,17 @@ public class UnitSpawning : MonoBehaviour {
         StructureMenu.AvaliableFunction func5 = CanSpawnMore;
 
         //structureMenu.AddMenuItem(StartSpawning, CancelSpawning, PercentageDone, NumQueuedUnits, CanSpawnMore, this);
-        structureMenu.AddMenuItem(func1, func2, func3 ,func4 ,func5, this);
+        structureMenu.AddMenuItem(func1, func2, func3 ,func4, func5);
         timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
     }
 
     void StartSpawning()
     {
+        if(BedSystem.bedSystem.GetNumFreeBeds() < unitPrefab.GetComponent<UnitInformation>().requireBeds)
+        {
+            return;
+        }
+
         pendingUnits++;
         if(pendingUnits == 1)
         {
@@ -66,7 +71,7 @@ public class UnitSpawning : MonoBehaviour {
 
     bool CanSpawnMore()
     {
-        return true;
+        return BedSystem.bedSystem.GetNumFreeBeds() >= unitPrefab.GetComponent<UnitInformation>().requireBeds;
     }
 
     // Update is called once per frame

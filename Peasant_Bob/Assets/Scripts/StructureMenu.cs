@@ -22,7 +22,6 @@ public class StructureMenu : MonoBehaviour {
         public PercentageDoneFunction percFunc;
         public NumberActiveFunction numFunc;
         public AvaliableFunction avilFunc;
-        public MonoBehaviour beh;
     }
 
     List<MenuItem> menuItems = new List<MenuItem>();
@@ -93,7 +92,7 @@ public class StructureMenu : MonoBehaviour {
 
     **/
 
-    public void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc, MonoBehaviour beh)
+    public void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc)
     {
         MenuItem newItem;
         newItem.clickFunc = func;
@@ -101,7 +100,6 @@ public class StructureMenu : MonoBehaviour {
         newItem.percFunc = perFunc;
         newItem.numFunc = numFunc;
         newItem.avilFunc = avilFunc;
-        newItem.beh = beh;
 
         menuItems.Add(newItem);
     }

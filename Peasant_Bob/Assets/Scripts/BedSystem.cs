@@ -7,7 +7,7 @@ public class BedSystem : MonoBehaviour {
     public static BedSystem bedSystem;
 
     int occopiedBeds = 0;
-    int maxBeds = 0;
+    public int maxBeds = 0;
 
     void Awake()
     {
@@ -19,7 +19,7 @@ public class BedSystem : MonoBehaviour {
         bedSystem = this;
     }
 
-    int GetNumFreeBeds()
+    public int GetNumFreeBeds()
     {
         return maxBeds - occopiedBeds;
     }
