@@ -90,11 +90,5 @@ public class TP_Animator : MonoBehaviour {
             m_moveDirection = Direction.Stationary;
         }
 
-
-
-        {
-
-        }
-
     }
 }

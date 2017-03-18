@@ -15,11 +15,18 @@ public class TP_Motor : MonoBehaviour {
     public float m_terminalVel = 20f;
     public float m_slideThreshold = 0.6f;
     public float m_maxControllableSlideMagnitude = 0.4f;
+    public float m_dashCoolDown = 1.0f;
+    public float m_dashSpeedImpulse = 50f;
+    public float m_dashSpeedFalloff = 100f;
+    public bool m_isDashing = false;
+    public float m_currentDashSpeed = 0f;
 
+    private float m_dashCooldownTimer = 0;
     private Vector3 m_slideDirection;
 
     public Vector3 m_moveVector { get; set; }
 	public float m_verticalVel { get; set; }
+    public Vector3 m_dashDirection { get; set; }
     // Use this for initialization
 	void Awake () {
         m_instance = this;
@@ -30,6 +37,38 @@ public class TP_Motor : MonoBehaviour {
         SnapAlignCharacterWithCamera();
         ProcessMotion();
 	}
+
+    public void StartDashing()
+    {
+        if (m_dashCooldownTimer > 0f || m_isDashing)
+        {
+            return;
+        }
+        m_currentDashSpeed = m_dashSpeedImpulse;
+        m_dashCooldownTimer = m_dashCoolDown;
+        m_isDashing = true;
+
+    }
+
+    void HandleDash()
+    {
+        if (m_dashCooldownTimer > 0f)
+        {
+            m_dashCooldownTimer -= Time.deltaTime;
+        }
+        if (!m_isDashing)
+        {
+            //not dashing
+            return;
+        }
+        m_moveVector += m_dashDirection * m_currentDashSpeed;
+        m_currentDashSpeed -= m_dashSpeedFalloff * Time.deltaTime;
+        if (m_currentDashSpeed < m_forwardSpeed)
+        {
+            m_isDashing = false;
+        }
+
+    }
 
     void ProcessMotion()
     {
@@ -42,11 +81,15 @@ public class TP_Motor : MonoBehaviour {
             m_moveVector = Vector3.Normalize(m_moveVector);
         }
 
-        // Apply Sliding if applicable
+            // Apply Sliding if applicable
         bool test = ApplySlide();
 
         // multiply normalised movevec with movespeed
-        m_moveVector *= MoveSpeed();
+        if (!m_isDashing)
+        {
+            m_moveVector *= MoveSpeed();
+        }
+        HandleDash();
         //Reapply Vertical Vel MoveVector.y
         m_moveVector = new Vector3(m_moveVector.x, m_verticalVel, m_moveVector.z);
 

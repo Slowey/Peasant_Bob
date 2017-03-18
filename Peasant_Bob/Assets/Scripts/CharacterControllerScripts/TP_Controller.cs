@@ -30,16 +30,24 @@ public class TP_Controller : MonoBehaviour {
         float deadZone = 0.1f;
 
         TP_Motor.m_instance.m_verticalVel = TP_Motor.m_instance.m_moveVector.y;
+        TP_Motor.m_instance.m_dashDirection = TP_Motor.m_instance.m_moveVector.normalized;
         TP_Motor.m_instance.m_moveVector = Vector3.zero;
         float t_vert = Input.GetAxis("Vertical");
         float t_hori = Input.GetAxis("Horizontal");
-        if (t_vert  > deadZone || t_vert < -deadZone)
+        if (TP_Motor.m_instance.m_isDashing)
         {
-            TP_Motor.m_instance.m_moveVector += new Vector3(0,0, t_vert);
+            TP_Motor.m_instance.m_moveVector = TP_Motor.m_instance.m_dashDirection;
         }
-        if (t_hori > deadZone || t_hori < -deadZone)
+        else
         {
-            TP_Motor.m_instance.m_moveVector += new Vector3(t_hori, 0, 0);
+            if (t_vert > deadZone || t_vert < -deadZone)
+            {
+                TP_Motor.m_instance.m_moveVector += new Vector3(0, 0, t_vert);
+            }
+            if (t_hori > deadZone || t_hori < -deadZone)
+            {
+                TP_Motor.m_instance.m_moveVector += new Vector3(t_hori, 0, 0);
+            }
         }
         TP_Animator.m_instance.DetermineCurrentMoveDirection();
     }
@@ -49,9 +57,17 @@ public class TP_Controller : MonoBehaviour {
         {
             Jump();
         }
+        if (Input.GetButton("Dash"))
+        {
+            Dash();
+        }
     }
     void Jump()
     {
         TP_Motor.m_instance.Jump();
+    }
+    void Dash()
+    {
+        TP_Motor.m_instance.StartDashing();
     }
 }
