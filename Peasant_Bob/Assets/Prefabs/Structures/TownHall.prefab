@@ -190,7 +190,7 @@ MonoBehaviour:
   m_agentState: 1
   m_maxDistanceToGatherResources: 1000
   m_startPeasantCount: 3
-  m_peasant: {fileID: 1376556683594508, guid: b3af66fac1aea9c43b59f2791c6fec65, type: 2}
+  m_peasant: {fileID: 1175835732278254, guid: a183eb6ab8dbb9b498704a96d954480b, type: 2}
 --- !u!208 &208522359957196838
 NavMeshObstacle:
   m_ObjectHideFlags: 1
