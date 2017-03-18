@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 114418387410942312}
   - component: {fileID: 114898606921988248}
   - component: {fileID: 114775949876643948}
+  - component: {fileID: 65184944127657096}
   m_Layer: 9
   m_Name: Peasant
   m_TagString: Untagged
@@ -656,6 +657,18 @@ Transform:
   m_Father: {fileID: 4373481484687220}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65184944127657096
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175835732278254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!111 &111435571127439032
 Animation:
   m_ObjectHideFlags: 1
