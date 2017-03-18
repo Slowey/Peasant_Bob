@@ -95,13 +95,13 @@ public class StructurePlacementSystem : MonoBehaviour {
 
                         if (gridPosX < 0 || gridPosY < 0)
                         {
-                            Debug.Log("outside1" + " " + gridPosX +" " + gridPosY);
+                            //Debug.Log("outside1" + " " + gridPosX +" " + gridPosY);
                             occopied = true;
                             continue;
                         }
                         if (gridPosX > gridHalfLength*2 - 1 || gridPosY > gridHalfLength*2 - 1)
                         {
-                            Debug.Log("outside2" + " " + gridPosX + " " + gridPosY);
+                            //Debug.Log("outside2" + " " + gridPosX + " " + gridPosY);
                             occopied = true;
                             continue;
                         }
