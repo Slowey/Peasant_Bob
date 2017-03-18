@@ -9,6 +9,7 @@ public class AgentsManager : MonoBehaviour {
         GatheringResource,
         Construction,
         Fighting,
+        Guarding,
         Walking,
         LeaveResources,
         ENDITEM
@@ -34,16 +35,22 @@ public class AgentsManager : MonoBehaviour {
 
     }
 
-    public void AddNewAgent(GameObject p_agent)
+    public void AddNewAgent(GameObject p_agent, NavAgent.UnitType p_unitType)
     {
         // Every agent start as idle NOT!!! They start as resource gatherers
-        m_agents[AgentStates.Idle].Add(p_agent);
-        GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
-        if (townHall != null)
+        if (p_unitType == NavAgent.UnitType.Peasant)
         {
-            townHall.GetComponent<TownhallAgentSystem>().SendNewAgentToGatherResources();
+            m_agents[AgentStates.Idle].Add(p_agent);
+            GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
+            if (townHall != null)
+            {
+                townHall.GetComponent<TownhallAgentSystem>().SendNewAgentToGatherResources();
+            }
         }
-
+        else if (p_unitType == NavAgent.UnitType.Archer)
+        {
+            m_agents[AgentStates.Guarding].Add(p_agent);
+        }
     }
 
     public GameObject AssignFreeAgentToFight()

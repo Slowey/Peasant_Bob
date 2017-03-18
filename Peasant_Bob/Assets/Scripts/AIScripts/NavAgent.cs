@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class NavAgent : MonoBehaviour {
+    public enum UnitType
+    {
+        Peasant,
+        Archer,
+    }
     private NavMeshAgent agent;
     public AgentsManager.AgentStates m_state;
     public AgentsManager.AgentStates m_wantedState;
     public float m_okWorkDistance;
-
+    public UnitType m_type;
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
-        GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().AddNewAgent(gameObject);
+        GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().AddNewAgent(gameObject, m_type);
     }
 
     void Update()
