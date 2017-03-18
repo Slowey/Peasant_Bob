@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23278385043668968}
   - component: {fileID: 95509662028926612}
   - component: {fileID: 114738186514564508}
+  - component: {fileID: 114955237512121684}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -119,3 +120,15 @@ MonoBehaviour:
   gridSizeX: 6
   gridSizeY: 6
   buildTime: 0
+--- !u!114 &114955237512121684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055352571389802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff35d170aa8e4844ab5322843e0e1fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bedAmount: 4
