@@ -27,6 +27,8 @@ public class TP_Controller : MonoBehaviour {
     void GetLocomotionInput()
     {
         float deadZone = 0.1f;
+
+        TP_Motor.m_instance.m_verticalVel = TP_Motor.m_instance.m_moveVector.y;
         TP_Motor.m_instance.m_moveVector = Vector3.zero;
         float t_vert = Input.GetAxis("Vertical");
         float t_hori = Input.GetAxis("Horizontal");

@@ -6,8 +6,13 @@ public class TP_Motor : MonoBehaviour {
 
     public static TP_Motor m_instance;
     public float m_moveSpeed = 10f;
+    public float m_gravity = 21f;
+    public float m_terminalVel = 20f;
+
+
     public Vector3 m_moveVector { get; set; }
-	// Use this for initialization
+	public float m_verticalVel { get; set; }
+    // Use this for initialization
 	void Awake () {
         m_instance = this;
 	}
@@ -30,10 +35,27 @@ public class TP_Motor : MonoBehaviour {
         }
         // multiply normalised movevec with movespeed
         m_moveVector *= m_moveSpeed;
-        // Multiply MoveVector by DeltaTime.
-        m_moveVector *= Time.deltaTime;
+
+        //Reapply Vertical Vel MoveVector.y
+        m_moveVector = new Vector3(m_moveVector.x, m_verticalVel, m_moveVector.z);
+
+        //Apply Gravity
+        ApplyGravity();
+
         // Move the Character in World space
-        TP_Controller.m_characterController.Move(m_moveVector);
+        TP_Controller.m_characterController.Move(m_moveVector * Time.deltaTime);
+    }
+
+    void ApplyGravity()
+    {
+        if (m_moveVector.y > -m_terminalVel)
+        {
+            m_moveVector = new Vector3(m_moveVector.x, m_moveVector.y - m_gravity * Time.deltaTime, m_moveVector.z);
+        }
+        if (TP_Controller.m_characterController.isGrounded && m_moveVector.y < -1)
+        {
+            m_moveVector = new Vector3(m_moveVector.x, -1, m_moveVector.z);
+        }
     }
 
     void SnapAlignCharacterWithCamera()
