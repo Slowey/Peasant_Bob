@@ -210,7 +210,8 @@ public class StructurePlacementSystem : MonoBehaviour {
         if(obj.GetComponent<Health>() != null)
         {
             Health health = obj.GetComponent<Health>();
-            float sethealth = buildingStructurePrefab.GetComponent<StructureInformation>().maxHealth;
+            StructureInformation structInf = currentStructurePrefab.GetComponent<StructureInformation>();
+            float sethealth = structInf.maxHealth;
             health.SetMaxHealth(sethealth);
             health.SetHealth(sethealth);
         }
