@@ -32,12 +32,13 @@ public class TrainAgentSystem : ObjectAgentSystem {
         {
             m_training -= Time.deltaTime;
             if (m_training <= 0)
-            {      
+            {
+                Vector3 position = m_agents[0].transform.position;
                 GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(m_agents[0], m_agentState);
                 Destroy(m_agents[0]);
                 m_agents.Clear();
                 // Spawn dude
-                Instantiate(m_unitPrefab);
+                Instantiate(m_unitPrefab, position, Quaternion.identity);
                 inQueue--;
                 inTraining = false;
                 m_training = m_trainingTime;
