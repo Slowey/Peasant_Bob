@@ -181,22 +181,22 @@ public class StructurePlacementSystem : MonoBehaviour {
     void CreateBuildingStructure()
     {
         GameObject obj = Instantiate(buildingStructurePrefab, currentStructure.transform.position, Quaternion.identity);
+        obj.GetComponent<ConstructionAgentSystem>().m_finalBuildingPrefab = currentStructurePrefab;
+        //MeshFilter filter = obj.GetComponent<MeshFilter>();
+        //MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
 
-        MeshFilter filter = obj.GetComponent<MeshFilter>();
-        MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
+        //Renderer renderer = obj.GetComponent<Renderer>();
+        //Renderer rendererObj = currentStructurePrefab.GetComponent<Renderer>();
 
-        Renderer renderer = obj.GetComponent<Renderer>();
-        Renderer rendererObj = currentStructurePrefab.GetComponent<Renderer>();
+        //if (filter == null || filterObj == null)
+        //    Debug.LogWarning("No filter on structure");
 
-        if (filter == null || filterObj == null)
-            Debug.LogWarning("No filter on structure");
-
-        if (renderer == null || rendererObj == null)
-            Debug.LogWarning("No renderer on structure");
+        //if (renderer == null || rendererObj == null)
+        //    Debug.LogWarning("No renderer on structure");
 
 
-        filter.mesh = filterObj.sharedMesh;
-        renderer.materials = rendererObj.sharedMaterials;
+        //filter.mesh = filterObj.sharedMesh;
+        //renderer.materials = rendererObj.sharedMaterials;
 
 
     }

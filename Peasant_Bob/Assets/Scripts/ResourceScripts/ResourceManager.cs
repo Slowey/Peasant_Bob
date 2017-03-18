@@ -37,7 +37,7 @@ public class ResourceManager : MonoBehaviour {
         foreach (var item in m_allResources[p_type])
         {
             float distance = Vector3.Distance(p_worldPosition, item.transform.position);
-            if (shortestDistance < distance)
+            if (distance < shortestDistance)
             {
                 shortestDistance = distance;
                 closestResource = item;

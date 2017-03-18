@@ -12,7 +12,6 @@ public class AgentsManager : MonoBehaviour {
         Walking,
         ENDITEM
     }
-    public float m_maxDistanceToGatherResources;
     // This basically keeps track of what agent is having what goal
     Dictionary<AgentStates, List<GameObject>> m_agents = new Dictionary<AgentStates, List<GameObject>>();
 
@@ -38,7 +37,12 @@ public class AgentsManager : MonoBehaviour {
     {
         // Every agent start as idle NOT!!! They start as resource gatherers
         m_agents[AgentStates.Idle].Add(p_agent);
-        SendAgentToGatherResources(p_agent);
+        GameObject townHall = GameObject.Find("TownHall");
+        if (townHall != null)
+        {
+            townHall.GetComponent<TownhallAgentSystem>().SendNewAgentToGatherResources();
+        }
+
     }
 
     public GameObject AssignFreeAgentToFight()
@@ -54,43 +58,56 @@ public class AgentsManager : MonoBehaviour {
         m_agents[AgentStates.Idle].Add(p_agent);
         // p_agent.GetComponent<NavAgent>().SetDestination(new Vector3(0, 0, 0), AgentStates.Idle);
         // Apparently we want all idle units to gather resources
-        SendAgentToGatherResources(p_agent);
-        
+        GameObject townHall = GameObject.Find("TownHall");
+        if (townHall != null)
+        {
+            townHall.GetComponent<TownhallAgentSystem>().SendNewAgentToGatherResources();
+        }
+
     }
 
     public GameObject AssignFreeAgentToTask(GameObject p_taskGameObject, AgentStates p_taskState)
     {
-        GameObject closestAgent = GetClosestIdleAgentToObject(p_taskGameObject);
-        int index = m_agents[AgentStates.GatheringResource].FindIndex(obj => obj.transform == closestAgent.transform); // TODO this should check for idle list through
-        m_agents[AgentStates.GatheringResource].RemoveAt(index);
+        AgentStates t_takenAgentPrevState;
+        GameObject closestAgent = GetClosestAvailableAgentToObject(p_taskGameObject, out t_takenAgentPrevState);
+        int index = m_agents[t_takenAgentPrevState].FindIndex(obj => obj.transform == closestAgent.transform); // TODO this should check for idle list through
+        m_agents[t_takenAgentPrevState].RemoveAt(index);
         m_agents[p_taskState].Add(closestAgent);
-        closestAgent.GetComponent<NavAgent>().SetDestination(p_taskGameObject.transform.position, p_taskState);
         return closestAgent;
     }
 
     // HELPER FUNCTIONS
-    private GameObject SendAgentToGatherResources(GameObject p_agent)
+    private GameObject GetClosestAvailableAgentToObject(GameObject p_object, out AgentStates o_unitPreviousState)
     {
-        ResourceManager resourceManager = GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
-        GameObject closestResource = resourceManager.FindClosestResourceOfType(p_agent.transform.position, m_maxDistanceToGatherResources, ResourceType.Wood);
-        if (closestResource == null)
+        o_unitPreviousState = AgentStates.ENDITEM;
+        GameObject closestAgent = null;
+        closestAgent = SearchThroughListForClosestAgent(p_object, AgentStates.Idle);
+        if (closestAgent != null)
         {
-            return null;
+            o_unitPreviousState = AgentStates.Idle;
+            return closestAgent;
         }
-        int index = m_agents[AgentStates.Idle].FindIndex(obj => obj.transform == p_agent.transform);
-        m_agents[AgentStates.Idle].RemoveAt(index);
-        m_agents[AgentStates.GatheringResource].Add(p_agent);
-
-        p_agent.GetComponent<NavAgent>().SetDestination(closestResource.transform.position, AgentStates.GatheringResource);
-
-        return p_agent;
+        closestAgent = SearchThroughListForClosestAgent(p_object, AgentStates.GatheringResource);
+        if (closestAgent != null)
+        {
+            // Tell the townhall to release the agent
+            GameObject townHall = GameObject.Find("TownHall");
+            if (townHall != null)
+            {
+                townHall.GetComponent<TownhallAgentSystem>().ReleaseAgent(closestAgent);
+            }
+            o_unitPreviousState = AgentStates.GatheringResource;
+            return closestAgent;
+        }
+        return closestAgent;
     }
 
-    private GameObject GetClosestIdleAgentToObject(GameObject p_object)
+    private GameObject SearchThroughListForClosestAgent(GameObject p_object, AgentStates p_list)
     {
         float shortestDistance = float.MaxValue;
         GameObject closestAgent = null;
-        foreach (var item in m_agents[AgentStates.GatheringResource]) // TODO Change this to idle if idle ever becomes a thing
+
+        foreach (var item in m_agents[p_list]) // TODO Change this to idle if idle ever becomes a thing
         {
             float distance = Vector3.Distance(p_object.transform.position, item.transform.position);
             if (distance < shortestDistance)
@@ -99,15 +116,7 @@ public class AgentsManager : MonoBehaviour {
                 closestAgent = item;
             }
         }
-        foreach (var item in m_agents[AgentStates.Idle]) // TODO Change this to idle if idle ever becomes a thing
-        {
-            float distance = Vector3.Distance(p_object.transform.position, item.transform.position);
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                closestAgent = item;
-            }
-        }
-        return closestAgent;
+
+        return closestAgent;      
     }
 }
