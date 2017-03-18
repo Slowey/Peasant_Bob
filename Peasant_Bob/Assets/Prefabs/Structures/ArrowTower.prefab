@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 33031608430483556}
   - component: {fileID: 23492932774239390}
   - component: {fileID: 114709559915108678}
-  m_Layer: 0
+  - component: {fileID: 65466879717788036}
+  - component: {fileID: 114139990745103280}
+  m_Layer: 8
   m_Name: ArrowTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094593621942238}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.937304, y: 0.15943465, z: -1.0748637}
+  m_LocalPosition: {x: 12.258505, y: 0.15943465, z: -2.5105891}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +85,29 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094593621942238}
   m_Mesh: {fileID: 4300000, guid: 520f9a2f22f23d04ca548223ab569685, type: 3}
+--- !u!65 &65466879717788036
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094593621942238}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6, y: 19.09629, z: 3.6}
+  m_Center: {x: 0, y: 9.38871, z: 0.00000011920929}
+--- !u!114 &114139990745103280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094593621942238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114709559915108678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,3 +122,4 @@ MonoBehaviour:
   gridSizeX: 4
   gridSizeY: 4
   buildTime: 0
+  maxHealth: 0

@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 95509662028926612}
   - component: {fileID: 114738186514564508}
   - component: {fileID: 114955237512121684}
-  m_Layer: 0
+  - component: {fileID: 114315084434572240}
+  m_Layer: 8
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,6 +107,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114315084434572240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055352571389802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114738186514564508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +132,7 @@ MonoBehaviour:
   gridSizeX: 6
   gridSizeY: 6
   buildTime: 0
+  maxHealth: 0
 --- !u!114 &114955237512121684
 MonoBehaviour:
   m_ObjectHideFlags: 1

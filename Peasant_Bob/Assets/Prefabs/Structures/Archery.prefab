@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114619419310636872}
   - component: {fileID: 114034819404043578}
   - component: {fileID: 65330405279083230}
+  - component: {fileID: 114298525164311714}
   m_Layer: 8
   m_Name: Archery
   m_TagString: Untagged
@@ -113,6 +114,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guiItemPrefab: {fileID: 1956821214663076, guid: 19021ec856b20854a91a6144272e4c0f,
     type: 2}
+--- !u!114 &114298525164311714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991026482798732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114619419310636872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,6 +157,7 @@ MonoBehaviour:
   gridSizeX: 8
   gridSizeY: 16
   buildTime: 0
+  maxHealth: 0
 --- !u!208 &208829201392268768
 NavMeshObstacle:
   m_ObjectHideFlags: 1

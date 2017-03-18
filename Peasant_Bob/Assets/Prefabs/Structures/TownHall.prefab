@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114573910569041268}
   - component: {fileID: 65536935188133102}
   - component: {fileID: 114402986773592658}
+  - component: {fileID: 114952545947869086}
   m_Layer: 8
   m_Name: TownHall
   m_TagString: TownHall
@@ -138,6 +139,7 @@ MonoBehaviour:
   gridSizeX: 32
   gridSizeY: 14
   buildTime: 0
+  maxHealth: 0
 --- !u!114 &114184489337735180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,6 +193,17 @@ MonoBehaviour:
   m_maxDistanceToGatherResources: 1000
   m_startPeasantCount: 3
   m_peasant: {fileID: 1175835732278254, guid: a183eb6ab8dbb9b498704a96d954480b, type: 2}
+--- !u!114 &114952545947869086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350227143289514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!208 &208522359957196838
 NavMeshObstacle:
   m_ObjectHideFlags: 1
