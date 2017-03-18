@@ -12,6 +12,7 @@ public class TP_Controller : MonoBehaviour {
 	void Awake () {
         m_characterController = GetComponent<CharacterController>();
         Instance = this;
+        TP_Camera.UseExistingOrCreateNewMainCamera();
 	}
 	
 	// Update is called once per frame
