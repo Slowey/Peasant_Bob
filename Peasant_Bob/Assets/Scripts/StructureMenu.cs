@@ -8,7 +8,9 @@ public class StructureMenu : MonoBehaviour {
     public delegate void ClickFunction();
     public delegate void CancelFunction();
     public delegate float PercentageDoneFunction();
+    public delegate int NumberActiveFunction();
     public delegate bool AvaliableFunction();
+
 
 
     public GameObject guiItemPrefab;
@@ -18,6 +20,7 @@ public class StructureMenu : MonoBehaviour {
         public ClickFunction clickFunc;
         public CancelFunction cancFunc;
         public PercentageDoneFunction percFunc;
+        public NumberActiveFunction numFunc;
         public AvaliableFunction avilFunc;
     }
 
@@ -38,7 +41,7 @@ public class StructureMenu : MonoBehaviour {
 
     float perf()
     {
-        return 0;
+        return 0.5f;
     }
 
     bool avilFun()
@@ -49,16 +52,20 @@ public class StructureMenu : MonoBehaviour {
     {
         return false;
     }
+    int numFun()
+    {
+        return 1;
+    }
 
     // Use this for initialization
     void Start () {
         canvasObj = GameObject.Find("Canvas");
-        AddMenuItem(click, cancelFunc, perf, avilFun);
-        AddMenuItem(click, cancelFunc, perf, avilFun);
-        AddMenuItem(click, cancelFunc, perf, avilFun2);
-        AddMenuItem(click, cancelFunc, perf, avilFun);
-        AddMenuItem(click, cancelFunc, perf, avilFun);
-        AddMenuItem(click, cancelFunc, perf, avilFun);
+        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
+        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
+        AddMenuItem(click, cancelFunc, perf,numFun,avilFun2);
+        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
+        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
+        AddMenuItem(click, cancelFunc, perf, numFun, avilFun);
 
 
 
@@ -94,12 +101,13 @@ public class StructureMenu : MonoBehaviour {
 
     **/
 
-    void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, AvaliableFunction avilFunc)
+    void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc)
     {
         MenuItem newItem;
         newItem.clickFunc = func;
         newItem.cancFunc = cancFunc;
         newItem.percFunc = perFunc;
+        newItem.numFunc = numFunc;
         newItem.avilFunc = avilFunc;
 
         menuItems.Add(newItem);
@@ -238,9 +246,6 @@ public class StructureMenu : MonoBehaviour {
     {
         RectTransform rectTrans = openMenu[i].GetComponent<RectTransform>();
         Image image = openMenu[i].GetComponent<Image>();
-        float H, S, V;
-        Color baseColor = new Color(.1f, .1f, .1f);
-        Color.RGBToHSV(baseColor, out H, out S, out V);
 
         if (menuItems[i].avilFunc())
         {
@@ -258,6 +263,33 @@ public class StructureMenu : MonoBehaviour {
         {
             image.color = new Color(0.25f, 0.25f, 0.25f);
         }
+
+        float percDone = menuItems[i].percFunc();
+        int numActive = menuItems[i].numFunc();
+
+        Text text1 = openMenu[i].transform.GetChild(0).GetComponent<Text>();
+        Text text2 = openMenu[i].transform.GetChild(1).GetComponent<Text>();
+
+        if (percDone == 0.0f)
+        {
+            text1.text = "";
+        }
+        else
+        {
+            text1.text = ((int)(percDone*100)).ToString() + "%";
+        }
+
+        if (numActive == 0)
+        {
+            text2.text = "";
+        }
+        else
+        {
+            text2.text = numActive.ToString();
+        }
+
+
+
     }
 
 
