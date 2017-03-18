@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114709559915108678}
   - component: {fileID: 65466879717788036}
   - component: {fileID: 114139990745103280}
+  - component: {fileID: 114617080991012392}
   m_Layer: 8
   m_Name: ArrowTower
   m_TagString: Untagged
@@ -108,6 +109,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114617080991012392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094593621942238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d8fa71bd55399478ee12aeb59e09d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!114 &114709559915108678
 MonoBehaviour:
   m_ObjectHideFlags: 1

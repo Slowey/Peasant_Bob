@@ -14,10 +14,23 @@ public class NavAgent : MonoBehaviour {
     public AgentsManager.AgentStates m_wantedState;
     public float m_okWorkDistance;
     public UnitType m_type;
+
+    GameObject agentManager;
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
-        GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().AddNewAgent(gameObject, m_type);
+        GameObject[] agentMans = GameObject.FindGameObjectsWithTag("AgentManager");
+        Team myTeam = GetComponent<Team>();
+
+        for (int i = 0; i < agentMans.Length; i++)
+        {
+            Team agentTeam = agentMans[i].GetComponent<Team>();
+            if (agentTeam.team == myTeam.team)
+            {
+                agentManager = agentMans[i];
+            }
+        }
+        agentManager.GetComponent<AgentsManager>().AddNewAgent(gameObject, m_type);
     }
 
     void Update()

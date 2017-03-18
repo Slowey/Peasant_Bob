@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 195902338416388410}
   - component: {fileID: 114431479079180644}
   - component: {fileID: 114109964799941928}
+  - component: {fileID: 114833107440992866}
   m_Layer: 9
   m_Name: Archer
   m_TagString: Untagged
@@ -711,6 +712,18 @@ MonoBehaviour:
   m_wantedState: 0
   m_okWorkDistance: 2
   m_type: 1
+--- !u!114 &114833107440992866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099477620601708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d8fa71bd55399478ee12aeb59e09d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!137 &137014820847958796
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

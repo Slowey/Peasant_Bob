@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 195070039396120876}
   - component: {fileID: 114072842984659764}
   - component: {fileID: 114542519818878866}
+  - component: {fileID: 114714137570964968}
   m_Layer: 9
   m_Name: Defender
   m_TagString: Untagged
@@ -696,6 +697,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114714137570964968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926222319910638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d8fa71bd55399478ee12aeb59e09d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!114 &114956906667646826
 MonoBehaviour:
   m_ObjectHideFlags: 1

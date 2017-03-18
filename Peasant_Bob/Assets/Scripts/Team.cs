@@ -11,5 +11,5 @@ public class Team : MonoBehaviour {
         Yellow,
     }
 
-    public Teams team;
+    public Teams team  = Teams.Blue;
 }

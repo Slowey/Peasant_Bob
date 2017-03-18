@@ -34,7 +34,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
             if (m_training <= 0)
             {
                 Vector3 position = m_agents[0].transform.position;
-                GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(m_agents[0], m_agentState);
+                m_agentManager.GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(m_agents[0], m_agentState);
                 Destroy(m_agents[0]);
                 m_agents.Clear();
                 // Spawn dude
@@ -70,7 +70,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
             foreach (var item in m_agents)
             {
                 GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
-                GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
+                m_agentManager.GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
                 inTraining = false;
             }
             m_training = m_trainingTime;
@@ -96,7 +96,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
     bool CanSpawnMore()
     {
         ResourceManager resourceManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
-        AgentsManager agentsManager = GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>();
+        AgentsManager agentsManager = m_agentManager.GetComponent<AgentsManager>();
         return agentsManager.UnitIsAvailableForWork() && resourceManager.ResourceExists(m_unitCost, ResourceType.Wood);
     }
 }

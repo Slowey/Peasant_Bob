@@ -10,7 +10,17 @@ public class ObjectAgentSystem : MonoBehaviour {
     protected AgentsManager m_agentManager;
 	// Use this for initialization
 	protected void Start () {
-        m_agentManager = GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>();
+        GameObject[] agentMans = GameObject.FindGameObjectsWithTag("AgentManager");
+        Team myTeam = GetComponent<Team>();
+
+        for (int i = 0; i < agentMans.Length; i++)
+        {
+            Team agentTeam = agentMans[i].GetComponent<Team>();
+            if (agentTeam.team == myTeam.team)
+            {
+                m_agentManager = agentMans[i].GetComponent<AgentsManager>();
+            }
+        }
     }
 	
 	// Update is called once per frame
@@ -23,8 +33,19 @@ public class ObjectAgentSystem : MonoBehaviour {
     {
         if (m_agentManager == null)
         {
-            m_agentManager = GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>();
+            GameObject[] agentMans = GameObject.FindGameObjectsWithTag("AgentManager");
+            Team myTeam = GetComponent<Team>();
+
+            for (int i = 0; i < agentMans.Length; i++)
+            {
+                Team agentTeam = agentMans[i].GetComponent<Team>();
+                if (agentTeam.team == myTeam.team)
+                {
+                    m_agentManager = agentMans[i].GetComponent<AgentsManager>();
+                }
+            }
         }
+
         GameObject newAgent = null;
         if (m_agents.Count < m_maxAgentsAssigned)
         {

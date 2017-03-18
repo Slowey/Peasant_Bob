@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114843049842382952}
   - component: {fileID: 136305721837553274}
   - component: {fileID: 114548964102397626}
+  - component: {fileID: 114926172849816426}
   m_Layer: 8
   m_Name: CanonTower
   m_TagString: Untagged
@@ -112,6 +113,18 @@ MonoBehaviour:
   gridSizeY: 4
   buildTime: 0
   maxHealth: 0
+--- !u!114 &114926172849816426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317323749662104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d8fa71bd55399478ee12aeb59e09d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!136 &136305721837553274
 CapsuleCollider:
   m_ObjectHideFlags: 1
