@@ -131,8 +131,12 @@ MonoBehaviour:
   m_slideSpeed: 8
   m_gravity: 21
   m_terminalVel: 20
-  m_slideThreshold: 0.91
+  m_slideThreshold: 0.1
   m_maxControllableSlideMagnitude: 0.4
+  m_dashCoolDown: 1
+  m_dashSpeedImpulse: 50
+  m_dashSpeedFalloff: 100
+  m_isDashing: 0
 --- !u!114 &114866674606939894
 MonoBehaviour:
   m_ObjectHideFlags: 1

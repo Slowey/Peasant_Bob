@@ -19,8 +19,8 @@ public class TP_Motor : MonoBehaviour {
     public float m_dashSpeedImpulse = 50f;
     public float m_dashSpeedFalloff = 100f;
     public bool m_isDashing = false;
-    public float m_currentDashSpeed = 0f;
 
+    private float m_currentDashSpeed = 0f;
     private float m_dashCooldownTimer = 0;
     private Vector3 m_slideDirection;
 
