@@ -29,16 +29,17 @@ public class BuildableStructureSystem : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	public bool UpdateSystem () {
 
         foreach (var item in buildableStructures) // Should be moved to some input system, or a call to here to cancel build when select weapon
         {
             if (Input.GetKeyDown(item.inputCode))
             {
                 strucPlaceSys.StartPlacing(item.structureObj);
-                break;
+                return true;
             }
         }
+        return false;
 	}
 
     void AddStructure(GameObject structure)

@@ -42,15 +42,16 @@ public class StructurePlacementSystem : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	public bool UpdateSystem ()
     {
         if (placing)
         {
             bool place = false;
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 place = true;
             }
+
 
             Vector3 direction;
             if (camera == null)
@@ -177,6 +178,7 @@ public class StructurePlacementSystem : MonoBehaviour {
                 }
             }
         }
+        return false;
 	}
 
     void CreateBuildingStructure()
@@ -237,6 +239,7 @@ public class StructurePlacementSystem : MonoBehaviour {
 
     public void CancelPlace()
     {
+        placing = false;
         if (currentStructure)
         {
             Destroy(currentStructure);

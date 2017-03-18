@@ -6,25 +6,50 @@ public class InputCheckScript : MonoBehaviour {
 
     public GameObject camera;
 
+
+    // Run all input form here
+    StructurePlacementSystem placeMentSystem;
+    BuildableStructureSystem buildSelectSystem;
+
+
     StructureMenu activeMenu;
 	// Use this for initialization
 	void Start () {
+        placeMentSystem = GetComponent<StructurePlacementSystem>();
+        buildSelectSystem = GetComponent<BuildableStructureSystem>();
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-        if(Input.GetKeyDown(KeyCode.E) && activeMenu == null)
+
+        if(buildSelectSystem.UpdateSystem())
         {
-            CheckRayCastHit();
+            // cancel others
+            if(activeMenu != null)
+                activeMenu.DestroyMenu();
+            activeMenu = null;
+        }
+        if(placeMentSystem.UpdateSystem())
+        {
+            if (activeMenu != null)
+                activeMenu.DestroyMenu();
+            activeMenu = null;
+        }
+        if (Input.GetKeyDown(KeyCode.E) && activeMenu == null)
+        {
+            CheckRayCastHit(); 
+            placeMentSystem.CancelPlace();
+            
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if (activeMenu != null)
             {
-                activeMenu.DestroyMenu();
+                if (activeMenu != null)
+                    activeMenu.DestroyMenu();
                 activeMenu = null;
+                placeMentSystem.CancelPlace();
             }
         }
 
