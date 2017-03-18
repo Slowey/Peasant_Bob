@@ -62,15 +62,15 @@ public class TP_Camera : MonoBehaviour {
         var deadZone = 0.01f;
 
         //Kommentera in för att ha enbart cameraändringarnär musknapp iklickad
-        //if (Input.GetMouseButton(1))
-        //{
-        //    // The RMB is down get mouse Axis input
-        //    m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense; 
-        //    m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense; 
-        //}
+       if (Input.GetMouseButton(1))
+       {
+           // The RMB is down get mouse Axis input
+           m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense; 
+           m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense; 
+       }
 
-        m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense;
-        m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense;
+        //m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense;
+        //m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense;
         // This is where we will limit MouseY
         m_mouseY = Helper.ClampAngle(m_mouseY, m_YMinLimit, m_YMaxLimit);
         if (Input.GetAxis("Mouse ScrollWheel")<-deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone)

@@ -22,6 +22,7 @@ public class TP_Controller : MonoBehaviour {
             return;
         }
         GetLocomotionInput();
+        HandleActionInput();
         TP_Motor.m_instance.UpdateMotor();
 	}
     void GetLocomotionInput()
@@ -40,6 +41,17 @@ public class TP_Controller : MonoBehaviour {
         {
             TP_Motor.m_instance.m_moveVector += new Vector3(t_hori, 0, 0);
         }
-
+        TP_Animator.m_instance.DetermineCurrentMoveDirection();
+    }
+    void HandleActionInput()
+    {
+        if (Input.GetButton("Jump"))
+        {
+            Jump();
+        }
+    }
+    void Jump()
+    {
+        TP_Motor.m_instance.Jump();
     }
 }
