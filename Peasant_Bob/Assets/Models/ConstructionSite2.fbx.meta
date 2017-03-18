@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 437cdab081f5c704fad0ef3401d9da3e
-timeCreated: 1489831263
+guid: f3be75539d66ad749b62b6ab91534291
+timeCreated: 1489853675
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: CanonTower
+    4300000: ConstructionSite2
   materials:
     importMaterials: 1
     materialName: 0
