@@ -206,6 +206,15 @@ public class StructurePlacementSystem : MonoBehaviour {
             }
         }
 
+        // Set health
+        if(obj.GetComponent<Health>() != null)
+        {
+            Health health = obj.GetComponent<Health>();
+            float sethealth = buildingStructurePrefab.GetComponent<StructureInformation>().maxHealth;
+            health.SetMaxHealth(sethealth);
+            health.SetHealth(sethealth);
+        }
+
         //MeshFilter filter = obj.GetComponent<MeshFilter>();
         //MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
 

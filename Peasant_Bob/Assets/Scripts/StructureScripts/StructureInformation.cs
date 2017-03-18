@@ -7,6 +7,7 @@ public class StructureInformation : MonoBehaviour {
     public int gridSizeX;
     public int gridSizeY;
     public float buildTime;
+    public float maxHealth;
 
     // Use this for initialization
     void Start () {
