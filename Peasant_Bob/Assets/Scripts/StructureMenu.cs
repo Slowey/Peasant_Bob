@@ -101,7 +101,7 @@ public class StructureMenu : MonoBehaviour {
 
     **/
 
-    void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc)
+    public void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc)
     {
         MenuItem newItem;
         newItem.clickFunc = func;
