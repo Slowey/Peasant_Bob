@@ -15,6 +15,8 @@ public class NavAgent : MonoBehaviour {
     public float m_okWorkDistance;
     public UnitType m_type;
 
+    UnitBase m_unitBase;
+
     GameObject agentManager;
     void Start()
     {
@@ -31,6 +33,8 @@ public class NavAgent : MonoBehaviour {
             }
         }
         agentManager.GetComponent<AgentsManager>().AddNewAgent(gameObject, m_type);
+
+        m_unitBase = GetComponent<UnitBase>();
     }
 
     void Update()
@@ -53,6 +57,8 @@ public class NavAgent : MonoBehaviour {
             case AgentsManager.AgentStates.Construction:
                 break;
             case AgentsManager.AgentStates.Fighting:
+
+                m_unitBase.FightingActions(m_state);
                 break;
             case AgentsManager.AgentStates.Walking:
                 break;

@@ -16,7 +16,8 @@ public class AgentsManager : MonoBehaviour {
         ENDITEM
     }
     // This basically keeps track of what agent is having what goal
-    Dictionary<AgentStates, List<GameObject>> m_agents = new Dictionary<AgentStates, List<GameObject>>();
+    public Dictionary<AgentStates, List<GameObject>> m_agents = new Dictionary<AgentStates, List<GameObject>>();
+
 
     // This runs before start
     void Awake()
