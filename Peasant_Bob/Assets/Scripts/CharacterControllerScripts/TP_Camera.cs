@@ -18,6 +18,9 @@ public class TP_Camera : MonoBehaviour {
     public float m_YSmooth = 0.1f;
     public float m_YMinLimit = -40f;
     public float m_YMaxLimit = 80f;
+    public float m_occlusionDistanceStep = 0.5f;
+    public int m_maxOcclusionChecks = 10;
+    public float m_distanceResumeSmooth = 1f;
 
 
     private float m_mouseX = 0f;
@@ -28,8 +31,11 @@ public class TP_Camera : MonoBehaviour {
     private float m_velDistance = 0f;
     private float m_startDistance = 0f;
     private float m_desiredDistance = 0f;
+    private float m_distanceSmoothForOcclusion = 0f;
+    private float m_preOccludedDistance = 0f;
     private Vector3 m_position = Vector3.zero;
     private Vector3 m_desiredPosition = Vector3.zero;
+
     void Awake()
     {
         m_instance = this;
@@ -52,9 +58,12 @@ public class TP_Camera : MonoBehaviour {
 
         HandlePlayerInput();
 
-        CalculateDesiredPosition();
-
-        CheckCameraPoints(TargetLookAt.position, m_desiredPosition);
+        var count = 0;
+        do
+        {
+            CalculateDesiredPosition();
+            count++;
+        } while (CheckIfOccluded(count));
 
         UpdatePosition();
     }
@@ -79,14 +88,19 @@ public class TP_Camera : MonoBehaviour {
         {
             // Zoom
             m_desiredDistance = Mathf.Clamp(m_distance - Input.GetAxis("Mouse ScrollWheel") * m_mouseWheelSense, m_distanceMin, m_distanceMax);
+
+            m_preOccludedDistance = m_desiredDistance;
+            m_distanceSmoothForOcclusion = m_distanceSmooth;
         }
 
     }
 
     void CalculateDesiredPosition()
     {
+
+        ResetDesiredDistance();
         // Evaluate distance
-        m_distance = Mathf.SmoothDamp(m_distance, m_desiredDistance, ref m_velDistance, m_distanceSmooth);
+        m_distance = Mathf.SmoothDamp(m_distance, m_desiredDistance, ref m_velDistance, m_distanceSmoothForOcclusion);
         // Calculate desired position ska vara fel axis, av nån anledning
         m_desiredPosition = CalculatePosition(m_mouseY, m_mouseX, m_distance);
     }
@@ -96,6 +110,36 @@ public class TP_Camera : MonoBehaviour {
         Vector3 t_direction = new Vector3(0, 0, -p_distance);
         Quaternion t_rotation = Quaternion.Euler(p_rotX, p_rotY, 0);
         return TargetLookAt.position + t_rotation * t_direction;
+    }
+
+    bool CheckIfOccluded(int p_count)
+    {
+        var r_isOccluded = false;
+
+        var t_nearestDistance = CheckCameraPoints(TargetLookAt.position, m_desiredPosition);
+
+        if (t_nearestDistance != -1)
+        {
+            if (p_count < m_maxOcclusionChecks)
+            {
+                r_isOccluded = true;
+                m_distance -= m_occlusionDistanceStep;
+                // Hårdkodat for now 1234 tutorials empiriska nummer. Vi kanske ska byta för vår karaktär va 25 frånbörjan (0.25f)
+                if (m_distance < 0.55f)
+                {
+                    m_distance = 0.55f;
+                }
+                else
+                {
+                    m_distance = t_nearestDistance - Camera.main.nearClipPlane;
+                }
+
+                m_desiredDistance = m_distance;
+                m_distanceSmoothForOcclusion = m_distanceResumeSmooth;
+            }
+        }
+
+        return r_isOccluded;
     }
 
     float CheckCameraPoints(Vector3 p_from, Vector3 p_to)
@@ -120,10 +164,55 @@ public class TP_Camera : MonoBehaviour {
 
         if (Physics.Linecast(p_from, t_clipPlanePoints.UpperLeft, out t_hitInfo) && t_hitInfo.collider.tag != "Player")
         {
+            t_nearestDistance = t_hitInfo.distance;
+        }
 
+        if (Physics.Linecast(p_from, t_clipPlanePoints.LowerLeft, out t_hitInfo) && t_hitInfo.collider.tag != "Player")
+        {
+            if (t_hitInfo.distance < t_nearestDistance || t_nearestDistance == -1)
+            {
+                t_nearestDistance = t_hitInfo.distance;
+            }
+        }
+
+        if (Physics.Linecast(p_from, t_clipPlanePoints.UpperRight, out t_hitInfo) && t_hitInfo.collider.tag != "Player")
+        {
+            if (t_hitInfo.distance < t_nearestDistance || t_nearestDistance == -1)
+            {
+                t_nearestDistance = t_hitInfo.distance;
+            }
+        }
+        if (Physics.Linecast(p_from, t_clipPlanePoints.LowerRight, out t_hitInfo) && t_hitInfo.collider.tag != "Player")
+        {
+            if (t_hitInfo.distance < t_nearestDistance || t_nearestDistance == -1)
+            {
+                t_nearestDistance = t_hitInfo.distance;
+            }
+        }
+        if (Physics.Linecast(p_from, p_to + transform.forward * -Camera.main.nearClipPlane, out t_hitInfo) && t_hitInfo.collider.tag != "Player")
+        {
+            if (t_hitInfo.distance < t_nearestDistance || t_nearestDistance == -1)
+            {
+                t_nearestDistance = t_hitInfo.distance;
+            }
         }
 
         return t_nearestDistance;
+    }
+
+    void ResetDesiredDistance()
+    {
+        if (m_desiredDistance < m_preOccludedDistance)
+        {
+            var t_pos = CalculatePosition(m_mouseY, m_mouseX, m_preOccludedDistance);
+
+            var t_nearestDistance = CheckCameraPoints(TargetLookAt.position, t_pos);
+
+            if (t_nearestDistance == -1 || t_nearestDistance > m_preOccludedDistance)
+            {
+                m_desiredDistance = m_preOccludedDistance;
+            }
+        }
     }
 
     void UpdatePosition()
@@ -143,6 +232,7 @@ public class TP_Camera : MonoBehaviour {
         m_mouseY = 10f;
         m_distance = m_startDistance;
         m_desiredDistance = m_distance;
+        m_preOccludedDistance = m_distance;
     }
     public static void UseExistingOrCreateNewMainCamera()
     {
