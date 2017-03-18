@@ -5,15 +5,19 @@ using UnityEngine;
 public class TownhallAgentSystem : ObjectAgentSystem {
 
     public float m_maxDistanceToGatherResources;
+    public int m_startPeasantCount;
+    public GameObject m_peasant;
     private List<GameObject> m_idleAgentsAssigned = new List<GameObject>();
     // Use this for initialization
     void Start () {
-		
+        for (int i = 0; i < m_startPeasantCount; i++)
+        {
+            Instantiate(m_peasant);
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(m_agents.Count);
         if (m_idleAgentsAssigned.Count > 0)
         {
             ResourceManager resourceManager = GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
