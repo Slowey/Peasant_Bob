@@ -151,8 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxAgentsAssigned: 1
   m_agentState: 3
-  m_unitType: 0
-  m_unitPrefab: {fileID: 1376556683594508, guid: b3af66fac1aea9c43b59f2791c6fec65,
+  m_unitType: 1
+  m_unitPrefab: {fileID: 1099477620601708, guid: b3b3247b9c354904bb83f2f87e5cf8ef,
     type: 2}
   m_unitCost: 10
   m_trainingTime: 5
