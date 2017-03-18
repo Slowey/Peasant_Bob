@@ -10,6 +10,7 @@ public class TownhallAgentSystem : ObjectAgentSystem {
     private List<GameObject> m_idleAgentsAssigned = new List<GameObject>();
     // Use this for initialization
     void Start () {
+        base.Start();
         for (int i = 0; i < m_startPeasantCount; i++)
         {
             Instantiate(m_peasant);
@@ -18,6 +19,7 @@ public class TownhallAgentSystem : ObjectAgentSystem {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(m_agents.Count);
         if (m_idleAgentsAssigned.Count > 0)
         {
             ResourceManager resourceManager = GameObject.Find("ResourceManager").GetComponent<ResourceManager>();

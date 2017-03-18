@@ -13,7 +13,7 @@ public class NavAgent : MonoBehaviour {
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
-        GameObject.Find("AgentManager").GetComponent<AgentsManager>().AddNewAgent(gameObject);
+        GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().AddNewAgent(gameObject);
     }
 
     void Update()

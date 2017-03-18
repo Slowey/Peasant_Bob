@@ -37,14 +37,14 @@ public class ConstructionAgentSystem : ObjectAgentSystem {
         m_buildTime -= Time.deltaTime * m_agentsAtConstructionSite;
         if (m_buildTime <= 0)
         {
+            GameObject tempObj = Instantiate(m_finalBuildingPrefab, transform.position, transform.rotation);
+
             // Building is done, release all agents...
             foreach (var item in m_agents)
             {
                 m_agentManager.RemoveAgentFromTask(item, m_agentState);
             }
             m_agents.Clear();
-
-            GameObject tempObj = Instantiate(m_finalBuildingPrefab, transform.position, transform.rotation);
 
             Destroy(gameObject);
         }

@@ -37,7 +37,7 @@ public class AgentsManager : MonoBehaviour {
     {
         // Every agent start as idle NOT!!! They start as resource gatherers
         m_agents[AgentStates.Idle].Add(p_agent);
-        GameObject townHall = GameObject.Find("TownHall");
+        GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
         if (townHall != null)
         {
             townHall.GetComponent<TownhallAgentSystem>().SendNewAgentToGatherResources();
@@ -58,7 +58,7 @@ public class AgentsManager : MonoBehaviour {
         m_agents[AgentStates.Idle].Add(p_agent);
         // p_agent.GetComponent<NavAgent>().SetDestination(new Vector3(0, 0, 0), AgentStates.Idle);
         // Apparently we want all idle units to gather resources
-        GameObject townHall = GameObject.Find("TownHall");
+        GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
         if (townHall != null)
         {
             townHall.GetComponent<TownhallAgentSystem>().SendNewAgentToGatherResources();
@@ -91,7 +91,7 @@ public class AgentsManager : MonoBehaviour {
         if (closestAgent != null)
         {
             // Tell the townhall to release the agent
-            GameObject townHall = GameObject.Find("TownHall");
+            GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
             if (townHall != null)
             {
                 townHall.GetComponent<TownhallAgentSystem>().ReleaseAgent(closestAgent);
