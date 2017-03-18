@@ -9,6 +9,8 @@ public class UnitSpawning : MonoBehaviour {
     int pendingUnits = 0;
     float timeLeft = 0;
 
+    bool paused = false;
+
 	// Use this for initialization
 	void Start () {
         StructureMenu structureMenu = GetComponent<StructureMenu>();
@@ -34,6 +36,7 @@ public class UnitSpawning : MonoBehaviour {
         pendingUnits++;
         if(pendingUnits == 1)
         {
+            BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
             timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
         }
     }
@@ -78,23 +81,43 @@ public class UnitSpawning : MonoBehaviour {
     void Update () {
         if (pendingUnits > 0)
         {
-            timeLeft -= Time.deltaTime;
-
-            if (timeLeft < 0)
+            if (paused)
             {
-                // Spawn
-
-                Instantiate(unitPrefab, transform.position + new Vector3(20,0,0), Quaternion.identity);
-
-                pendingUnits--;
-
-                if (pendingUnits > 0)
+                if (BedSystem.bedSystem.GetNumFreeBeds() >= unitPrefab.GetComponent<UnitInformation>().requireBeds)
                 {
-                    timeLeft += unitPrefab.GetComponent<UnitInformation>().spawnTime;
+                    paused = false;
                 }
-                else
+            }
+
+            if (!paused)
+            {
+                timeLeft -= Time.deltaTime;
+
+                if (timeLeft < 0)
                 {
-                    timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
+                    // Spawn
+
+                    Instantiate(unitPrefab, transform.position + new Vector3(20, 0, 0), Quaternion.identity);
+
+                    pendingUnits--;
+
+                    if (pendingUnits > 0)
+                    {
+                        if (BedSystem.bedSystem.GetNumFreeBeds() < unitPrefab.GetComponent<UnitInformation>().requireBeds)
+                        {
+                            paused = true;
+                            timeLeft += unitPrefab.GetComponent<UnitInformation>().spawnTime;
+                        }
+                        else
+                        {
+                            BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
+                            timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
+                        }
+                    }
+                    else
+                    {
+                        timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
+                    }
                 }
             }
         }
