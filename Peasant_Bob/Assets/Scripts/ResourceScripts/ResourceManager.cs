@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour {
     Dictionary<ResourceType, List<GameObject>> m_allResources = new Dictionary<ResourceType, List<GameObject>>(); // This should perhaps be in a resource manager or something
-
+    Dictionary<ResourceType, int> m_availableResources = new Dictionary<ResourceType, int>();
 
 
     // Use this for initialization
@@ -44,5 +44,39 @@ public class ResourceManager : MonoBehaviour {
             }
         }
         return closestResource;
+    }
+
+    public void GiveAmountOfType(int p_amount, ResourceType p_type)
+    {
+        if (!m_availableResources.ContainsKey(p_type))
+        {
+            m_availableResources.Add(p_type, 0);
+        }
+        m_availableResources[p_type] += p_amount;
+    }
+
+    // Returns if succesful
+    public bool TakeResource(int p_amount, ResourceType p_type)
+    {
+        if (ResourceExists(p_amount, p_type))
+        {
+            m_availableResources[p_type] -= p_amount;
+            return true;
+        }
+        return false;
+    }
+
+    public bool ResourceExists(int p_amount, ResourceType p_type)
+    {
+        return m_availableResources.ContainsKey(p_type) && m_availableResources[p_type] >= p_amount;
+    }
+
+    public int GetResourceRemaining(ResourceType p_type)
+    {
+        if (m_availableResources.ContainsKey(p_type))
+        {
+            return m_availableResources[p_type];
+        }
+        return 0;
     }
 }

@@ -8,6 +8,7 @@ public class AgentsManager : MonoBehaviour {
         Idle,
         GatheringResource,
         Construction,
+        Training,
         Fighting,
         Guarding,
         Walking,
@@ -88,6 +89,10 @@ public class AgentsManager : MonoBehaviour {
         return closestAgent;
     }
 
+    public bool UnitIsAvailableForWork()
+    {
+        return m_agents[AgentStates.Idle].Count > 0 || m_agents[AgentStates.GatheringResource].Count > 0;
+    }
     // HELPER FUNCTIONS
     private GameObject GetClosestAvailableAgentToObject(GameObject p_object, out AgentStates o_unitPreviousState)
     {
