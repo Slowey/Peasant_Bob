@@ -14,6 +14,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
 	void Start () {
         StructureMenu structureMenu = GetComponent<StructureMenu>();
         structureMenu.AddMenuItem(StartSpawning, CancelSpawning, PercentageDone, NumQueuedUnits, CanSpawnMore);
+        m_training = m_trainingTime;
     }
 	
 	// Update is called once per frame
@@ -37,6 +38,9 @@ public class TrainAgentSystem : ObjectAgentSystem {
                 m_agents.Clear();
                 // Spawn dude
                 Instantiate(m_unitPrefab);
+                inQueue--;
+                inTraining = false;
+                m_training = m_trainingTime;
             }
         }
 	}
@@ -66,7 +70,10 @@ public class TrainAgentSystem : ObjectAgentSystem {
             {
                 GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
                 GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
+                inTraining = false;
             }
+            m_training = m_trainingTime;
+            m_agents.Clear();
         }
         else if (inQueue < 0)
         {
@@ -77,7 +84,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
 
     float PercentageDone()
     {
-        return Mathf.Max(0, m_training)/m_trainingTime;
+        return 1.0f - Mathf.Max(0, m_training)/m_trainingTime;
     }
 
     int NumQueuedUnits()
