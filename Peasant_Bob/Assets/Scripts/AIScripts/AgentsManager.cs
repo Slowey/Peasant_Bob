@@ -14,15 +14,19 @@ public class AgentsManager : MonoBehaviour {
     }
     public float m_maxDistanceToGatherResources;
     // This basically keeps track of what agent is having what goal
-    Dictionary<AgentStates, List<GameObject>> m_agents;
-    // Use this for initialization
-    void Start() {
-        m_agents = new Dictionary<AgentStates, List<GameObject>>();
+    Dictionary<AgentStates, List<GameObject>> m_agents = new Dictionary<AgentStates, List<GameObject>>();
+
+    // This runs before start
+    void Awake()
+    {
         for (int i = 0; i < (int)AgentStates.ENDITEM; i++)
         {
             m_agents.Add((AgentStates)i, new List<GameObject>());
         }
+    }
 
+    // Use this for initialization
+    void Start() {
     }
 
     // Update is called once per frame
