@@ -7,15 +7,18 @@ public class StructureMenu : MonoBehaviour {
 
     public delegate void ClickFunction();
     public delegate void CancelFunction();
-    public delegate float TimeLeftFunction();
+    public delegate float PercentageDoneFunction();
+    public delegate bool AvaliableFunction();
+
 
     public GameObject guiItemPrefab;
 
     struct MenuItem
     {
-        public ClickFunction clicFunc;
+        public ClickFunction clickFunc;
         public CancelFunction cancFunc;
-        public TimeLeftFunction timeFunc;
+        public PercentageDoneFunction percFunc;
+        public AvaliableFunction avilFunc;
     }
 
     List<MenuItem> menuItems = new List<MenuItem>();
@@ -33,20 +36,29 @@ public class StructureMenu : MonoBehaviour {
         Debug.Log("cancel");
     }
 
-    float timef()
+    float perf()
     {
         return 0;
     }
 
-	// Use this for initialization
-	void Start () {
+    bool avilFun()
+    {
+        return true;
+    }
+    bool avilFun2()
+    {
+        return false;
+    }
+
+    // Use this for initialization
+    void Start () {
         canvasObj = GameObject.Find("Canvas");
-        AddMenuItem(click, cancelFunc, timef);
-        AddMenuItem(click, cancelFunc, timef);
-        AddMenuItem(click, cancelFunc, timef);
-        AddMenuItem(click, cancelFunc, timef);
-        AddMenuItem(click, cancelFunc, timef);
-        AddMenuItem(click, cancelFunc, timef);
+        AddMenuItem(click, cancelFunc, perf, avilFun);
+        AddMenuItem(click, cancelFunc, perf, avilFun);
+        AddMenuItem(click, cancelFunc, perf, avilFun2);
+        AddMenuItem(click, cancelFunc, perf, avilFun);
+        AddMenuItem(click, cancelFunc, perf, avilFun);
+        AddMenuItem(click, cancelFunc, perf, avilFun);
 
 
 
@@ -73,6 +85,7 @@ public class StructureMenu : MonoBehaviour {
         if(menuOpen)
         {
             CheckInput();
+
         }
 
 		
@@ -95,12 +108,13 @@ public class StructureMenu : MonoBehaviour {
 
     **/
 
-    void AddMenuItem(ClickFunction func, CancelFunction cancFunc, TimeLeftFunction timeFunc)
+    void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, AvaliableFunction avilFunc)
     {
         MenuItem newItem;
-        newItem.clicFunc = func;
+        newItem.clickFunc = func;
         newItem.cancFunc = cancFunc;
-        newItem.timeFunc = timeFunc;
+        newItem.percFunc = perFunc;
+        newItem.avilFunc = avilFunc;
 
         menuItems.Add(newItem);
     }
@@ -143,17 +157,32 @@ public class StructureMenu : MonoBehaviour {
         float x = Input.mousePosition.x;
         float y = Input.mousePosition.y;
 
+        bool rightPressed = Input.GetKeyDown(KeyCode.Mouse1);
+        bool leftPressed = Input.GetKeyDown(KeyCode.Mouse0);
+
 
         Vector2 mousePoint = new Vector2(x, y);
-        mousePoint -= new Vector2(Screen.width/2.0f, Screen.height/2.0f);
+        mousePoint -= new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
         //Debug.Log(mousePoint);
 
         if (openMenu.Count == 1)
         {
-            float radius = openMenu[0].GetComponent<RectTransform>().rect.width/2.0f;
+            float radius = openMenu[0].GetComponent<RectTransform>().rect.width / 2.0f;
             if (mousePoint.magnitude < radius)
             {
-                Debug.Log("inside");
+                UpdateVisuals(0, true);
+                if (leftPressed)
+                {
+                    menuItems[0].clickFunc();
+                }
+                else if (rightPressed)
+                {
+                    menuItems[0].cancFunc();
+                }
+            }
+            else
+            {
+                UpdateVisuals(0, false);
             }
         }
         else
@@ -162,44 +191,74 @@ public class StructureMenu : MonoBehaviour {
 
             // 2 = 0, 3 = 0.333 ,4 = 0.5f, 8 = 0.75
             //float dotMax = 1.0f - 1.0f/ menuItems.Count;
-            float dotMax = Mathf.Cos((degreesBetween/2.0f)*2*Mathf.PI/360.0f);
+            float dotMax = Mathf.Cos((degreesBetween / 2.0f) * 2 * Mathf.PI / 360.0f);
             Vector3 curVector = new Vector3(0, 1, 0);
 
-            
 
-            foreach (var item in openMenu)
+            float radius = openMenu[0].GetComponent<RectTransform>().rect.width / 2.0f;
+
+            for (int i = 0; i < menuItems.Count; i++)
             {
-                float radius = item.GetComponent<RectTransform>().rect.width / 2.0f;
+                float dotVal = Vector2.Dot(mousePoint.normalized, new Vector2(curVector.x, curVector.y));
+
                 if (mousePoint.magnitude > radius)
                 {
-
-
-                    float dotVal = Vector2.Dot(mousePoint.normalized, new Vector2(curVector.x, curVector.y));
-                    Debug.Log(dotVal + " " + mousePoint.normalized + " " + curVector);
-
-                    if(dotVal > dotMax)
+                    if (dotVal > dotMax)
                     {
-                        Image image = item.GetComponent<Image>();
-                        image.color = new Color(1, 0, 0);
+
+                        UpdateVisuals(i, true);
+
+                        if (leftPressed)
+                        {
+                            menuItems[i].clickFunc();
+                        }
+                        else if (rightPressed)
+                        {
+                            menuItems[i].cancFunc();
+                        }
                     }
                     else
                     {
-                        Image image = item.GetComponent<Image>();
-                        image.color = new Color(1, 1, 1);
+                        UpdateVisuals(i, false);
                     }
-
-                    curVector = Quaternion.Euler(0, 0, degreesBetween) * curVector;
-                    curVector.Normalize();
                 }
-            }
+                else
+                {
+                    UpdateVisuals(i, false);
 
+                }
+
+                curVector = Quaternion.Euler(0, 0, degreesBetween) * curVector;
+                curVector.Normalize();
+            }
         }
 
-        foreach (var item in openMenu)
+    }
+    
+
+    void UpdateVisuals(int i, bool inside)
+    {
+        RectTransform rectTrans = openMenu[i].GetComponent<RectTransform>();
+        Image image = openMenu[i].GetComponent<Image>();
+        float H, S, V;
+        Color baseColor = new Color(.1f, .1f, .1f);
+        Color.RGBToHSV(baseColor, out H, out S, out V);
+
+        if (menuItems[i].avilFunc())
         {
+            if(inside)
+            {
 
-            RectTransform rectTrans = item.GetComponent<RectTransform>();
-
+                image.color = new Color(1, 1, 1);
+            }
+            else
+            {
+                image.color = new Color(0.7f, 0.7f, 0.7f);
+            }
+        }
+        else
+        {
+            image.color = new Color(0.25f, 0.25f, 0.25f);
         }
     }
 
