@@ -111,8 +111,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4603071000059056}
   - component: {fileID: 111435571127439032}
+  - component: {fileID: 114251050001696910}
   m_Layer: 0
-  m_Name: Worker_Run
+  m_Name: Peasant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -666,6 +667,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &114251050001696910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175835732278254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e003b3e53ed8ad4690ea6dbe60c81ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceCost: 50
+  spawnTime: 10
 --- !u!137 &137600048978032584
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

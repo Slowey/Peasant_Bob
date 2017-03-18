@@ -22,6 +22,7 @@ public class StructureMenu : MonoBehaviour {
         public PercentageDoneFunction percFunc;
         public NumberActiveFunction numFunc;
         public AvaliableFunction avilFunc;
+        public MonoBehaviour beh;
     }
 
     List<MenuItem> menuItems = new List<MenuItem>();
@@ -60,15 +61,6 @@ public class StructureMenu : MonoBehaviour {
     // Use this for initialization
     void Start () {
         canvasObj = GameObject.Find("Canvas");
-        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
-        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
-        AddMenuItem(click, cancelFunc, perf,numFun,avilFun2);
-        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
-        AddMenuItem(click, cancelFunc, perf,numFun,avilFun);
-        AddMenuItem(click, cancelFunc, perf, numFun, avilFun);
-
-
-
     }
 	
 	// Update is called once per frame
@@ -101,7 +93,7 @@ public class StructureMenu : MonoBehaviour {
 
     **/
 
-    public void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc)
+    public void AddMenuItem(ClickFunction func, CancelFunction cancFunc, PercentageDoneFunction perFunc, NumberActiveFunction numFunc, AvaliableFunction avilFunc, MonoBehaviour beh)
     {
         MenuItem newItem;
         newItem.clickFunc = func;
@@ -109,6 +101,7 @@ public class StructureMenu : MonoBehaviour {
         newItem.percFunc = perFunc;
         newItem.numFunc = numFunc;
         newItem.avilFunc = avilFunc;
+        newItem.beh = beh;
 
         menuItems.Add(newItem);
     }
