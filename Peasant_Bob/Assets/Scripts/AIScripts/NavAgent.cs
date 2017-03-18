@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class NavAgent : MonoBehaviour {
-
     private NavMeshAgent agent;
-    private AgentsManager.AgentStates m_state;
-    private AgentsManager.AgentStates m_wantedState;
-    private float m_okWorkDistance;
+    public AgentsManager.AgentStates m_state;
+    public AgentsManager.AgentStates m_wantedState;
+    public float m_okWorkDistance;
 
     void Start()
     {
@@ -22,6 +21,27 @@ public class NavAgent : MonoBehaviour {
         {
             m_state = m_wantedState;
         }
+        switch (m_wantedState)
+        {
+            case AgentsManager.AgentStates.Idle:
+                break;
+            case AgentsManager.AgentStates.GatheringResource:
+            case AgentsManager.AgentStates.LeaveResources:
+                {
+                    GatheringResourceUpdate();
+                }
+                break;
+            case AgentsManager.AgentStates.Construction:
+                break;
+            case AgentsManager.AgentStates.Fighting:
+                break;
+            case AgentsManager.AgentStates.Walking:
+                break;
+            case AgentsManager.AgentStates.ENDITEM:
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetDestination(Vector3 p_position, AgentsManager.AgentStates p_wantedState)
@@ -31,14 +51,25 @@ public class NavAgent : MonoBehaviour {
         agent.SetDestination(p_position);
     }
 
-    public void SetOkWorkDistance(float p_distance)
-    {
-        m_okWorkDistance = p_distance;
-        agent.stoppingDistance = m_okWorkDistance;
-    }
-
     public AgentsManager.AgentStates GetAgentState()
     {
         return m_state;
+    }
+
+    private void GatheringResourceUpdate()
+    {
+        bool stayInState = GetComponent<ResourceGatheringLogic>().AgentUpdate(m_state);
+        if (!stayInState)
+        {
+            if (m_state == AgentsManager.AgentStates.GatheringResource)
+            {
+                SetDestination(GameObject.FindGameObjectWithTag("TownHall").GetComponent<TownhallAgentSystem>().FindClosestPositionForAgent(gameObject), AgentsManager.AgentStates.LeaveResources);
+            }
+            else if (m_state == AgentsManager.AgentStates.LeaveResources)
+            {
+                Vector3 newPosition = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().FindClosestResourceOfType(gameObject.transform.position,1000, ResourceType.Wood).transform.position;
+                SetDestination(newPosition, AgentsManager.AgentStates.GatheringResource);
+            }
+        }
     }
 }

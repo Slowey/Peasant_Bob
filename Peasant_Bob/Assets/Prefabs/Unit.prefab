@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23980763285350574}
   - component: {fileID: 195529427718169730}
   - component: {fileID: 114814174963801978}
+  - component: {fileID: 114800741404456742}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376556683594508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.62, y: 1.92, z: -19.4}
+  m_LocalPosition: {x: -17.75, y: 0.32, z: -13.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,6 +95,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114800741404456742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1376556683594508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd58c6d784b5734985e410d91492e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxResourceCarry: 10
+  m_resourceGatherSpeed: 1
 --- !u!114 &114814174963801978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,6 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5db3bb6db985c64f9b956e1ccae2576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_state: 0
+  m_wantedState: 0
+  m_okWorkDistance: 2
 --- !u!195 &195529427718169730
 NavMeshAgent:
   m_ObjectHideFlags: 1

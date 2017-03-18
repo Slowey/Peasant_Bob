@@ -16,7 +16,7 @@ public class ConstructionAgentSystem : ObjectAgentSystem {
         navMeshObstacleSize.y = 5.0f;
         GetComponent<NavMeshObstacle>().size = navMeshObstacleSize;
         GameObject newAgent = AssignAgentToObject();
-        newAgent.GetComponent<NavAgent>().SetDestination(FindBestConstructionPositionForAgent(newAgent), m_agentState);
+        newAgent.GetComponent<NavAgent>().SetDestination(FindClosestPositionForAgent(newAgent), m_agentState);
     }
 	
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class ConstructionAgentSystem : ObjectAgentSystem {
         if (Input.GetKeyDown(KeyCode.L))
         {
             GameObject newAgent = AssignAgentToObject();
-            newAgent.GetComponent<NavAgent>().SetDestination(FindBestConstructionPositionForAgent(newAgent), m_agentState);
+            newAgent.GetComponent<NavAgent>().SetDestination(FindClosestPositionForAgent(newAgent), m_agentState);
         }
         int m_agentsAtConstructionSite = 0;
         foreach (var item in m_agents)
@@ -50,50 +50,5 @@ public class ConstructionAgentSystem : ObjectAgentSystem {
         }
 	}
 
-    Vector3 FindBestConstructionPositionForAgent(GameObject p_agent)
-    {
-        Vector3 bestPosition = Vector3.zero;
-        Vector3 agentPosition = p_agent.transform.position;
-        Vector3 myPosition = transform.position;
-        Vector3 navMeshSize = GetComponent<NavMeshObstacle>().size;
-        float distance = float.MaxValue;
-        // Find closest wall. We are counting on the fact that all walls are reachable, not good
-        Vector3 side = myPosition;
-        side.x += navMeshSize.x/2.0f;
-        float distanceBetween = Vector3.Distance(side, agentPosition);
-        if (distanceBetween < distance)
-        {
-            distance = distanceBetween;
-            bestPosition = side;
-        }
 
-        side = myPosition;
-        side.x -= navMeshSize.x / 2.0f;
-        distanceBetween = Vector3.Distance(side, agentPosition);
-        if (distanceBetween < distance)
-        {
-            distance = distanceBetween;
-            bestPosition = side;
-        }
-
-        side = myPosition;
-        side.z -= navMeshSize.z / 2.0f;
-        distanceBetween = Vector3.Distance(side, agentPosition);
-        if (distanceBetween < distance)
-        {
-            distance = distanceBetween;
-            bestPosition = side;
-        }
-
-        side = myPosition;
-        side.z += navMeshSize.z / 2.0f;
-        distanceBetween = Vector3.Distance(side, agentPosition);
-        if (distanceBetween < distance)
-        {
-            distance = distanceBetween;
-            bestPosition = side;
-        }
-        
-        return bestPosition;
-    }
 }
