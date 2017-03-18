@@ -24,6 +24,7 @@ public class ResourceGatheringLogic : MonoBehaviour {
         }
         else if (p_currentState == AgentsManager.AgentStates.LeaveResources)
         {
+            GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType((int)m_currentResourceCarry, ResourceType.Wood);
             m_currentResourceCarry = 0;
             return false;
         }

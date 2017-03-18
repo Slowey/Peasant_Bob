@@ -23,7 +23,10 @@ GameObject:
   - component: {fileID: 23062174963666328}
   - component: {fileID: 114850935257221414}
   - component: {fileID: 208829201392268768}
-  m_Layer: 0
+  - component: {fileID: 114619419310636872}
+  - component: {fileID: 114034819404043578}
+  - component: {fileID: 65330405279083230}
+  m_Layer: 8
   m_Name: Archery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991026482798732}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.344292, y: 0.67560834, z: -15.242931}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,6 +88,49 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991026482798732}
   m_Mesh: {fileID: 4300000, guid: 868fac1b5f8c9e543a065a01b16e5ccd, type: 3}
+--- !u!65 &65330405279083230
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991026482798732}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 10, z: 16}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114034819404043578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991026482798732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4f8da01e25edf41812b75e391f220f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guiItemPrefab: {fileID: 1956821214663076, guid: 19021ec856b20854a91a6144272e4c0f,
+    type: 2}
+--- !u!114 &114619419310636872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991026482798732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f528250b62b83564d88fc2c9d35d85cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxAgentsAssigned: 1
+  m_agentState: 3
+  m_unitType: 0
+  m_unitPrefab: {fileID: 1376556683594508, guid: b3af66fac1aea9c43b59f2791c6fec65,
+    type: 2}
+  m_unitCost: 10
+  m_trainingTime: 5
 --- !u!114 &114850935257221414
 MonoBehaviour:
   m_ObjectHideFlags: 1

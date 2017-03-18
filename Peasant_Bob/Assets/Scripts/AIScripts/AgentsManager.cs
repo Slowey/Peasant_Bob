@@ -65,6 +65,7 @@ public class AgentsManager : MonoBehaviour {
         int index = m_agents[p_stateToRemoveFrom].FindIndex(obj => obj.transform == p_agent.transform);
         m_agents[p_stateToRemoveFrom].RemoveAt(index);
         m_agents[AgentStates.Idle].Add(p_agent);
+        p_agent.GetComponent<NavAgent>().SetDestination(Vector3.zero, AgentStates.Idle);
         // p_agent.GetComponent<NavAgent>().SetDestination(new Vector3(0, 0, 0), AgentStates.Idle);
         // Apparently we want all idle units to gather resources
         GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");

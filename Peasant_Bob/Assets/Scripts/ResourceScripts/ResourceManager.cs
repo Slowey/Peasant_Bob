@@ -9,6 +9,7 @@ public class ResourceManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        m_availableResources.Add(ResourceType.Wood, 1000);
     }
 
     // Update is called once per frame

@@ -49,6 +49,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
             if (newAgent != null)
             {
                 GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().TakeResource(m_unitCost, ResourceType.Wood);
+                newAgent.GetComponent<NavAgent>().SetDestination(base.FindClosestPositionForAgent(newAgent), m_agentState);
                 m_training = m_trainingTime;
             }
             
@@ -76,7 +77,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
 
     float PercentageDone()
     {
-        return 0;
+        return Mathf.Max(0, m_training)/m_trainingTime;
     }
 
     int NumQueuedUnits()
@@ -86,7 +87,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
 
     bool CanSpawnMore()
     {
-        ResourceManager resourceManager = GameObject.FindGameObjectWithTag("AgentManager").GetComponent<ResourceManager>();
+        ResourceManager resourceManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
         AgentsManager agentsManager = GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>();
         return agentsManager.UnitIsAvailableForWork() && resourceManager.ResourceExists(m_unitCost, ResourceType.Wood);
     }
