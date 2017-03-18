@@ -66,20 +66,6 @@ public class StructureMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.E) && menuOpen == false)
-        {
-            CreateMenu();
-            menuOpen = true;
-        }
-        else if(Input.GetKeyDown(KeyCode.Escape) && menuOpen == true)
-        {
-            menuOpen = false;
-            foreach (var item in openMenu)
-            {
-                Destroy(item);
-            }
-            openMenu.Clear();
-        }
 
         // Check input
         if(menuOpen)
@@ -119,8 +105,10 @@ public class StructureMenu : MonoBehaviour {
         menuItems.Add(newItem);
     }
 
-    void CreateMenu()
+    public void CreateMenu()
     {
+        menuOpen = true;
+
         // Create circle for each
         if (menuItems.Count == 0)
         {
@@ -150,6 +138,16 @@ public class StructureMenu : MonoBehaviour {
             }
         }
 
+    }
+
+    public void DestroyMenu()
+    {
+        menuOpen = false;
+        foreach (var item in openMenu)
+        {
+            Destroy(item);
+        }
+        openMenu.Clear();
     }
 
     void CheckInput()
@@ -261,6 +259,7 @@ public class StructureMenu : MonoBehaviour {
             image.color = new Color(0.25f, 0.25f, 0.25f);
         }
     }
+
 
     //void UpdateMenu()
     //{
