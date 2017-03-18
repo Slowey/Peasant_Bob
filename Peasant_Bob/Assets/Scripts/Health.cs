@@ -29,6 +29,20 @@ public class Health : MonoBehaviour {
         curHealth = val;
     }
 
+    public void TakeDamage(float val)
+    {
+        curHealth -= val;
+        CheckDeath();
+    }
+
+    public void CheckDeath()
+    {
+        if (curHealth < maxHealth)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update () {
 		

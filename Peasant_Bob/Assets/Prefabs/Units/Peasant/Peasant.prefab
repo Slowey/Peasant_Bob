@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 195344063478563778}
   - component: {fileID: 114176727381261160}
   - component: {fileID: 114418387410942312}
+  - component: {fileID: 114898606921988248}
   m_Layer: 0
   m_Name: Peasant
   m_TagString: Untagged
@@ -699,6 +700,7 @@ MonoBehaviour:
   resourceCost: 50
   spawnTime: 1
   requireBeds: 1
+  maxHealth: 0
 --- !u!114 &114418387410942312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -712,6 +714,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxResourceCarry: 10
   m_resourceGatherSpeed: 1
+--- !u!114 &114898606921988248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175835732278254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137600048978032584
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

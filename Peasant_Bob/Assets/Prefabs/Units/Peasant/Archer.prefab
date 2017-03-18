@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 114012020677462112}
   - component: {fileID: 195902338416388410}
   - component: {fileID: 114431479079180644}
+  - component: {fileID: 114109964799941928}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -683,6 +684,18 @@ MonoBehaviour:
   resourceCost: 50
   spawnTime: 1
   requireBeds: 1
+  maxHealth: 0
+--- !u!114 &114109964799941928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099477620601708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114431479079180644
 MonoBehaviour:
   m_ObjectHideFlags: 1
