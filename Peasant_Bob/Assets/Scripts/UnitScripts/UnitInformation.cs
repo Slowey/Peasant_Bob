@@ -9,6 +9,7 @@ public class UnitInformation : MonoBehaviour {
     public int requireBeds = 0;
     public float maxHealth = 0;
     public float range = 0;
+    public float attackSpeed = 0;
 
 	// Use this for initialization
 	void Start () {

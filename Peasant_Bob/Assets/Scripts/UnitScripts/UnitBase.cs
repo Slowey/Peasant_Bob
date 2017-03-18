@@ -5,10 +5,10 @@ using UnityEngine;
 public abstract class UnitBase : MonoBehaviour {
     protected Team m_team;
     protected AgentsManager myAgentManager;
-    protected List<AgentsManager> enemyAgentManager;
+    protected List<AgentsManager> enemyAgentManager = new List<AgentsManager>();
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
         m_team = GetComponent<Team>();
 
         GameObject[] agentMans = GameObject.FindGameObjectsWithTag("AgentManager");

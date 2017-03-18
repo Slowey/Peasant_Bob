@@ -51,7 +51,7 @@ public class AgentsManager : MonoBehaviour {
         }
         else if (p_unitType == NavAgent.UnitType.Archer)
         {
-            m_agents[AgentStates.Guarding].Add(p_agent);
+            m_agents[AgentStates.Fighting].Add(p_agent);
         }
     }
 

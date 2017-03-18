@@ -700,7 +700,7 @@ MonoBehaviour:
   spawnTime: 1
   requireBeds: 1
   maxHealth: 0
-  range: 0
+  range: 5
 --- !u!114 &114109964799941928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad0206ee21a5c49b84dbd90a4b1392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRange: 10
+  aggroRange: 50
 --- !u!114 &114431479079180644
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -132,4 +132,16 @@ public class NavAgent : MonoBehaviour {
             animationComponent.CrossFade(clipToChangeTo);
         }
     }
+
+    void OnDestroy()
+    {
+        if (m_type == UnitType.Archer)
+        {
+            agentManager.GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(gameObject, AgentsManager.AgentStates.Fighting);
+        }
+        else
+        {
+            agentManager.GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(gameObject, m_wantedState);
+        }
+    }
 }

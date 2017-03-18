@@ -7,10 +7,12 @@ public class ArcherBehavior : UnitBase {
 
     public float aggroRange = 10.0f;
     float shootRange;
+    float cooldown;
 
 
 	// Use this for initialization
 	void Start () {
+        base.Start();
         shootRange = GetComponent<UnitInformation>().range;
 	}
 	
@@ -23,13 +25,20 @@ public class ArcherBehavior : UnitBase {
     {
         if (p_state == AgentsManager.AgentStates.Walking)
         {
-            CheckInAggro();
+            CheckInAggro(p_state);
+        }
+        else if (p_state == AgentsManager.AgentStates.Fighting)
+        {
+            // Check if still in fighting
+            // else find new point to fight to (enemy main buildng?)
+
+            CheckInAggro(p_state);
         }
 
 
     }
 
-    public void CheckInAggro()
+    public void CheckInAggro(AgentsManager.AgentStates p_laststate)
     {
         Vector3 mypos = transform.position;
         Vector3 lastDir = new Vector3(0, 0, 0);
@@ -68,13 +77,23 @@ public class ArcherBehavior : UnitBase {
             if (lastDir.magnitude < shootRange)
             {
                 // Change state to killmode
-                GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Fighting;
+                if (p_laststate == AgentsManager.AgentStates.Fighting)
+                {
+                    // Continue fighting stuff
+
+                }
+                else
+                {
+                    GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Fighting;
+                    GetComponent<NavAgent>().SetDestination(transform.position, AgentsManager.AgentStates.Fighting);
+                    Debug.Log("KILLMODE ENGAGE");
+                }
             }
             else
             {
                 // Move to closest
                 GetComponent<NavAgent>().SetDestination(transform.position + lastDir, AgentsManager.AgentStates.Fighting);
-
+                Debug.Log("I SEE ENEMY");
             }
         }
     }
