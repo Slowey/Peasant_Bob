@@ -119,11 +119,28 @@ public class StructurePlacementSystem : MonoBehaviour {
 
                 if (occopied)
                 {
-                    currentStructure.GetComponent<Renderer>().material = invalidMaterial;
+                    Renderer rend = currentStructure.GetComponent<Renderer>();
+                    rend.enabled = true;
+                    Material[] tempMatArr = new Material[rend.materials.Length];
+                    for (int i = 0; i < tempMatArr.Length; i++)
+                    {
+                        tempMatArr[i] = invalidMaterial;
+                    }
+
+                    rend.materials = tempMatArr;
                 }
                 else
                 {
-                    currentStructure.GetComponent<Renderer>().material = validMaterial;
+                    Renderer rend = currentStructure.GetComponent<Renderer>();
+                    rend.enabled = true;
+                    Material[] tempMatArr = new Material[rend.materials.Length];
+                    for (int i = 0; i < tempMatArr.Length; i++)
+                    {
+                        tempMatArr[i] = validMaterial;
+                    }
+
+                    rend.materials = tempMatArr;
+                    
                 }
 
                 if (place && occopied == false)
@@ -148,10 +165,14 @@ public class StructurePlacementSystem : MonoBehaviour {
                     }
 
                     CreateBuildingStructure();
-                    placing = false;
-                    Destroy(currentStructure);
-                    currentStructure = null;
 
+
+                    if (Input.GetKey(KeyCode.LeftShift) == false)
+                    {
+                        placing = false;
+                        Destroy(currentStructure);
+                        currentStructure = null;
+                    }
                 }
             }
         }
@@ -163,10 +184,21 @@ public class StructurePlacementSystem : MonoBehaviour {
 
         MeshFilter filter = obj.GetComponent<MeshFilter>();
         MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        Renderer rendererObj = currentStructurePrefab.GetComponent<Renderer>();
+
         if (filter == null || filterObj == null)
             Debug.LogWarning("No filter on structure");
 
+        if (renderer == null || rendererObj == null)
+            Debug.LogWarning("No renderer on structure");
+
+
         filter.mesh = filterObj.sharedMesh;
+        renderer.materials = rendererObj.sharedMaterials;
+
+
     }
 
     public void CancelPlace()
@@ -188,11 +220,19 @@ public class StructurePlacementSystem : MonoBehaviour {
         // Get data
         MeshFilter filter = currentStructure.GetComponent<MeshFilter>();
         MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
+
+        Renderer renderer = currentStructure.GetComponent<Renderer>();
+        Renderer rendererObj = currentStructurePrefab.GetComponent<Renderer>();
+        renderer.enabled = false;
+
         if (filter == null || filterObj == null)
             Debug.LogWarning("No filter on structure");
 
-        filter.mesh = filterObj.sharedMesh;
+        if (renderer == null || rendererObj == null)
+            Debug.LogWarning("No renderer on structure");
 
+        filter.mesh = filterObj.sharedMesh;
+        renderer.materials = rendererObj.sharedMaterials;
 
         StructureInformation info = obj.GetComponent<StructureInformation>();
         currentStructureGridSize.x = info.gridSizeX;
