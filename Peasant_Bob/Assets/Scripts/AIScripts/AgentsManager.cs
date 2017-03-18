@@ -71,9 +71,13 @@ public class AgentsManager : MonoBehaviour {
     {
         AgentStates t_takenAgentPrevState;
         GameObject closestAgent = GetClosestAvailableAgentToObject(p_taskGameObject, out t_takenAgentPrevState);
-        int index = m_agents[t_takenAgentPrevState].FindIndex(obj => obj.transform == closestAgent.transform); // TODO this should check for idle list through
-        m_agents[t_takenAgentPrevState].RemoveAt(index);
-        m_agents[p_taskState].Add(closestAgent);
+        if (closestAgent != null)
+        {
+            int index = m_agents[t_takenAgentPrevState].FindIndex(obj => obj.transform == closestAgent.transform); // TODO this should check for idle list through
+            m_agents[t_takenAgentPrevState].RemoveAt(index);
+            m_agents[p_taskState].Add(closestAgent);
+        }
+
         return closestAgent;
     }
 

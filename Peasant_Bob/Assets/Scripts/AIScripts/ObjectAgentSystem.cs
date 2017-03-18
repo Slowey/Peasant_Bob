@@ -29,7 +29,10 @@ public class ObjectAgentSystem : MonoBehaviour {
         if (m_agents.Count < m_maxAgentsAssigned)
         {
             newAgent = m_agentManager.AssignFreeAgentToTask(gameObject, m_agentState);
-            m_agents.Add(newAgent);
+            if (newAgent != null)
+            {
+                m_agents.Add(newAgent);
+            }
         }
         return newAgent;
     }
