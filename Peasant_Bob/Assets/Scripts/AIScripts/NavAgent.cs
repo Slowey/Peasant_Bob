@@ -22,6 +22,7 @@ public class NavAgent : MonoBehaviour {
 
     void Update()
     {
+        AgentsManager.AgentStates m_previousState = m_state;
         if (Vector3.Distance(agent.destination, transform.position) <= m_okWorkDistance)
         {
             m_state = m_wantedState;
@@ -47,6 +48,10 @@ public class NavAgent : MonoBehaviour {
             default:
                 break;
         }
+        if (m_previousState != m_state)
+        {
+            ChangedState();
+        }
     }
 
     public void SetDestination(Vector3 p_position, AgentsManager.AgentStates p_wantedState)
@@ -54,6 +59,7 @@ public class NavAgent : MonoBehaviour {
         m_state = AgentsManager.AgentStates.Walking;
         m_wantedState = p_wantedState;
         agent.SetDestination(p_position);
+        ChangedState();
     }
 
     public AgentsManager.AgentStates GetAgentState()
@@ -75,6 +81,36 @@ public class NavAgent : MonoBehaviour {
                 Vector3 newPosition = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().FindClosestResourceOfType(gameObject.transform.position,1000, ResourceType.Wood).transform.position;
                 SetDestination(newPosition, AgentsManager.AgentStates.GatheringResource);
             }
+        }
+    }
+
+    private void ChangedState()
+    {
+        string clipToChangeTo = "";
+        switch (m_state)
+        {
+            case AgentsManager.AgentStates.Idle:
+            case AgentsManager.AgentStates.GatheringResource:
+            case AgentsManager.AgentStates.Construction:
+            case AgentsManager.AgentStates.Training:
+            case AgentsManager.AgentStates.Fighting:
+            case AgentsManager.AgentStates.Guarding:
+            case AgentsManager.AgentStates.LeaveResources:
+                clipToChangeTo = "Peasant_Attack";
+                break;
+            case AgentsManager.AgentStates.Walking:
+                clipToChangeTo = "Peasant_Run";
+                break;
+            case AgentsManager.AgentStates.ENDITEM:
+                break;
+            default:
+                break;
+        }
+        Animation animationComponent =  GetComponent<Animation>();
+
+        if (animationComponent != null)
+        {
+            animationComponent.CrossFade(clipToChangeTo);
         }
     }
 }
