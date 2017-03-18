@@ -54,6 +54,8 @@ public class TP_Camera : MonoBehaviour {
 
         CalculateDesiredPosition();
 
+        CheckCameraPoints(TargetLookAt.position, m_desiredPosition);
+
         UpdatePosition();
     }
 
@@ -95,6 +97,35 @@ public class TP_Camera : MonoBehaviour {
         Quaternion t_rotation = Quaternion.Euler(p_rotX, p_rotY, 0);
         return TargetLookAt.position + t_rotation * t_direction;
     }
+
+    float CheckCameraPoints(Vector3 p_from, Vector3 p_to)
+    {
+        var t_nearestDistance = -1f;
+
+        RaycastHit t_hitInfo;
+
+        Helper.ClipPlanePoints t_clipPlanePoints = Helper.ClipPlaneAtNear(p_to);
+
+        // Draw lines in the editor to make it easier to visualize and debug
+        Debug.DrawLine(p_from, p_to + transform.forward * - Camera.main.nearClipPlane, Color.red);
+        Debug.DrawLine(p_from, t_clipPlanePoints.UpperLeft);
+        Debug.DrawLine(p_from, t_clipPlanePoints.LowerLeft);
+        Debug.DrawLine(p_from, t_clipPlanePoints.UpperRight);
+        Debug.DrawLine(p_from, t_clipPlanePoints.LowerRight);
+
+        Debug.DrawLine(t_clipPlanePoints.UpperLeft, t_clipPlanePoints.UpperRight);
+        Debug.DrawLine(t_clipPlanePoints.UpperRight, t_clipPlanePoints.LowerRight);
+        Debug.DrawLine(t_clipPlanePoints.LowerRight, t_clipPlanePoints.LowerLeft);
+        Debug.DrawLine(t_clipPlanePoints.LowerLeft, t_clipPlanePoints.UpperLeft);
+
+        if (Physics.Linecast(p_from, t_clipPlanePoints.UpperLeft, out t_hitInfo) && t_hitInfo.collider.tag != "Player")
+        {
+
+        }
+
+        return t_nearestDistance;
+    }
+
     void UpdatePosition()
     {
         var posX = Mathf.SmoothDamp(m_position.x, m_desiredPosition.x, ref m_velX, m_XSmooth);
