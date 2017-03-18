@@ -6,7 +6,10 @@ public class TrainAgentSystem : ObjectAgentSystem {
     public NavAgent.UnitType m_unitType;
     public GameObject m_unitPrefab;
     public int m_unitCost;
+    public float m_trainingTime;
+    private float m_training;
     private int inQueue;
+    private bool inTraining;
 	// Use this for initialization
 	void Start () {
         StructureMenu structureMenu = GetComponent<StructureMenu>();
@@ -20,6 +23,18 @@ public class TrainAgentSystem : ObjectAgentSystem {
             StartSpawning();
             inQueue--;     
         }
+        if (!inTraining && m_agents.Count > 0 && m_agents[0].GetComponent<NavAgent>().m_state == m_agentState)
+        {
+            inTraining = true;
+        }
+        if (inTraining)
+        {
+            m_training -= Time.deltaTime;
+            if (m_training <= 0)
+            {
+                // Spawn dude
+            }
+        }
 	}
 
     void StartSpawning()
@@ -27,14 +42,13 @@ public class TrainAgentSystem : ObjectAgentSystem {
         if (CanSpawnMore())
         {
             GameObject newAgent = base.AssignAgentToObject();
-            if (newAgent == null)
-            {
-                inQueue++;
-            }
-            else
+            if (newAgent != null)
             {
                 GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().TakeResource(m_unitCost, ResourceType.Wood);
+                m_training = m_trainingTime;
             }
+            
+            inQueue++;
         }
     }
 
