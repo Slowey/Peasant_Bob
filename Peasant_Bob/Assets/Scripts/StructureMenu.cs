@@ -51,7 +51,19 @@ public class StructureMenu : MonoBehaviour {
     void CreateMenu()
     {
         // Create circle for each
+        if (menuItems.Count == 0)
+        {
+            return;
+        }
+        else if(menuItems.Count == 1)
+        {
+            // Create one circle in middle
 
+        }
+        else
+        {
+
+        }
 
     }
 }

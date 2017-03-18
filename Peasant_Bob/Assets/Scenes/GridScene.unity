@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structures:
-  - {fileID: 1033316705240196, guid: 9f4c59f8e8384954b9c87a9389045dbd, type: 2}
+  - {fileID: 1991026482798732, guid: 9f4c59f8e8384954b9c87a9389045dbd, type: 2}
   - {fileID: 1317323749662104, guid: d7bed98cfdb4ddc49a00e95fa1aed875, type: 2}
 --- !u!1 &2021604151
 GameObject:
