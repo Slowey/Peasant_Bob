@@ -12,6 +12,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
     private bool inTraining;
 	// Use this for initialization
 	void Start () {
+        base.Start();
         StructureMenu structureMenu = GetComponent<StructureMenu>();
         structureMenu.AddMenuItem(StartSpawning, CancelSpawning, PercentageDone, NumQueuedUnits, CanSpawnMore);
         m_training = m_trainingTime;

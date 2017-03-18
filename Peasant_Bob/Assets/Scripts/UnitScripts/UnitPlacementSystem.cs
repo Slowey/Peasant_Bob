@@ -36,7 +36,7 @@ public class UnitPlacementSystem : MonoBehaviour {
         if (Physics.Raycast(ray, out hitInfo, 1000.0f))
         {
             placePosition = hitInfo.point;
-            pointer.transform.position = placePosition;
+            pointer.transform.position = new Vector3(placePosition.x, placePosition.y + 2, placePosition.z);
         }
     }
 
