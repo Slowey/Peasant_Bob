@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridCenter: {fileID: 1849646589}
+  camera: {fileID: 0}
   placeStructurePrefab: {fileID: 1653682062889654, guid: 2823a97e7ca8c944e8e8b8dd79257f4e,
     type: 2}
   buildingStructurePrefab: {fileID: 1422516968071788, guid: 45d5171c7bec1994eb641383c158abbd,
@@ -487,7 +488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad4791f0823182449f09d4ef2eec13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testObj: {fileID: 1934038935164946, guid: 59ab6b86c11bfec4b891bea0e5190a55, type: 2}
+  structures:
+  - {fileID: 1033316705240196, guid: 9f4c59f8e8384954b9c87a9389045dbd, type: 2}
+  - {fileID: 1317323749662104, guid: d7bed98cfdb4ddc49a00e95fa1aed875, type: 2}
 --- !u!1 &2021604151
 GameObject:
   m_ObjectHideFlags: 0

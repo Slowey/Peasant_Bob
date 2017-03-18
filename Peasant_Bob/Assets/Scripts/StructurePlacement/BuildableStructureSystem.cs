@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildableStructureSystem : MonoBehaviour {
 
-    public GameObject testObj;
+    public GameObject[] structures;
 
     struct BuildableStructure
     {
@@ -21,8 +21,11 @@ public class BuildableStructureSystem : MonoBehaviour {
     void Start () {
         strucPlaceSys = GetComponent<StructurePlacementSystem>();
 
+        foreach (var item in structures)
+        {
+            AddStructure(item);
+        }
 
-        AddStructure(testObj);
     }
 	
 	// Update is called once per frame
