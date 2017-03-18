@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StructureMenu : MonoBehaviour {
 
@@ -24,7 +25,12 @@ public class StructureMenu : MonoBehaviour {
     GameObject canvasObj;
     void click()
     {
+        Debug.Log("clicked");
+    }
 
+    void cancelFunc()
+    {
+        Debug.Log("cancel");
     }
 
     float timef()
@@ -35,8 +41,13 @@ public class StructureMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         canvasObj = GameObject.Find("Canvas");
-        AddMenuItem(click, click, timef);
-        AddMenuItem(click, click, timef);
+        AddMenuItem(click, cancelFunc, timef);
+        AddMenuItem(click, cancelFunc, timef);
+        AddMenuItem(click, cancelFunc, timef);
+        AddMenuItem(click, cancelFunc, timef);
+        AddMenuItem(click, cancelFunc, timef);
+        AddMenuItem(click, cancelFunc, timef);
+
 
 
     }
@@ -57,6 +68,13 @@ public class StructureMenu : MonoBehaviour {
             }
             openMenu.Clear();
         }
+
+        // Check input
+        if(menuOpen)
+        {
+            CheckInput();
+        }
+
 		
         //if(menuOpen)
         //{
@@ -118,6 +136,71 @@ public class StructureMenu : MonoBehaviour {
             }
         }
 
+    }
+
+    void CheckInput()
+    {
+        float x = Input.mousePosition.x;
+        float y = Input.mousePosition.y;
+
+
+        Vector2 mousePoint = new Vector2(x, y);
+        mousePoint -= new Vector2(Screen.width/2.0f, Screen.height/2.0f);
+        //Debug.Log(mousePoint);
+
+        if (openMenu.Count == 1)
+        {
+            float radius = openMenu[0].GetComponent<RectTransform>().rect.width/2.0f;
+            if (mousePoint.magnitude < radius)
+            {
+                Debug.Log("inside");
+            }
+        }
+        else
+        {
+            float degreesBetween = 360.0f / menuItems.Count;
+
+            // 2 = 0, 3 = 0.333 ,4 = 0.5f, 8 = 0.75
+            //float dotMax = 1.0f - 1.0f/ menuItems.Count;
+            float dotMax = Mathf.Cos((degreesBetween/2.0f)*2*Mathf.PI/360.0f);
+            Vector3 curVector = new Vector3(0, 1, 0);
+
+            
+
+            foreach (var item in openMenu)
+            {
+                float radius = item.GetComponent<RectTransform>().rect.width / 2.0f;
+                if (mousePoint.magnitude > radius)
+                {
+
+
+                    float dotVal = Vector2.Dot(mousePoint.normalized, new Vector2(curVector.x, curVector.y));
+                    Debug.Log(dotVal + " " + mousePoint.normalized + " " + curVector);
+
+                    if(dotVal > dotMax)
+                    {
+                        Image image = item.GetComponent<Image>();
+                        image.color = new Color(1, 0, 0);
+                    }
+                    else
+                    {
+                        Image image = item.GetComponent<Image>();
+                        image.color = new Color(1, 1, 1);
+                    }
+
+                    curVector = Quaternion.Euler(0, 0, degreesBetween) * curVector;
+                    curVector.Normalize();
+                }
+            }
+
+        }
+
+        foreach (var item in openMenu)
+        {
+
+            RectTransform rectTrans = item.GetComponent<RectTransform>();
+
+        }
     }
 
     //void UpdateMenu()
