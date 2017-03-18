@@ -31,8 +31,12 @@ public class TrainAgentSystem : ObjectAgentSystem {
         {
             m_training -= Time.deltaTime;
             if (m_training <= 0)
-            {
+            {      
+                GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(m_agents[0], m_agentState);
+                Destroy(m_agents[0]);
+                m_agents.Clear();
                 // Spawn dude
+                Instantiate(m_unitPrefab);
             }
         }
 	}
@@ -54,11 +58,20 @@ public class TrainAgentSystem : ObjectAgentSystem {
 
     void CancelSpawning()
     {
-        foreach (var item in m_agents)
+        inQueue--;
+        if (inQueue == 0)
         {
-            GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
-            GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
+            foreach (var item in m_agents)
+            {
+                GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
+                GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
+            }
         }
+        else if (inQueue < 0)
+        {
+            inQueue = 0;
+        }
+        
     }
 
     float PercentageDone()

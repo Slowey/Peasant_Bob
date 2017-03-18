@@ -93,6 +93,18 @@ public class AgentsManager : MonoBehaviour {
     {
         return m_agents[AgentStates.Idle].Count > 0 || m_agents[AgentStates.GatheringResource].Count > 0;
     }
+
+    // Call on destroy
+    public bool RemoveUnitFromAgentSystem(GameObject p_agent, AgentStates p_inState)
+    {
+        int index = m_agents[p_inState].FindIndex(obj => obj.transform == p_agent.transform);
+        if (index == -1)
+        {
+            return false;
+        }
+        m_agents[p_inState].RemoveAt(index);
+        return true;
+    }
     // HELPER FUNCTIONS
     private GameObject GetClosestAvailableAgentToObject(GameObject p_object, out AgentStates o_unitPreviousState)
     {
