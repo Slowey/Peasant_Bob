@@ -18,6 +18,7 @@ public class StructurePlacementSystem : MonoBehaviour {
 
     public GameObject placeStructurePrefab;
     public GameObject buildingStructurePrefab;
+    public GameObject[] constructionSites;
 
     public Material validMaterial;
     public Material invalidMaterial;
@@ -182,6 +183,29 @@ public class StructurePlacementSystem : MonoBehaviour {
     {
         GameObject obj = Instantiate(buildingStructurePrefab, currentStructure.transform.position, Quaternion.identity);
         obj.GetComponent<ConstructionAgentSystem>().m_finalBuildingPrefab = currentStructurePrefab;
+
+        if (constructionSites.Length == 0)
+            return;
+
+        int numSitesX = currentStructureGridSize.x / 4;
+        int numSitesY = currentStructureGridSize.y / 4;
+
+        float offSetX = -cellWidth * 2 *(numSitesX - 1);
+        float offSetY = -cellWidth * 2 * (numSitesY - 1);
+
+        //offSetX = 0;
+        //offSetY = 0;
+
+        for (int y = 0; y < numSitesY; y++)
+        {
+            for (int x = 0; x < numSitesX; x++)
+            {
+                Quaternion rotation = Quaternion.identity * Quaternion.Euler(Vector3.up * 90 * Random.Range(0, 3));
+                Vector3 position = obj.transform.position + new Vector3(offSetX + x * 4 * cellWidth, 0, offSetY + y * 4 * cellWidth);
+                Instantiate(constructionSites[Random.Range(0, constructionSites.Length)], position, rotation, obj.transform);
+            }
+        }
+
         //MeshFilter filter = obj.GetComponent<MeshFilter>();
         //MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
 
