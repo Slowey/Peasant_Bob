@@ -21,7 +21,7 @@ public class UnitSpawning : MonoBehaviour {
 
         //structureMenu.AddMenuItem(StartSpawning, CancelSpawning, PercentageDone, NumQueuedUnits, CanSpawnMore, this);
         structureMenu.AddMenuItem(func1, func2, func3 ,func4 ,func5, this);
-
+        timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
     }
 
     void StartSpawning()
@@ -40,16 +40,28 @@ public class UnitSpawning : MonoBehaviour {
             pendingUnits--;
             // Return resources
         }
+
+        if (pendingUnits == 0)
+        {
+            timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
+        }
     }
 
     float PercentageDone()
     {
-        return 0;
+        return (unitPrefab.GetComponent<UnitInformation>().spawnTime - timeLeft)/ unitPrefab.GetComponent<UnitInformation>().spawnTime;
     }
 
     int NumQueuedUnits()
     {
-        return 0;
+        if (pendingUnits > 1)
+        {
+            return pendingUnits -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     bool CanSpawnMore()
@@ -63,16 +75,21 @@ public class UnitSpawning : MonoBehaviour {
         {
             timeLeft -= Time.deltaTime;
 
-            if (timeLeft == 0)
+            if (timeLeft < 0)
             {
                 // Spawn
-                Debug.Log("Spawned!");
+
+                Instantiate(unitPrefab, transform.position + new Vector3(20,0,0), Quaternion.identity);
 
                 pendingUnits--;
 
                 if (pendingUnits > 0)
                 {
                     timeLeft += unitPrefab.GetComponent<UnitInformation>().spawnTime;
+                }
+                else
+                {
+                    timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
                 }
             }
         }

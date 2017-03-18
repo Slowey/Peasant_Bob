@@ -679,7 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceCost: 50
-  spawnTime: 10
+  spawnTime: 1
 --- !u!137 &137600048978032584
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -27,7 +27,8 @@ GameObject:
   - component: {fileID: 208522359957196838}
   - component: {fileID: 114184489337735180}
   - component: {fileID: 114573910569041268}
-  m_Layer: 0
+  - component: {fileID: 65536935188133102}
+  m_Layer: 8
   m_Name: TownHall
   m_TagString: TownHall
   m_Icon: {fileID: 0}
@@ -41,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350227143289514}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.2261918, y: 0.5, z: -4.5059094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,6 +94,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350227143289514}
   m_Mesh: {fileID: 4300000, guid: cede1a6d00ce2174286bae25ed2764af, type: 3}
+--- !u!65 &65536935188133102
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350227143289514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 24.39154, y: 16.995506, z: 17.476793}
+  m_Center: {x: 0, y: 7.997753, z: 1.1160688}
 --- !u!95 &95099671349309074
 Animator:
   serializedVersion: 3
