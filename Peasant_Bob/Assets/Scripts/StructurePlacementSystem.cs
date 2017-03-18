@@ -13,10 +13,14 @@ public class StructurePlacementSystem : MonoBehaviour {
 
     bool placing = false;
     GameObject currentStructurePrefab;
-    public GameObject currentStructure;
+    GameObject currentStructure;
+    public GameObject camera;
 
     public GameObject placeStructurePrefab;
     public GameObject buildingStructurePrefab;
+
+    public Material validMaterial;
+    public Material invalidMaterial;
 
     struct StructureGridSize
     {
@@ -34,25 +38,29 @@ public class StructurePlacementSystem : MonoBehaviour {
                 grid[x,y] = 0;
             }
         }
-
-        grid[0, 0] = 1;
-
-        currentStructureGridSize.x = 4;
-        currentStructureGridSize.y = 8;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        bool place = false;
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            place = true;
-        }
-
         if (placing)
         {
-            Vector3 direction = transform.forward; // Get from camera
+            bool place = false;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                place = true;
+            }
+
+            Vector3 direction;
+            if (camera == null)
+            {
+                direction = transform.forward; // Get from camera
+            }
+            else
+            {
+                direction = camera.transform.forward;
+            }
+
 
             Ray ray = new Ray(transform.position + direction*0.2f, direction);
             //Ray ray = new Ray(new Vector3(0, 5, 1), Vector3.down);
@@ -87,11 +95,13 @@ public class StructurePlacementSystem : MonoBehaviour {
                         if (gridPosX < 0 || gridPosY < 0)
                         {
                             Debug.Log("outside1" + " " + gridPosX +" " + gridPosY);
+                            occopied = true;
                             continue;
                         }
                         if (gridPosX > gridHalfLength*2 - 1 || gridPosY > gridHalfLength*2 - 1)
                         {
                             Debug.Log("outside2" + " " + gridPosX + " " + gridPosY);
+                            occopied = true;
                             continue;
                         }
 
@@ -109,7 +119,11 @@ public class StructurePlacementSystem : MonoBehaviour {
 
                 if (occopied)
                 {
-                    Debug.Log("occopied");
+                    currentStructure.GetComponent<Renderer>().material = invalidMaterial;
+                }
+                else
+                {
+                    currentStructure.GetComponent<Renderer>().material = validMaterial;
                 }
 
                 if (place && occopied == false)
@@ -133,22 +147,26 @@ public class StructurePlacementSystem : MonoBehaviour {
                         }
                     }
 
-                    GameObject obj = Instantiate(currentStructure);
-                    currentStructure = obj;
+                    CreateBuildingStructure();
+                    placing = false;
+                    Destroy(currentStructure);
+                    currentStructure = null;
+
                 }
-
             }
-
-            // Check collision
-
         }
-
-
 	}
 
-    public void AttemptPlace()
+    void CreateBuildingStructure()
     {
+        GameObject obj = Instantiate(buildingStructurePrefab, currentStructure.transform.position, Quaternion.identity);
 
+        MeshFilter filter = obj.GetComponent<MeshFilter>();
+        MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
+        if (filter == null || filterObj == null)
+            Debug.LogWarning("No filter on structure");
+
+        filter.mesh = filterObj.sharedMesh;
     }
 
     public void CancelPlace()
@@ -173,7 +191,12 @@ public class StructurePlacementSystem : MonoBehaviour {
         if (filter == null || filterObj == null)
             Debug.LogWarning("No filter on structure");
 
-        filter.mesh = filterObj.mesh;
+        filter.mesh = filterObj.sharedMesh;
+
+
+        StructureInformation info = obj.GetComponent<StructureInformation>();
+        currentStructureGridSize.x = info.gridSizeX;
+        currentStructureGridSize.y = info.gridSizeY;
 
 
         placing = true;
