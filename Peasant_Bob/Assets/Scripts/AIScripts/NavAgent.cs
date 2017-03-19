@@ -85,6 +85,10 @@ public class NavAgent : MonoBehaviour {
     {
         m_state = AgentsManager.AgentStates.Walking;
         m_wantedState = p_wantedState;
+        if (agent == null)
+        {
+            agent = gameObject.GetComponent<NavMeshAgent>(); 
+        }
         agent.SetDestination(p_position);
         ChangedState();
     }
