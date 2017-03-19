@@ -50,7 +50,7 @@ ModelImporter:
     400040: Worker
     400042: //RootNode
     4300000: Worker
-    7400000: Peasant_Attacking
+    7400000: Peasant_Attack
     9500000: //RootNode
     11100000: //RootNode
     13700000: Worker
@@ -76,7 +76,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Peasant_Attacking
+      name: Peasant_Attack
       takeName: Take 001
       firstFrame: 121
       lastFrame: 150
