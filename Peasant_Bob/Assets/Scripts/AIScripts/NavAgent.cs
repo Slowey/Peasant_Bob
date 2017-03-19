@@ -47,6 +47,11 @@ public class NavAgent : MonoBehaviour {
         switch (m_wantedState)
         {
             case AgentsManager.AgentStates.Idle:
+                if(m_type == UnitType.Archer)
+                {
+                    m_state = AgentsManager.AgentStates.Walking; // For now
+                    m_wantedState = AgentsManager.AgentStates.Fighting;
+                }
                 break;
             case AgentsManager.AgentStates.GatheringResource:
             case AgentsManager.AgentStates.LeaveResources:
