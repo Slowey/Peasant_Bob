@@ -64,6 +64,13 @@ public class InputCheckScript : MonoBehaviour {
             placeMentSystem.CancelPlace();
             unitPlacementSystem.UnitToPlace = null;
         }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (unitPlacementSystem.UnitToPlace != null)
+            {
+                unitPlacementSystem.PlaceUnit();
+            }
+        }
 
 	}
 

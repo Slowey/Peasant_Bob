@@ -40,6 +40,7 @@ public class TrainAgentSystem : ObjectAgentSystem {
                 m_agents.Clear();
                 // Spawn dude
                 Instantiate(m_unitPrefab, position, Quaternion.identity);
+                BedSystem.bedSystem.OccopyBed(1);
                 inTraining = false;
                 m_training = m_trainingTime;
                 m_agentManager.unitsOccupiedForTraining--;

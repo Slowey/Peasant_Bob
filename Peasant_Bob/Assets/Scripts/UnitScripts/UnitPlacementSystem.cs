@@ -17,6 +17,7 @@ public class UnitPlacementSystem : MonoBehaviour {
     {
         if (UnitToPlace == null)
         {
+            pointer.GetComponent<MeshRenderer>().enabled = false;
             return;
         }
         pointer.GetComponent<MeshRenderer>().enabled = true;
