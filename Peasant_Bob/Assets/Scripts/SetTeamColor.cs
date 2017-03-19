@@ -18,34 +18,34 @@ public class SetTeamColor : MonoBehaviour {
 
     public static void SetColorForObject(GameObject obj, Team.Teams teamCol)
     {
-        foreach (Renderer rend in obj.transform.GetComponentsInChildren<MeshRenderer>())
+        foreach (Renderer rend in obj.transform.GetComponentsInChildren<Renderer>())
         {
-            List<Material> mats = new List<Material>();
+            Material[] mats = new Material[rend.materials.Length];
 
             for (int i = 0; i < rend.materials.Length; i++)
             {
-                if (rend.materials[i].name == "TeamColorMat")
+                if (rend.materials[i].name.CompareTo("TeamColorMat (Instance)") == 0)
                 {
                     switch (teamCol)
                     {
                         case Team.Teams.Blue:
-                            mats.Add(teamColBlue);
+                            mats[i] = (teamColBlue);
                             break;
                         case Team.Teams.Red:
-                            mats.Add(teamColBlue);
+                            mats[i] = (teamColRed);
                             break;
                         default:
-                            mats.Add(rend.materials[i]);
+                            mats[i] = (rend.materials[i]);
                             break;
                     }
                 }
                 else
                 {
-                    mats.Add(rend.materials[i]);
+                    mats[i] = (rend.materials[i]);
                 }
             }
 
-            rend.materials = mats.ToArray();
+            rend.materials = mats;
         }
     }
 }
