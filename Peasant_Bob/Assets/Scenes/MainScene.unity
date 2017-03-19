@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4479506, g: 0.49375206, b: 0.5529456, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1097,6 +1097,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114783338379282778, guid: 3e99456242dedc942ae870411e6d9c84,
+        type: 2}
+      propertyPath: structures.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4584472393836510, guid: 3e99456242dedc942ae870411e6d9c84, type: 2}
       propertyPath: m_LocalPosition.x
       value: -79.4
@@ -1131,6 +1136,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114513567031900732, guid: 3e99456242dedc942ae870411e6d9c84,
         type: 2}
+      propertyPath: gridCenter
+      value: 
+      objectReference: {fileID: 1152982197}
+    - target: {fileID: 114513567031900732, guid: 3e99456242dedc942ae870411e6d9c84,
+        type: 2}
       propertyPath: camera
       value: 
       objectReference: {fileID: 2029657119}
@@ -1144,11 +1154,12 @@ Prefab:
       propertyPath: camera
       value: 
       objectReference: {fileID: 2029657123}
-    - target: {fileID: 114513567031900732, guid: 3e99456242dedc942ae870411e6d9c84,
+    - target: {fileID: 114783338379282778, guid: 3e99456242dedc942ae870411e6d9c84,
         type: 2}
-      propertyPath: gridCenter
+      propertyPath: structures.Array.data[5]
       value: 
-      objectReference: {fileID: 1152982197}
+      objectReference: {fileID: 1047710258631608, guid: 7eeccb95097e3e84792c9ad565c9a6e1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e99456242dedc942ae870411e6d9c84, type: 2}
   m_IsPrefabParent: 0

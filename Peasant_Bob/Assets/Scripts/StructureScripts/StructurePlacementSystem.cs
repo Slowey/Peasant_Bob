@@ -5,7 +5,7 @@ using UnityEngine;
 public class StructurePlacementSystem : MonoBehaviour {
 
     public Transform gridCenter;
-    static public int gridHalfLength = 50;
+    static public int gridHalfLength = 1000;
     float cellWidth = 1.0f;
     
     int[,] grid = new int[gridHalfLength*2, gridHalfLength*2];
@@ -120,28 +120,36 @@ public class StructurePlacementSystem : MonoBehaviour {
 
                 if (occopied)
                 {
-                    Renderer rend = currentStructure.GetComponent<Renderer>();
-                    rend.enabled = true;
-                    Material[] tempMatArr = new Material[rend.materials.Length];
-                    for (int i = 0; i < tempMatArr.Length; i++)
+                    foreach (Renderer rend in currentStructure.GetComponentsInChildren<Renderer>())
                     {
-                        tempMatArr[i] = invalidMaterial;
-                    }
 
-                    rend.materials = tempMatArr;
+                        rend.enabled = true;
+                        Material[] tempMatArr = new Material[rend.materials.Length];
+                        for (int i = 0; i < tempMatArr.Length; i++)
+                        {
+                            tempMatArr[i] = invalidMaterial;
+                        }
+
+                        rend.materials = tempMatArr;
+
+                    }
                 }
                 else
                 {
-                    Renderer rend = currentStructure.GetComponent<Renderer>();
-                    rend.enabled = true;
-                    Material[] tempMatArr = new Material[rend.materials.Length];
-                    for (int i = 0; i < tempMatArr.Length; i++)
+                    foreach (Renderer rend in currentStructure.GetComponentsInChildren<Renderer>())
                     {
-                        tempMatArr[i] = validMaterial;
+
+                        rend.enabled = true;
+                        Material[] tempMatArr = new Material[rend.materials.Length];
+                        for (int i = 0; i < tempMatArr.Length; i++)
+                        {
+                            tempMatArr[i] = validMaterial;
+                        }
+
+                        rend.materials = tempMatArr;
+
                     }
 
-                    rend.materials = tempMatArr;
-                    
                 }
 
                 if (place && occopied == false)
@@ -255,21 +263,45 @@ public class StructurePlacementSystem : MonoBehaviour {
         currentStructure = Instantiate(placeStructurePrefab, transform.position, Quaternion.identity);
 
         // Get data
-        MeshFilter filter = currentStructure.GetComponent<MeshFilter>();
-        MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
+        int numChild = currentStructurePrefab.transform.childCount;
+        for (int i = 0; i < numChild; i++)
+        {
+            Transform child = currentStructurePrefab.transform.GetChild(i);
+            GameObject newChild = new GameObject("child");
+            
+            newChild.transform.SetParent(currentStructure.transform);
+            newChild.transform.localPosition = child.transform.localPosition;
+            newChild.transform.localRotation = child.transform.localRotation;
 
-        Renderer renderer = currentStructure.GetComponent<Renderer>();
-        Renderer rendererObj = currentStructurePrefab.GetComponent<Renderer>();
-        renderer.enabled = false;
+            MeshFilter filterObj = child.GetComponent<MeshFilter>();
+            Renderer rendererObj = child.GetComponent<Renderer>();
 
-        if (filter == null || filterObj == null)
-            Debug.LogWarning("No filter on structure");
+            if (filterObj)
+            {
+                MeshFilter filter = newChild.AddComponent<MeshFilter>();
+                Renderer renderer = newChild.AddComponent<MeshRenderer>();
 
-        if (renderer == null || rendererObj == null)
-            Debug.LogWarning("No renderer on structure");
+                renderer.enabled = false;
+                filter.mesh = filterObj.sharedMesh;
+                renderer.materials = rendererObj.sharedMaterials;
+            }
+        }
 
-        filter.mesh = filterObj.sharedMesh;
-        renderer.materials = rendererObj.sharedMaterials;
+        MeshFilter filterp = currentStructure.GetComponent<MeshFilter>();
+        MeshFilter filterObjp = currentStructurePrefab.GetComponent<MeshFilter>();
+
+        Renderer rendererp = currentStructure.GetComponent<Renderer>();
+        Renderer rendererObjp = currentStructurePrefab.GetComponent<Renderer>();
+
+
+        if (filterp != null && filterObjp != null && rendererp != null && rendererObjp != null)
+        {
+            rendererp.enabled = false;
+            filterp.mesh = filterObjp.sharedMesh;
+            rendererp.materials = rendererObjp.sharedMaterials;
+
+        }
+
 
         StructureInformation info = obj.GetComponent<StructureInformation>();
         currentStructureGridSize.x = info.gridSizeX;
