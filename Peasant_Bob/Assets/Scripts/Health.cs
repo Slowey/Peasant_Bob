@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     float maxHealth = 0;
-    float curHealth = 0;
+    public float curHealth = 0;
 	// Use this for initialization
 	void Start () {
         if(GetComponent<UnitInformation>() != null)

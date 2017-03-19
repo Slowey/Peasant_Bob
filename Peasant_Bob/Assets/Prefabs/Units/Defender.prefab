@@ -777,6 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHealth: 0
 --- !u!114 &114714137570964968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -807,7 +808,7 @@ MonoBehaviour:
   range: 2
   attackSpeed: 2
   attackAnimation: 0
-  meleeDamage: 0
+  meleeDamage: 100
   projectiles: []
 --- !u!137 &137308629805066492
 SkinnedMeshRenderer:

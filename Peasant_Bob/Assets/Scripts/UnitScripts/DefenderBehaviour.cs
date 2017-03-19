@@ -26,7 +26,6 @@ public class DefenderBehaviour : UnitBase
 
     public override void FightingActions(AgentsManager.AgentStates p_state)
     {
-        attacked = false;
         if (p_state == AgentsManager.AgentStates.Walking)
         {
             CheckInAggro(p_state);
@@ -64,7 +63,8 @@ public class DefenderBehaviour : UnitBase
                 // Do dmg
                 Vector3 mypos = transform.position;
                 Vector3 lastDir = new Vector3(0, 0, 0);
-                GameObject potential = null;
+                List<GameObject> potentials = new List<GameObject>();
+                float range = GetComponent<UnitInformation>().range;
 
                 foreach (var item in enemyAgentManager)
                 {
@@ -73,21 +73,17 @@ public class DefenderBehaviour : UnitBase
                         foreach (var agent in agentList.Value)
                         {
                             Vector3 dir = agent.transform.position - mypos;
-                            if (dir.magnitude < aggroRange)
+                            if (dir.magnitude < range && Vector3.Dot(dir.normalized, transform.forward) > 0.3f)
                             {
-                                if (potential != null && dir.magnitude < lastDir.magnitude)
-                                {
-                                    lastDir = dir;
-                                    potential = agent;
-                                }
-                                else if (potential == null)
-                                {
-                                    lastDir = dir;
-                                    potential = agent;
-                                }
+                                potentials.Add(agent);
                             }
                         }
                     }
+                }
+
+                for (int i = 0; i < potentials.Count; i++)
+                {
+                    potentials[i].GetComponent<Health>().TakeDamage(GetComponent<UnitInformation>().meleeDamage);
                 }
 
                 attacked = true;
@@ -113,6 +109,7 @@ public class DefenderBehaviour : UnitBase
                 float totalLen = animationComponent.GetClip("Peasant_Attack").length;
 
                 animationComponent["Peasant_Attack"].speed = totalLen / GetComponent<UnitInformation>().attackSpeed;
+                attacked = false;
             }
         }
 
