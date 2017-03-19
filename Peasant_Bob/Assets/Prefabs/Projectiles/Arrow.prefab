@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114971587316561086}
   - component: {fileID: 54449678905086986}
   - component: {fileID: 114054488987386668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33423676219666542}
   - component: {fileID: 65623683543339146}
   - component: {fileID: 23875139492681808}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1160266822513386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4241476, y: 17.55196, z: 19.321775}
+  m_LocalPosition: {x: -58.301174, y: 0.5, z: 90.650505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4182788775305190}
@@ -121,7 +121,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0859c3cbc67448be881b9c70d8b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!114 &114971587316561086
 MonoBehaviour:
   m_ObjectHideFlags: 1

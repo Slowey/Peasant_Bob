@@ -714,7 +714,11 @@ MonoBehaviour:
   resourceCost: 50
   spawnTime: 1
   requireBeds: 1
-  maxHealth: 0
+  maxHealth: 100
+  range: 0
+  attackSpeed: 0
+  attackAnimation: 0
+  projectiles: []
 --- !u!114 &114418387410942312
 MonoBehaviour:
   m_ObjectHideFlags: 1

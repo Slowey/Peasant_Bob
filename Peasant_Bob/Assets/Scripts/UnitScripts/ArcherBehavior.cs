@@ -43,6 +43,7 @@ public class ArcherBehavior : UnitBase {
         if (cooldown <= 0)
         {
             cooldown = GetComponent<UnitInformation>().attackSpeed;
+            Projectile.ProjectileInfo projInfo = GetComponent<UnitInformation>().projectiles[0];
 
             Rigidbody rig = attackObj.GetComponent<Rigidbody>();
 
@@ -57,22 +58,25 @@ public class ArcherBehavior : UnitBase {
                 velocityObj = rig.velocity;
             }
 
-            float airTime = 5;
+            //float airTime = projInfo.projectileAirTime;
+            float airTime = (attackObj.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
+            float shootoffset = 0.0f;
 
-            //velocity = (positionObj + velocityObj * airTime - position - (acceleration * airTime * airTime / 2.0f))/ airTime;
+            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1,0) - (acceleration * airTime * airTime / 2.0f))/ airTime;
 
+            
+            
 
-            velocity = (positionObj - position - (acceleration * airTime * airTime / 2.0f))/ airTime;
-
-
-            Debug.Log(velocity);
-
-            float shootoffset = 0.2f;
-            GameObject proj = Instantiate(GetComponent<UnitInformation>().projectiles[0], transform.position + velocity.normalized* shootoffset,Quaternion.identity);
+            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized* shootoffset,Quaternion.identity);
             //proj.transform.LookAt(proj.transform.position + velocity);
             Rigidbody rigProj = proj.GetComponent<Rigidbody>();
             rigProj.AddForce(velocity, ForceMode.VelocityChange);
-            
+            proj.GetComponent<Projectile>().damage = projInfo.damage;
+            proj.GetComponent<Team>().team = m_team.team;
+            proj.GetComponent<Projectile>().EnableColliderAfter(1.0f);
+
+
+            //Set damage
         }
     }
 
