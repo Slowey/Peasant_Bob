@@ -145,6 +145,10 @@ Prefab:
       propertyPath: team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1099477620601708, guid: b3b3247b9c354904bb83f2f87e5cf8ef, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3b3247b9c354904bb83f2f87e5cf8ef, type: 2}
   m_IsPrefabParent: 0
@@ -505,6 +509,11 @@ Prefab:
       propertyPath: m_Name
       value: Defender (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114714137570964968, guid: 1e77535b06ceb2341a1cd147ded66bff,
+        type: 2}
+      propertyPath: team
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e77535b06ceb2341a1cd147ded66bff, type: 2}
   m_IsPrefabParent: 0
@@ -564,6 +573,10 @@ Prefab:
     - target: {fileID: 4775231645868730, guid: b3b3247b9c354904bb83f2f87e5cf8ef, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -98.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099477620601708, guid: b3b3247b9c354904bb83f2f87e5cf8ef, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3b3247b9c354904bb83f2f87e5cf8ef, type: 2}
@@ -1128,6 +1141,11 @@ Prefab:
     - target: {fileID: 4048086645677098, guid: 1e77535b06ceb2341a1cd147ded66bff, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114956906667646826, guid: 1e77535b06ceb2341a1cd147ded66bff,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e77535b06ceb2341a1cd147ded66bff, type: 2}
