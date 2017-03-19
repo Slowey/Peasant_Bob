@@ -9,6 +9,8 @@ public class ArcherBehaviour : UnitBase {
     float shootRange;
     float cooldown = 0.0f;
 
+    public float offset = 0.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -70,14 +72,13 @@ public class ArcherBehaviour : UnitBase {
 
             //float airTime = projInfo.projectileAirTime;
             float airTime = (attackObj.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
-            float shootoffset = 0.0f;
 
             velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f))/ airTime;
 
             
             
 
-            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized* shootoffset,Quaternion.identity);
+            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized* offset, Quaternion.identity);
             //proj.transform.LookAt(proj.transform.position + velocity);
             Rigidbody rigProj = proj.GetComponent<Rigidbody>();
             rigProj.AddForce(velocity, ForceMode.VelocityChange);

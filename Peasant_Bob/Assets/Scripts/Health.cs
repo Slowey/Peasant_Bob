@@ -37,7 +37,7 @@ public class Health : MonoBehaviour {
 
     public void CheckDeath()
     {
-        if (curHealth < 0.0f)
+        if (curHealth <= 0.0f)
         {
             Destroy(gameObject);
         }
