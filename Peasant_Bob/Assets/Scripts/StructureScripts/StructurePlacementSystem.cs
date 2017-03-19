@@ -70,7 +70,6 @@ public class StructurePlacementSystem : MonoBehaviour {
             if(Physics.Raycast(ray, out hitInfo, 1000.0f))
             {
                 Vector3 hitPosition = hitInfo.point;
-
                 Vector3 formatPos = (hitPosition - gridCenter.transform.position) / cellWidth;
                 Vector2 cornerPos = new Vector2(Mathf.Floor(formatPos.x + 0.5f), Mathf.Floor(formatPos.z + 0.5f));
 

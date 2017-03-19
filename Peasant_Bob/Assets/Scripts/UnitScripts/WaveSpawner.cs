@@ -15,6 +15,7 @@ public class WaveSpawner : MonoBehaviour {
     public float timeBetweenWaves;
     public GameObject spawnArea;
     public Team.Teams enemyColor;
+    public Transform enemyBaseCenter;
     private float timer;
     private float halfWidth;
     private float halfHeight;
@@ -22,10 +23,7 @@ public class WaveSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timer = timeBetweenWaves;
-        foreach (var item in unitsToSpawn)
-        {
-            item.unitPrefab.GetComponent<Team>().team = GetComponent<Team>().team;
-        }
+
         halfWidth = spawnArea.transform.lossyScale.x / 2;
         halfHeight = spawnArea.transform.lossyScale.z / 2;
     }
@@ -52,7 +50,8 @@ public class WaveSpawner : MonoBehaviour {
                         GameObject buildingToAttack = BuildingTracker.buildingTracker.GetClosestBuildinOnTeam(position, enemyColor);               
                         GameObject newUnit = Instantiate(item.unitPrefab, position, Quaternion.identity);
 
-                        Vector3 positionToAttack = Vector3.zero;//buildingToAttack.GetComponent<ObjectAgentSystem>().FindClosestPositionForAgent(newUnit);
+                        newUnit.GetComponent<Team>().team = GetComponent<Team>().team;
+                        Vector3 positionToAttack = enemyBaseCenter.position;//buildingToAttack.GetComponent<ObjectAgentSystem>().FindClosestPositionForAgent(newUnit);
                         newUnit.GetComponent<NavAgent>().SetDestination(positionToAttack, AgentsManager.AgentStates.Fighting);
                     }
                     item.waveSpawn += item.waveSpawnIncrement;
