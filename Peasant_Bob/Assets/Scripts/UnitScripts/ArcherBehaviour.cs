@@ -38,6 +38,11 @@ public class ArcherBehaviour : UnitBase {
 
     }
 
+    public override void AttackingActions(AgentsManager.AgentStates state)
+    {
+
+    }
+
     void AttackUpdate(GameObject attackObj)
     {
         if (cooldown <= 0)

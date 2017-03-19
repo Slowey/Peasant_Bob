@@ -9,7 +9,7 @@ public class DefenderBehaviour : UnitBase
     public float aggroRange = 10.0f;
     float shootRange;
     float cooldown = 0.0f;
-
+    bool attacked = false;
 
     // Use this for initialization
     void Start()
@@ -26,6 +26,7 @@ public class DefenderBehaviour : UnitBase
 
     public override void FightingActions(AgentsManager.AgentStates p_state)
     {
+        attacked = false;
         if (p_state == AgentsManager.AgentStates.Walking)
         {
             CheckInAggro(p_state);
@@ -41,14 +42,81 @@ public class DefenderBehaviour : UnitBase
 
     }
 
+    public override void AttackingActions(AgentsManager.AgentStates state)
+    {
+        Animation animationComponent = GetComponentInChildren<Animation>();
+
+        if (animationComponent != null)
+        {
+            float totalLen = animationComponent.GetClip("Peasant_Attack").length;
+            float curTime = animationComponent["Peasant_Attack"].time;
+
+
+            if (curTime <= 0.0f && attacked == true)
+            {
+                // Do somethign else
+                GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Fighting;
+                GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Fighting;
+                attacked = false;
+            }
+            else if (curTime < totalLen*0.2f)
+            {
+                // Do dmg
+                Vector3 mypos = transform.position;
+                Vector3 lastDir = new Vector3(0, 0, 0);
+                GameObject potential = null;
+
+                foreach (var item in enemyAgentManager)
+                {
+                    foreach (var agentList in item.m_agents)
+                    {
+                        foreach (var agent in agentList.Value)
+                        {
+                            Vector3 dir = agent.transform.position - mypos;
+                            if (dir.magnitude < aggroRange)
+                            {
+                                if (potential != null && dir.magnitude < lastDir.magnitude)
+                                {
+                                    lastDir = dir;
+                                    potential = agent;
+                                }
+                                else if (potential == null)
+                                {
+                                    lastDir = dir;
+                                    potential = agent;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                attacked = true;
+            }
+        }
+
+    }
+
     void AttackUpdate(GameObject attackObj)
     {
         if (cooldown <= 0)
         {
             cooldown = GetComponent<UnitInformation>().attackSpeed;
 
-            //Set damage
+            // Start attack animation
+            GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Attacking;
+            GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Attacking;
+
+            Animation animationComponent = GetComponentInChildren<Animation>();
+
+            if (animationComponent != null)
+            {
+                float totalLen = animationComponent.GetClip("Peasant_Attack").length;
+
+                animationComponent["Peasant_Attack"].speed = totalLen / GetComponent<UnitInformation>().attackSpeed;
+            }
         }
+
+
         transform.LookAt(attackObj.transform);
     }
 

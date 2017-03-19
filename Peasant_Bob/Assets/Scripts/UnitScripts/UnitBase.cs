@@ -32,5 +32,7 @@ public abstract class UnitBase : MonoBehaviour {
 		
 	}
 
-    public abstract void FightingActions(AgentsManager.AgentStates type);
+    public abstract void AttackingActions(AgentsManager.AgentStates state);
+
+    public abstract void FightingActions(AgentsManager.AgentStates state);
 }

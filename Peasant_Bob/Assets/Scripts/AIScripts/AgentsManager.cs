@@ -13,6 +13,7 @@ public class AgentsManager : MonoBehaviour {
         Guarding,
         Walking,
         LeaveResources,
+        Attacking,
         ENDITEM
     }
     // This basically keeps track of what agent is having what goal

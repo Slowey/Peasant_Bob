@@ -65,6 +65,9 @@ public class NavAgent : MonoBehaviour {
 
                 m_unitBase.FightingActions(m_state);
                 break;
+            case AgentsManager.AgentStates.Attacking:
+                m_unitBase.AttackingActions(m_state);
+                break;
             case AgentsManager.AgentStates.Walking:
                 break;
             case AgentsManager.AgentStates.ENDITEM:
@@ -126,6 +129,9 @@ public class NavAgent : MonoBehaviour {
                 clipToChangeTo = "Peasant_Run";
                 break;
             case AgentsManager.AgentStates.ENDITEM:
+                break;
+            case AgentsManager.AgentStates.Attacking:
+                clipToChangeTo = "Peasant_Attack";
                 break;
             default:
                 break;
