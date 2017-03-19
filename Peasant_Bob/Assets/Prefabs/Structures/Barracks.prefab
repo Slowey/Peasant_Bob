@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4534977602543992}
   - component: {fileID: 33237244177029136}
   - component: {fileID: 23013832493048760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube135
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4986406271000666}
   - component: {fileID: 33219256062270612}
   - component: {fileID: 23280910469533906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface284
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4811713519375580}
   - component: {fileID: 33294675925962946}
   - component: {fileID: 23030710706028696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface405
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 114756663762483764}
   - component: {fileID: 114689621457341548}
   - component: {fileID: 114751233880164930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4112834740466480}
   - component: {fileID: 33717345690805488}
   - component: {fileID: 23828387897315804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface407
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4758838512073040}
   - component: {fileID: 33502015888514294}
   - component: {fileID: 23529358182627626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube127
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4894791288715336}
   - component: {fileID: 33946523008362968}
   - component: {fileID: 23534350687216002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface418
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4395924269841762}
   - component: {fileID: 33341375152474120}
   - component: {fileID: 23193448850481566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube134
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 4106832802270700}
   - component: {fileID: 33258133210165972}
   - component: {fileID: 23778730069570360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface400
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4005951723046854}
   - component: {fileID: 33457993832725204}
   - component: {fileID: 23824265374312142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube113
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4907473132096194}
   - component: {fileID: 33338504215272936}
   - component: {fileID: 23270668083630630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 4437130398036122}
   - component: {fileID: 33563059543424570}
   - component: {fileID: 23871193913182612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube133
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 4015431853747882}
   - component: {fileID: 33573439953307068}
   - component: {fileID: 23434368432170510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 4420630752468680}
   - component: {fileID: 33979006655365062}
   - component: {fileID: 23343517701128114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface419
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 4399480243987050}
   - component: {fileID: 33285626611046824}
   - component: {fileID: 23087637098272520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 4567506989853546}
   - component: {fileID: 33327909828701822}
   - component: {fileID: 23623842230779060}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube137
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 4871210604263636}
   - component: {fileID: 33158478514095410}
   - component: {fileID: 23125254260980230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface283
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 4163950788321956}
   - component: {fileID: 33913855076181510}
   - component: {fileID: 23817766569787982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface411
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 4551338323149664}
   - component: {fileID: 33711688901594948}
   - component: {fileID: 23358310557935850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 4896938051879572}
   - component: {fileID: 33867367597972774}
   - component: {fileID: 23524363040639694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube132
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 4507780907930892}
   - component: {fileID: 33922441181805808}
   - component: {fileID: 23281699656724382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface406
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 4010838845599136}
   - component: {fileID: 33786147699972868}
   - component: {fileID: 23369768996565594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube114
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 4841844535136616}
   - component: {fileID: 33733333359605288}
   - component: {fileID: 23947448788331850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 4420063715544420}
   - component: {fileID: 33513485649672686}
   - component: {fileID: 23925184015128244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 4986260794381276}
   - component: {fileID: 33956748247418478}
   - component: {fileID: 23014651234887770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube136
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 4969210872724558}
   - component: {fileID: 33346046440820200}
   - component: {fileID: 23950090194162110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube120
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 4238434599787708}
   - component: {fileID: 33675278167377406}
   - component: {fileID: 23274248438310834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface54
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 4934128556869880}
   - component: {fileID: 33673127699827232}
   - component: {fileID: 23185777969880236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface401
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 4972335778772934}
   - component: {fileID: 33410562978923950}
   - component: {fileID: 23158161554622666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadOnStick3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 4801872255594956}
   - component: {fileID: 33505824338838724}
   - component: {fileID: 23494825070444494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface404
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 4710485071026714}
   - component: {fileID: 33641621565303870}
   - component: {fileID: 23108373527335284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 4635917849997648}
   - component: {fileID: 33446259175516124}
   - component: {fileID: 23564861718706604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface417
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 4443766849054500}
   - component: {fileID: 33762790079534970}
   - component: {fileID: 23039416605538370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube125
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 4045991872983178}
   - component: {fileID: 33365683145613300}
   - component: {fileID: 23136109345044308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface396
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 4743620085052622}
   - component: {fileID: 33190341248000748}
   - component: {fileID: 23868791926419924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 4063481288233166}
   - component: {fileID: 33006092908823732}
   - component: {fileID: 23207518455833752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 4831729654091894}
   - component: {fileID: 33742058328736000}
   - component: {fileID: 23604697269830978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 4058268080374418}
   - component: {fileID: 33455446491205966}
   - component: {fileID: 23345453987817972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface414
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 4613788442295404}
   - component: {fileID: 33902085582078650}
   - component: {fileID: 23505457051824404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 4877681587472916}
   - component: {fileID: 33329772896740322}
   - component: {fileID: 23712326030697234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface324
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 4300479832800342}
   - component: {fileID: 33086670881003038}
   - component: {fileID: 23359438768913240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube115
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 4852912961059412}
   - component: {fileID: 33851673849991710}
   - component: {fileID: 23711480743008952}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: swordrack6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 4897806505252780}
   - component: {fileID: 33519720444601240}
   - component: {fileID: 23828584668330824}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface409
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 4396721415924640}
   - component: {fileID: 33777426297591128}
   - component: {fileID: 23214466317667606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube128
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 4469064863587970}
   - component: {fileID: 33559268813977296}
   - component: {fileID: 23903705843792914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube126
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 4270367452768950}
   - component: {fileID: 33964673804746940}
   - component: {fileID: 23515085835082168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface408
   m_TagString: Untagged
   m_Icon: {fileID: 0}
