@@ -801,6 +801,7 @@ Animation:
   - {fileID: 7400000, guid: 4742f4512d972bb4fa5b416575fc2476, type: 3}
   - {fileID: 7400000, guid: f51ce8e10106c104aa39171a7d52aa56, type: 3}
   - {fileID: 7400000, guid: d997a01e12816ca41a509a271ca2dd92, type: 3}
+  - {fileID: 7400000, guid: 95d981f430072f14a80215eeca1c8456, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -876,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroRange: 200
+  offset: 0
 --- !u!114 &114431479079180644
 MonoBehaviour:
   m_ObjectHideFlags: 1

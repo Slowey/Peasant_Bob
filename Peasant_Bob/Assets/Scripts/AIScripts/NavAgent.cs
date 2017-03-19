@@ -85,10 +85,6 @@ public class NavAgent : MonoBehaviour {
     {
         m_state = AgentsManager.AgentStates.Walking;
         m_wantedState = p_wantedState;
-        if (agent == null)
-        {
-            agent = gameObject.GetComponent<NavMeshAgent>();
-        }
         agent.SetDestination(p_position);
         ChangedState();
     }
@@ -121,11 +117,13 @@ public class NavAgent : MonoBehaviour {
         switch (m_state)
         {
             case AgentsManager.AgentStates.Idle:
-            case AgentsManager.AgentStates.GatheringResource:
-            case AgentsManager.AgentStates.Construction:
             case AgentsManager.AgentStates.Training:
             case AgentsManager.AgentStates.Fighting:
             case AgentsManager.AgentStates.Guarding:
+                clipToChangeTo = "Peasant_Train";
+                break;
+            case AgentsManager.AgentStates.GatheringResource:
+            case AgentsManager.AgentStates.Construction:
             case AgentsManager.AgentStates.LeaveResources:
                 clipToChangeTo = "Peasant_Harvest";
                 break;
