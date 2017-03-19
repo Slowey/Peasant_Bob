@@ -53,6 +53,8 @@ public class WaveSpawner : MonoBehaviour {
                         newUnit.GetComponent<Team>().team = GetComponent<Team>().team;
                         Vector3 positionToAttack = enemyBaseCenter.position;//buildingToAttack.GetComponent<ObjectAgentSystem>().FindClosestPositionForAgent(newUnit);
                         newUnit.GetComponent<NavAgent>().SetDestination(positionToAttack, AgentsManager.AgentStates.Fighting);
+
+                        SetTeamColor.SetColorForObject(newUnit, GetComponent<Team>().team);
                     }
                     item.waveSpawn += item.waveSpawnIncrement;
                 }
