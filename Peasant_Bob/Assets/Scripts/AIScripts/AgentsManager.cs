@@ -102,6 +102,11 @@ public class AgentsManager : MonoBehaviour {
         int index = m_agents[p_inState].FindIndex(obj => obj.transform == p_agent.transform);
         if (index == -1)
         {
+            if (p_inState == AgentStates.LeaveResources)
+            {
+                p_inState = AgentStates.GatheringResource;
+                RemoveUnitFromAgentSystem(p_agent, p_inState);
+            }
             return false;
         }
         m_agents[p_inState].RemoveAt(index);
