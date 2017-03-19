@@ -22,9 +22,8 @@ public class TP_Camera : MonoBehaviour {
     public int m_maxOcclusionChecks = 10;
     public float m_distanceResumeSmooth = 1f;
 
-
     private float m_mouseX = 0f;
-    private float m_mouseY = 0f;
+    public float m_mouseY = 0f;
     private float m_velX = 0f;
     private float m_velY = 0f;
     private float m_velZ = 0f;
@@ -73,16 +72,36 @@ public class TP_Camera : MonoBehaviour {
         var deadZone = 0.01f;
 
         //Kommentera in för att ha enbart cameraändringarnär musknapp iklickad
-       if (Input.GetMouseButton(1))
-       {
-           // The RMB is down get mouse Axis input
-           m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense; 
-           m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense; 
-       }
-
-        //m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense;
-        //m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense;
-        // This is where we will limit MouseY
+       //if (Input.GetMouseButton(1))
+       //{
+       //    // The RMB is down get mouse Axis input
+       //    m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense; 
+       //    m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense; 
+       //}
+        if (Input.GetMouseButton(1))
+        {
+            // The RMB is down enter aimmode
+            GameObject t_targetLookAt = GameObject.Find("targetLookAt");
+            t_targetLookAt.transform.localPosition = new Vector3(1.46f, 0.21f, 2.21f);
+             m_YMinLimit = -20f;
+             m_YMaxLimit = 40f;
+            TP_AimTrajectoryScript.m_instance.ToggleTrajectory(true);
+            m_XMouseSense = 3f;
+            m_YMouseSense = 1f;
+        }
+        else
+        {
+            GameObject t_targetLookAt = GameObject.Find("targetLookAt");
+            t_targetLookAt.transform.localPosition = new Vector3(0, 0.9f, 0);
+            m_YMinLimit = -40f;
+            m_YMaxLimit = 80f;
+            TP_AimTrajectoryScript.m_instance.ToggleTrajectory(false);
+            m_XMouseSense = 5f;
+            m_YMouseSense = 5f;
+        }
+        m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense;
+        m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense;
+         // This is where we will limit MouseY
         m_mouseY = Helper.ClampAngle(m_mouseY, m_YMinLimit, m_YMaxLimit);
         if (Input.GetAxis("Mouse ScrollWheel")<-deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone)
         {
@@ -110,6 +129,11 @@ public class TP_Camera : MonoBehaviour {
         Vector3 t_direction = new Vector3(0, 0, -p_distance);
         Quaternion t_rotation = Quaternion.Euler(p_rotX, p_rotY, 0);
         return TargetLookAt.position + t_rotation * t_direction;
+    }
+
+    void Aim()
+    {
+
     }
 
     bool CheckIfOccluded(int p_count)

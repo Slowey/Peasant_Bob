@@ -166,7 +166,7 @@ public class TP_Motor : MonoBehaviour {
     }
     void SnapAlignCharacterWithCamera()
     {
-        if (m_moveVector.x != 0 || m_moveVector.z!=0)
+        //if (m_moveVector.x != 0 || m_moveVector.z!=0)
         {
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x,
                 Camera.main.transform.eulerAngles.y, transform.eulerAngles.z);
