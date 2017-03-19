@@ -57,12 +57,22 @@ public class ArcherBehavior : UnitBase {
                 velocityObj = rig.velocity;
             }
 
-            float airTime = Vector3.ProjectOnPlane(attackObj.transform.position - transform.position, Vector3.up).magnitude;
+            float airTime = 5;
 
-            velocity = (positionObj + velocityObj * airTime - position - (acceleration * airTime * airTime / 2.0f))/ airTime;
+            //velocity = (positionObj + velocityObj * airTime - position - (acceleration * airTime * airTime / 2.0f))/ airTime;
 
+
+            velocity = (positionObj - position - (acceleration * airTime * airTime / 2.0f))/ airTime;
+
+
+            Debug.Log(velocity);
+
+            float shootoffset = 0.2f;
+            GameObject proj = Instantiate(GetComponent<UnitInformation>().projectiles[0], transform.position + velocity.normalized* shootoffset,Quaternion.identity);
+            //proj.transform.LookAt(proj.transform.position + velocity);
+            Rigidbody rigProj = proj.GetComponent<Rigidbody>();
+            rigProj.AddForce(velocity, ForceMode.VelocityChange);
             
-
         }
     }
 
