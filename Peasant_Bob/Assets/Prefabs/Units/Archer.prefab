@@ -73,10 +73,10 @@ GameObject:
   - component: {fileID: 114431479079180644}
   - component: {fileID: 114109964799941928}
   - component: {fileID: 114833107440992866}
-  - component: {fileID: 65246065085370884}
   - component: {fileID: 114291111190722308}
   - component: {fileID: 114216258936619866}
   - component: {fileID: 114256227011471526}
+  - component: {fileID: 136954967794737558}
   m_Layer: 9
   m_Name: Archer
   m_TagString: Untagged
@@ -600,7 +600,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1099477620601708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7243626, y: -8.0610994e-19, z: 1.8151982}
+  m_LocalPosition: {x: 30.710358, y: -55.861702, z: 24.024841}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4454458530533724}
@@ -759,18 +759,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071602741066284}
   m_Mesh: {fileID: 4300000, guid: 19913d6197dbbe7488cacf2c8a94fdac, type: 3}
---- !u!65 &65246065085370884
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1099477620601708}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95271737854522596
 Animator:
   serializedVersion: 3
@@ -905,6 +893,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+--- !u!136 &136954967794737558
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099477620601708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137014820847958796
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -990,6 +991,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
