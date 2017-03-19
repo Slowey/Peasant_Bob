@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4664840f59c5c4c4eb5bc11df7f92a49
-timeCreated: 1489853667
+guid: 1e5c3dc981e6b1d4db900837276615dd
+timeCreated: 1489936579
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: ConstructionSite1
+    4300000: Rock3
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
