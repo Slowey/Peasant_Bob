@@ -21,6 +21,7 @@ public class TP_Camera : MonoBehaviour {
     public float m_occlusionDistanceStep = 0.5f;
     public int m_maxOcclusionChecks = 10;
     public float m_distanceResumeSmooth = 1f;
+    public bool m_aiming = false;
 
     private float m_mouseX = 0f;
     public float m_mouseY = 0f;
@@ -88,6 +89,7 @@ public class TP_Camera : MonoBehaviour {
             TP_AimTrajectoryScript.m_instance.ToggleTrajectory(true);
             m_XMouseSense = 3f;
             m_YMouseSense = 1f;
+            m_aiming = true;
         }
         else
         {
@@ -98,6 +100,7 @@ public class TP_Camera : MonoBehaviour {
             TP_AimTrajectoryScript.m_instance.ToggleTrajectory(false);
             m_XMouseSense = 5f;
             m_YMouseSense = 5f;
+            m_aiming = false;
         }
         m_mouseX += Input.GetAxis("Mouse X") * m_XMouseSense;
         m_mouseY -= Input.GetAxis("Mouse Y") * m_YMouseSense;

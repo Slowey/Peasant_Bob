@@ -70,14 +70,31 @@ public class TP_AimTrajectoryScript : MonoBehaviour {
 	public void Update () {
         float t;
         LineRenderer t_lineRenderer = GetComponent<LineRenderer>();
+        var mousePos = Input.mousePosition;
+        var yPosition = Mathf.Min(Screen.height, Mathf.Max(mousePos.y, 0));
+        m_startpoint = transform.position;
+        //m_startpoint = Vector3.zero;
+        m_endpoint = transform.position + transform.forward * (yPosition / Screen.height) * m_maxLength;
+
+        RaycastHit t_hitinfo;
+        if (Physics.Raycast(m_endpoint, Vector3.down, out t_hitinfo))
+        {
+            m_endpoint = t_hitinfo.point;
+        }
+        List<Vector3>t_vecList =  RangeCombatScript.m_instance.GetTrajectory(m_endpoint, t_lineRenderer.numPositions);
         for (int i = 0; i < t_lineRenderer.numPositions; i++)
         {
-            t = (i / (float)(m_sections - 1));
-            Vector3 t_temp = GetQuadraticCoordinates(t); 
-            t_lineRenderer.SetPosition(i, t_temp);
-            //var t = Time.time;
-            //t_lineRenderer.SetPosition(i, new Vector3(i * 0.5f, Mathf.Sin(i + t), 0.0f));
+            t_lineRenderer.SetPosition(i, t_vecList[i]);
         }
+
+        //for (int i = 0; i < t_lineRenderer.numPositions; i++)
+        //{
+        //    t = (i / (float)(m_sections - 1));
+        //    Vector3 t_temp = GetQuadraticCoordinates(t); 
+        //    t_lineRenderer.SetPosition(i, t_temp);
+        //    //var t = Time.time;
+        //    //t_lineRenderer.SetPosition(i, new Vector3(i * 0.5f, Mathf.Sin(i + t), 0.0f));
+        //}
 
     }
 }

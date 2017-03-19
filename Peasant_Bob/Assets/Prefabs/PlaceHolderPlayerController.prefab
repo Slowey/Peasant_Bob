@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 114034215261719566}
   - component: {fileID: 143210565636436280}
   - component: {fileID: 114866674606939894}
+  - component: {fileID: 114768535965801264}
+  - component: {fileID: 114921181681886916}
   m_Layer: 2
   m_Name: PlaceHolderPlayerController
   m_TagString: Player
@@ -137,6 +139,23 @@ MonoBehaviour:
   m_dashSpeedImpulse: 50
   m_dashSpeedFalloff: 100
   m_isDashing: 0
+--- !u!114 &114768535965801264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478226696988508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ac4b3dba7b105478bfc7c2ceb02b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sections: 10
+  m_maxHeight: 100
+  m_maxLength: 100
+  c1: {r: 1, g: 0, b: 0, a: 1}
+  c2: {r: 0, g: 0, b: 1, a: 1}
+  m_endpoint: {x: 0, y: 0, z: 0}
 --- !u!114 &114866674606939894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,6 +178,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd4284be9cc3754891f5e53e08347c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114921181681886916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478226696988508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec77bc7010810fb44ac7fa264ae6c2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projInfo:
+    damage: 6.81
+    timeDistanceRelation: 0
+    projectile: {fileID: 1160266822513386, guid: 18a9e1ade41a4eb4db8d3f06fcf92e78,
+      type: 2}
+  m_timeDistanceChanger: 10
+  m_shootCooldown: 1
 --- !u!136 &136382389932102992
 CapsuleCollider:
   m_ObjectHideFlags: 1

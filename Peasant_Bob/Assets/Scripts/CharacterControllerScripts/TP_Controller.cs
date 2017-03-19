@@ -61,6 +61,18 @@ public class TP_Controller : MonoBehaviour {
         {
             Dash();
         }
+        if (Input.GetMouseButton(0))
+        {
+            if (Input.GetMouseButton(1))
+            {
+                ShootArrow();
+            }
+        }
+    }
+
+    void ShootArrow()
+    {
+        RangeCombatScript.m_instance.ShootArrow();
     }
     void Jump()
     {
