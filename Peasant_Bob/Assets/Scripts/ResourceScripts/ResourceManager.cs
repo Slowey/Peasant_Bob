@@ -26,6 +26,23 @@ public class ResourceManager : MonoBehaviour {
         m_allResources[p_type].Add(p_resource);
     }
 
+    public GameObject FindOneObjectOfType(Vector3 p_worldPosition, float p_maxDistance, ResourceType p_type)
+    {
+        if (!m_allResources.ContainsKey(p_type))
+        {
+            // We dont have that resource
+            return null;
+        }
+
+        List<GameObject> objectsInRange = GetAllResourcesInRange(p_worldPosition, p_maxDistance, p_type);
+        if (objectsInRange.Count <= 0)
+        {
+            return null;
+        }
+        int objectToSend = Random.Range(0, objectsInRange.Count - 1);
+        return objectsInRange[objectToSend];
+    }
+
     public GameObject FindClosestResourceOfType(Vector3 p_worldPosition, float p_maxDistance, ResourceType p_type)
     {
         if (!m_allResources.ContainsKey(p_type))
@@ -79,5 +96,19 @@ public class ResourceManager : MonoBehaviour {
             return m_availableResources[p_type];
         }
         return 0;
+    }
+
+    private List<GameObject> GetAllResourcesInRange(Vector3 p_position,float p_range, ResourceType p_type)
+    {
+        List<GameObject> objects = new List<GameObject>();
+        foreach (var item in m_allResources[p_type])
+        {
+            Vector3 objectPosition = item.transform.position;
+            if (Vector3.Distance(objectPosition, p_position) <= p_range)
+            {
+                objects.Add(item);
+            }
+        }
+        return objects;
     }
 }

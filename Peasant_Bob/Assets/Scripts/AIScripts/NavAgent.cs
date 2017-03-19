@@ -97,7 +97,7 @@ public class NavAgent : MonoBehaviour {
             }
             else if (m_state == AgentsManager.AgentStates.LeaveResources)
             {
-                Vector3 newPosition = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().FindClosestResourceOfType(gameObject.transform.position,1000, ResourceType.Wood).transform.position;
+                Vector3 newPosition = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().FindOneObjectOfType(gameObject.transform.position,1000, ResourceType.Wood).transform.position;
                 SetDestination(newPosition, AgentsManager.AgentStates.GatheringResource);
             }
         }
