@@ -81,6 +81,19 @@ public class DefenderBehaviour : UnitBase
                     }
                 }
 
+                if (m_team.team == Team.Teams.Red)
+                {
+                    Vector3 dirPlay = GameObject.Find("Player").transform.position - mypos;
+                    if (dirPlay.magnitude < range && Vector3.Dot(dirPlay.normalized, transform.forward) > 0.3f)
+                    {
+                        if (dirPlay.magnitude < lastDir.magnitude)
+                        {
+                            lastDir = dirPlay;
+                            potentials.Add(GameObject.Find("Player"));
+                        }
+                    }
+                }
+
                 for (int i = 0; i < potentials.Count; i++)
                 {
                     potentials[i].GetComponent<Health>().TakeDamage(GetComponent<UnitInformation>().meleeDamage);
@@ -143,6 +156,24 @@ public class DefenderBehaviour : UnitBase
                             potential = agent;
                         }
                     }
+                }
+            }
+        }
+
+        if (m_team.team == Team.Teams.Red)
+        {
+            Vector3 dirPlay = GameObject.Find("Player").transform.position - mypos;
+            if (dirPlay.magnitude < aggroRange)
+            {
+                if (potential != null && dirPlay.magnitude < lastDir.magnitude)
+                {
+                    lastDir = dirPlay;
+                    potential = GameObject.Find("Player");
+                }
+                else if (potential == null)
+                {
+                    lastDir = dirPlay;
+                    potential = GameObject.Find("Player");
                 }
             }
         }

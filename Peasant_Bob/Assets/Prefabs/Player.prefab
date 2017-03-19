@@ -380,6 +380,8 @@ GameObject:
   - component: {fileID: 114783338379282778}
   - component: {fileID: 114513567031900732}
   - component: {fileID: 114361917098780740}
+  - component: {fileID: 114811911830133266}
+  - component: {fileID: 114251498639290816}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -860,6 +862,18 @@ MonoBehaviour:
       type: 2}
   m_timeDistanceChanger: 10
   m_shootCooldown: 1
+--- !u!114 &114251498639290816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936290056502002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d8fa71bd55399478ee12aeb59e09d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!114 &114349459389508184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -959,6 +973,19 @@ MonoBehaviour:
   - {fileID: 1317323749662104, guid: d7bed98cfdb4ddc49a00e95fa1aed875, type: 2}
   - {fileID: 1055352571389802, guid: b5bba2f3c633fce4b86631697e35b9d4, type: 2}
   - {fileID: 1350227143289514, guid: fa8ae6ac59fd01844ab45f1cf7cd772e, type: 2}
+  - {fileID: 1047710258631608, guid: 7eeccb95097e3e84792c9ad565c9a6e1, type: 2}
+--- !u!114 &114811911830133266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936290056502002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curHealth: 100
 --- !u!136 &136279914790644470
 CapsuleCollider:
   m_ObjectHideFlags: 1

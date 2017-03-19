@@ -146,13 +146,13 @@ MonoBehaviour:
   resourceCost: 50
   spawnTime: 1
   requireBeds: 1
-  maxHealth: 1000
-  range: 1000
-  attackSpeed: 5
+  maxHealth: 500
+  range: 100
+  attackSpeed: 8
   attackAnimation: 0
   meleeDamage: 0
   projectiles:
-  - damage: 1000
+  - damage: 300
     timeDistanceRelation: 50
     projectile: {fileID: 1396871299902510, guid: bae8948937c39c64c81e8ac0655b994f,
       type: 2}
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroRange: 200
+  offset: 0
 --- !u!114 &114666246207219046
 MonoBehaviour:
   m_ObjectHideFlags: 1

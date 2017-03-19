@@ -794,11 +794,11 @@ MonoBehaviour:
   resourceCost: 50
   spawnTime: 1
   requireBeds: 1
-  maxHealth: 5000
+  maxHealth: 250
   range: 2
   attackSpeed: 2
   attackAnimation: 0
-  meleeDamage: 100
+  meleeDamage: 150
   projectiles: []
 --- !u!136 &136315768107622246
 CapsuleCollider:

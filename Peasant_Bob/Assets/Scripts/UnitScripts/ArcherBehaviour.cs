@@ -89,6 +89,24 @@ public class ArcherBehaviour : UnitBase {
                     }
                 }
 
+                if (m_team.team == Team.Teams.Red)
+                {
+                    Vector3 dirPlay = GameObject.Find("Player").transform.position - mypos;
+                    if (dirPlay.magnitude < aggroRange)
+                    {
+                        if (target != null && dirPlay.magnitude < lastDir.magnitude)
+                        {
+                            lastDir = dirPlay;
+                            target = GameObject.Find("Player");
+                        }
+                        else if (target == null)
+                        {
+                            lastDir = dirPlay;
+                            target = GameObject.Find("Player");
+                        }
+                    }
+                }
+
                 if (target == null)
                 {
                     attacked = true;
@@ -126,7 +144,7 @@ public class ArcherBehaviour : UnitBase {
                 rigProj.AddForce(velocity, ForceMode.VelocityChange);
                 proj.GetComponent<Projectile>().damage = projInfo.damage;
                 proj.GetComponent<Team>().team = m_team.team;
-                proj.GetComponent<Projectile>().EnableColliderAfter(1.0f);
+                proj.GetComponent<Projectile>().EnableColliderAfter(0.1f);
 
                 attacked = true;
             }
@@ -188,6 +206,25 @@ public class ArcherBehaviour : UnitBase {
                 }
             }
         }
+
+        if(m_team.team == Team.Teams.Red)
+        {
+            Vector3 dirPlay = GameObject.Find("Player").transform.position - mypos;
+            if (dirPlay.magnitude < aggroRange)
+            {
+                if (potential != null && dirPlay.magnitude < lastDir.magnitude)
+                {
+                    lastDir = dirPlay;
+                    potential = GameObject.Find("Player");
+                }
+                else if (potential == null)
+                {
+                    lastDir = dirPlay;
+                    potential = GameObject.Find("Player");
+                }
+            }
+        }
+
 
         // add buildings
 

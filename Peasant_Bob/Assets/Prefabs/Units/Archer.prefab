@@ -808,8 +808,8 @@ MonoBehaviour:
   resourceCost: 50
   spawnTime: 1
   requireBeds: 1
-  maxHealth: 1000
-  range: 100
+  maxHealth: 150
+  range: 50
   attackSpeed: 1
   attackAnimation: 0
   meleeDamage: 0
@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad0206ee21a5c49b84dbd90a4b1392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRange: 200
+  aggroRange: 100
   offset: 1
 --- !u!114 &114431479079180644
 MonoBehaviour:

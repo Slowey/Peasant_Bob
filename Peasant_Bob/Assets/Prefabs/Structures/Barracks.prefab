@@ -3259,7 +3259,7 @@ MonoBehaviour:
   m_unitType: 1
   m_unitPrefab: {fileID: 1926222319910638, guid: 1e77535b06ceb2341a1cd147ded66bff,
     type: 2}
-  m_unitCost: 50
+  m_unitCost: 60
   m_trainingTime: 5
 --- !u!114 &114689621457341548
 MonoBehaviour:
@@ -3310,7 +3310,7 @@ MonoBehaviour:
   gridSizeX: 16
   gridSizeY: 16
   buildTime: 0
-  maxHealth: 2000
+  maxHealth: 1000
 --- !u!208 &208666623103648016
 NavMeshObstacle:
   m_ObjectHideFlags: 1

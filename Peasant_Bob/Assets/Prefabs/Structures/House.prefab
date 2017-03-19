@@ -172,7 +172,7 @@ MonoBehaviour:
   gridSizeX: 6
   gridSizeY: 6
   buildTime: 0
-  maxHealth: 0
+  maxHealth: 500
 --- !u!114 &114955237512121684
 MonoBehaviour:
   m_ObjectHideFlags: 1

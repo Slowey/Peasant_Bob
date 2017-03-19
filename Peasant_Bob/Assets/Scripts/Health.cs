@@ -16,6 +16,10 @@ public class Health : MonoBehaviour {
         {
             maxHealth = GetComponent<StructureInformation>().maxHealth;
         }
+        else
+        {
+            maxHealth = curHealth;
+        }
         curHealth = maxHealth;
     }
 	

@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHealth: 0
 --- !u!114 &114600344406239902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_unitType: 1
   m_unitPrefab: {fileID: 1099477620601708, guid: b3b3247b9c354904bb83f2f87e5cf8ef,
     type: 2}
-  m_unitCost: 10
+  m_unitCost: 60
   m_trainingTime: 5
 --- !u!114 &114850935257221414
 MonoBehaviour:
@@ -182,7 +183,7 @@ MonoBehaviour:
   gridSizeX: 8
   gridSizeY: 16
   buildTime: 0
-  maxHealth: 0
+  maxHealth: 1000
 --- !u!208 &208829201392268768
 NavMeshObstacle:
   m_ObjectHideFlags: 1
