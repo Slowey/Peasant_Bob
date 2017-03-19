@@ -11,12 +11,14 @@ public class UnitInformation : MonoBehaviour {
     public float range = 0;
     public float attackSpeed = 0;
     public float attackAnimation = 0;
-
+    public float meleeDamage = 0;
 
     public List<Projectile.ProjectileInfo> projectiles = new List<Projectile.ProjectileInfo>();
 
-	// Use this for initialization
-	void Start () {
+
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

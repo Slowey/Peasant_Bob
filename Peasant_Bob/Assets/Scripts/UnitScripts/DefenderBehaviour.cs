@@ -46,41 +46,10 @@ public class DefenderBehaviour : UnitBase
         if (cooldown <= 0)
         {
             cooldown = GetComponent<UnitInformation>().attackSpeed;
-            Projectile.ProjectileInfo projInfo = GetComponent<UnitInformation>().projectiles[0];
-
-            Rigidbody rig = attackObj.GetComponent<Rigidbody>();
-
-            Vector3 velocity;
-            Vector3 acceleration = Physics.gravity;
-            Vector3 position = transform.position;
-            Vector3 positionObj = attackObj.transform.position;
-            Vector3 velocityObj = Vector3.zero;
-
-            if (rig != null)
-            {
-                velocityObj = rig.velocity;
-            }
-
-            //float airTime = projInfo.projectileAirTime;
-            float airTime = (attackObj.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
-            float shootoffset = 0.0f;
-
-            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f)) / airTime;
-
-
-
-
-            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized * shootoffset, Quaternion.identity);
-            //proj.transform.LookAt(proj.transform.position + velocity);
-            Rigidbody rigProj = proj.GetComponent<Rigidbody>();
-            rigProj.AddForce(velocity, ForceMode.VelocityChange);
-            proj.GetComponent<Projectile>().damage = projInfo.damage;
-            proj.GetComponent<Team>().team = m_team.team;
-            proj.GetComponent<Projectile>().EnableColliderAfter(1.0f);
-
 
             //Set damage
         }
+        transform.LookAt(attackObj.transform);
     }
 
     public void CheckInAggro(AgentsManager.AgentStates p_laststate)

@@ -46,23 +46,28 @@ public class ArcherBehaviour : UnitBase {
             Projectile.ProjectileInfo projInfo = GetComponent<UnitInformation>().projectiles[0];
 
             Rigidbody rig = attackObj.GetComponent<Rigidbody>();
+            VelocityTracker velTrack = attackObj.GetComponent<VelocityTracker>();
 
             Vector3 velocity;
             Vector3 acceleration = Physics.gravity;
             Vector3 position = transform.position;
-            Vector3 positionObj = attackObj.transform.position;
+            Vector3 positionObj = attackObj.transform.position + new Vector3(0, 1, 0); // TODO get form collsion box halfway
             Vector3 velocityObj = Vector3.zero;
 
             if (rig != null)
             {
                 velocityObj = rig.velocity;
             }
+            else if(velTrack != null)
+            {
+                velocityObj = velTrack.velocity;
+            }
 
             //float airTime = projInfo.projectileAirTime;
             float airTime = (attackObj.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
             float shootoffset = 0.0f;
 
-            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1,0) - (acceleration * airTime * airTime / 2.0f))/ airTime;
+            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f))/ airTime;
 
             
             
@@ -74,10 +79,12 @@ public class ArcherBehaviour : UnitBase {
             proj.GetComponent<Projectile>().damage = projInfo.damage;
             proj.GetComponent<Team>().team = m_team.team;
             proj.GetComponent<Projectile>().EnableColliderAfter(1.0f);
-
+            
 
             //Set damage
         }
+
+        transform.LookAt(attackObj.transform);
     }
 
     public void CheckInAggro(AgentsManager.AgentStates p_laststate)
