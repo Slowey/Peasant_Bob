@@ -40,10 +40,10 @@ public class UnitSpawning : MonoBehaviour {
         pendingUnits++;
         if(pendingUnits == 1)
         {
-            BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
-            resourceManager.TakeResource(unitPrefab.GetComponent<UnitInformation>().resourceCost, ResourceType.Wood);
             timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
         }
+        BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
+        resourceManager.TakeResource(unitPrefab.GetComponent<UnitInformation>().resourceCost, ResourceType.Wood);
     }
 
     void CancelSpawning()
@@ -52,6 +52,8 @@ public class UnitSpawning : MonoBehaviour {
         {
             pendingUnits--;
             // Return resources
+            BedSystem.bedSystem.FreeBeds(unitPrefab.GetComponent<UnitInformation>().requireBeds);
+            resourceManager.GiveAmountOfType(unitPrefab.GetComponent<UnitInformation>().resourceCost, ResourceType.Wood);
         }
 
         if (pendingUnits == 0)
@@ -108,17 +110,7 @@ public class UnitSpawning : MonoBehaviour {
 
                     if (pendingUnits > 0)
                     {
-                        if (BedSystem.bedSystem.GetNumFreeBeds() < unitPrefab.GetComponent<UnitInformation>().requireBeds)
-                        {
-                            paused = true;
-                            timeLeft += unitPrefab.GetComponent<UnitInformation>().spawnTime;
-                        }
-                        else
-                        {
-                            BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
-                            resourceManager.TakeResource(unitPrefab.GetComponent<UnitInformation>().resourceCost, ResourceType.Wood);
-                            timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
-                        }
+                        timeLeft += unitPrefab.GetComponent<UnitInformation>().spawnTime;
                     }
                     else
                     {
