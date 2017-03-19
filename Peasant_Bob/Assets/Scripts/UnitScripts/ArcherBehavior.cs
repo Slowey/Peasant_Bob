@@ -7,7 +7,7 @@ public class ArcherBehavior : UnitBase {
 
     public float aggroRange = 10.0f;
     float shootRange;
-    float cooldown;
+    float cooldown = 0.0f;
 
 
 	// Use this for initialization
@@ -18,7 +18,7 @@ public class ArcherBehavior : UnitBase {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        cooldown -= Time.deltaTime;
 	}
 
     public override void FightingActions(AgentsManager.AgentStates p_state)
@@ -36,6 +36,34 @@ public class ArcherBehavior : UnitBase {
         }
 
 
+    }
+
+    void AttackUpdate(GameObject attackObj)
+    {
+        if (cooldown <= 0)
+        {
+            cooldown = GetComponent<UnitInformation>().attackSpeed;
+
+            Rigidbody rig = attackObj.GetComponent<Rigidbody>();
+
+            Vector3 velocity;
+            Vector3 acceleration = Physics.gravity;
+            Vector3 position = transform.position;
+            Vector3 positionObj = attackObj.transform.position;
+            Vector3 velocityObj = Vector3.zero;
+
+            if (rig != null)
+            {
+                velocityObj = rig.velocity;
+            }
+
+            float airTime = Vector3.ProjectOnPlane(attackObj.transform.position - transform.position, Vector3.up).magnitude;
+
+            velocity = (positionObj + velocityObj * airTime - position - (acceleration * airTime * airTime / 2.0f))/ airTime;
+
+            
+
+        }
     }
 
     public void CheckInAggro(AgentsManager.AgentStates p_laststate)
@@ -80,7 +108,7 @@ public class ArcherBehavior : UnitBase {
                 if (p_laststate == AgentsManager.AgentStates.Fighting)
                 {
                     // Continue fighting stuff
-
+                    AttackUpdate(potential);
                 }
                 else
                 {

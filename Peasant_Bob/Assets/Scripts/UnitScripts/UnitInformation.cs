@@ -11,6 +11,8 @@ public class UnitInformation : MonoBehaviour {
     public float range = 0;
     public float attackSpeed = 0;
 
+    public GameObject[] projectiles;
+
 	// Use this for initialization
 	void Start () {
 		
