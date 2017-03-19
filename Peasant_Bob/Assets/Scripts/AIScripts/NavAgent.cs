@@ -130,7 +130,7 @@ public class NavAgent : MonoBehaviour {
             default:
                 break;
         }
-        Animation animationComponent =  GetComponent<Animation>();
+        Animation animationComponent =  GetComponentInChildren<Animation>();
 
         if (animationComponent != null)
         {
