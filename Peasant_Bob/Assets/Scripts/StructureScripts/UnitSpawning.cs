@@ -6,6 +6,7 @@ public class UnitSpawning : MonoBehaviour {
 
     public GameObject unitPrefab;
 
+    ResourceManager resourceManager;
     int pendingUnits = 0;
     float timeLeft = 0;
 
@@ -24,11 +25,14 @@ public class UnitSpawning : MonoBehaviour {
         //structureMenu.AddMenuItem(StartSpawning, CancelSpawning, PercentageDone, NumQueuedUnits, CanSpawnMore, this);
         structureMenu.AddMenuItem(func1, func2, func3 ,func4, func5);
         timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
+
+        resourceManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
     }
 
     void StartSpawning()
     {
-        if(BedSystem.bedSystem.GetNumFreeBeds() < unitPrefab.GetComponent<UnitInformation>().requireBeds)
+        if(BedSystem.bedSystem.GetNumFreeBeds() < unitPrefab.GetComponent<UnitInformation>().requireBeds || 
+            resourceManager.GetResourceRemaining(ResourceType.Wood) < unitPrefab.GetComponent<UnitInformation>().resourceCost)
         {
             return;
         }
@@ -37,6 +41,7 @@ public class UnitSpawning : MonoBehaviour {
         if(pendingUnits == 1)
         {
             BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
+            resourceManager.TakeResource(unitPrefab.GetComponent<UnitInformation>().resourceCost, ResourceType.Wood);
             timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
         }
     }
@@ -74,7 +79,7 @@ public class UnitSpawning : MonoBehaviour {
 
     bool CanSpawnMore()
     {
-        return BedSystem.bedSystem.GetNumFreeBeds() >= unitPrefab.GetComponent<UnitInformation>().requireBeds;
+        return BedSystem.bedSystem.GetNumFreeBeds() >= unitPrefab.GetComponent<UnitInformation>().requireBeds && resourceManager.GetResourceRemaining(ResourceType.Wood) >= unitPrefab.GetComponent<UnitInformation>().resourceCost;
     }
 
     // Update is called once per frame
@@ -111,6 +116,7 @@ public class UnitSpawning : MonoBehaviour {
                         else
                         {
                             BedSystem.bedSystem.OccopyBed(unitPrefab.GetComponent<UnitInformation>().requireBeds);
+                            resourceManager.TakeResource(unitPrefab.GetComponent<UnitInformation>().resourceCost, ResourceType.Wood);
                             timeLeft = unitPrefab.GetComponent<UnitInformation>().spawnTime;
                         }
                     }

@@ -20,14 +20,14 @@ public class TrainAgentSystem : ObjectAgentSystem {
 	
 	// Update is called once per frame
 	void Update () {
-        if (inQueue > 0 && m_agents.Count < m_maxAgentsAssigned && CanSpawnMore())
+        if (inQueue > 0 && m_agents.Count < m_maxAgentsAssigned && m_agentManager.UnitIsAvailableForWork())
         {
-            StartSpawning();
-            inQueue--;     
+            GetAgentToTrain();
         }
         if (!inTraining && m_agents.Count > 0 && m_agents[0].GetComponent<NavAgent>().m_state == m_agentState)
         {
             inTraining = true;
+            inQueue--;     
         }
         if (inTraining)
         {
@@ -35,14 +35,14 @@ public class TrainAgentSystem : ObjectAgentSystem {
             if (m_training <= 0)
             {
                 Vector3 position = m_agents[0].transform.position;
-                m_agentManager.GetComponent<AgentsManager>().RemoveUnitFromAgentSystem(m_agents[0], m_agentState);
+
                 Destroy(m_agents[0]);
                 m_agents.Clear();
                 // Spawn dude
                 Instantiate(m_unitPrefab, position, Quaternion.identity);
-                inQueue--;
                 inTraining = false;
                 m_training = m_trainingTime;
+                m_agentManager.unitsOccupiedForTraining--;
             }
         }
 	}
@@ -51,36 +51,45 @@ public class TrainAgentSystem : ObjectAgentSystem {
     {
         if (CanSpawnMore())
         {
-            GameObject newAgent = base.AssignAgentToObject();
-            if (newAgent != null)
-            {
-                GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().TakeResource(m_unitCost, ResourceType.Wood);
-                newAgent.GetComponent<NavAgent>().SetDestination(base.FindClosestPositionForAgent(newAgent), m_agentState);
-                m_training = m_trainingTime;
-            }
-            
-            inQueue++;
+            inQueue++;          
+            GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().TakeResource(m_unitCost, ResourceType.Wood);
+            m_agentManager.unitsOccupiedForTraining++;
         }
     }
 
     void CancelSpawning()
-    {
-        inQueue--;
-        if (inQueue == 0)
+    {     
+        if (inQueue > 0)
+        {
+            GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
+            m_agentManager.unitsOccupiedForTraining--;
+            inQueue--;
+            if (inQueue == 0 && !inTraining)
+            {
+                foreach (var item in m_agents)
+                {
+                    m_agentManager.GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
+                }
+                m_agents.Clear();
+            }
+        }
+        else if (inTraining && inQueue == 0)
         {
             foreach (var item in m_agents)
             {
-                GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
                 m_agentManager.GetComponent<AgentsManager>().RemoveAgentFromTask(item, m_agentState);
                 inTraining = false;
             }
-            m_training = m_trainingTime;
             m_agents.Clear();
+            m_training = m_trainingTime;
+            GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>().GiveAmountOfType(m_unitCost, ResourceType.Wood);
+            m_agentManager.unitsOccupiedForTraining--;
         }
-        else if (inQueue < 0)
+        if (inQueue < 0)
         {
             inQueue = 0;
         }
+
         
     }
 
@@ -98,6 +107,16 @@ public class TrainAgentSystem : ObjectAgentSystem {
     {
         ResourceManager resourceManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
         AgentsManager agentsManager = m_agentManager.GetComponent<AgentsManager>();
-        return agentsManager.UnitIsAvailableForWork() && resourceManager.ResourceExists(m_unitCost, ResourceType.Wood);
+        return agentsManager.GetUnitsAvailableForRecruiting() > 0 && resourceManager.ResourceExists(m_unitCost, ResourceType.Wood);
+    }
+
+    private void GetAgentToTrain()
+    {
+        GameObject newAgent = base.AssignAgentToObject();
+        if (newAgent != null)
+        {
+            newAgent.GetComponent<NavAgent>().SetDestination(base.FindClosestPositionForAgent(newAgent), m_agentState);
+            m_training = m_trainingTime;
+        }
     }
 }

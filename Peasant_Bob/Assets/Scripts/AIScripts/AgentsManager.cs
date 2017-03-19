@@ -17,7 +17,7 @@ public class AgentsManager : MonoBehaviour {
     }
     // This basically keeps track of what agent is having what goal
     public Dictionary<AgentStates, List<GameObject>> m_agents = new Dictionary<AgentStates, List<GameObject>>();
-
+    public int unitsOccupiedForTraining;
 
     // This runs before start
     void Awake()
@@ -98,7 +98,7 @@ public class AgentsManager : MonoBehaviour {
 
     public int GetUnitsAvailableForRecruiting()
     {
-        return m_agents[AgentStates.Idle].Count + m_agents[AgentStates.GatheringResource].Count + m_agents[AgentStates.Construction].Count + m_agents[AgentStates.Training].Count;
+        return m_agents[AgentStates.Idle].Count + m_agents[AgentStates.GatheringResource].Count + m_agents[AgentStates.Construction].Count + m_agents[AgentStates.Training].Count - unitsOccupiedForTraining;
     }
 
     // Call on destroy
