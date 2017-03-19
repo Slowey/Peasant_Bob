@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 136305721837553274}
   - component: {fileID: 114548964102397626}
   - component: {fileID: 114926172849816426}
+  - component: {fileID: 114077727400929344}
+  - component: {fileID: 208395679058550764}
   m_Layer: 8
   m_Name: CanonTower
   m_TagString: Untagged
@@ -87,6 +89,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317323749662104}
   m_Mesh: {fileID: 4300000, guid: b81ea6f507e53044ebd47fedc55c978e, type: 3}
+--- !u!114 &114077727400929344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317323749662104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b08e2b530481434995bf16d7357954d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114548964102397626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHealth: 0
 --- !u!114 &114843049842382952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,3 +152,18 @@ CapsuleCollider:
   m_Height: 22.491247
   m_Direction: 1
   m_Center: {x: 0, y: 4.97, z: 0}
+--- !u!208 &208395679058550764
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317323749662104}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2, y: 5, z: 2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
