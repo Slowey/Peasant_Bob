@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23228766530125826}
   - component: {fileID: 95254882268589260}
   - component: {fileID: 65169348187004462}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ BoxCollider:
   m_GameObject: {fileID: 1638933036164672}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.3016691, y: 0.17770544, z: 0.17770548}
   m_Center: {x: -1.1267276, y: 0, z: 0}

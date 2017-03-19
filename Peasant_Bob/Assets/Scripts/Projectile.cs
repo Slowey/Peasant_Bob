@@ -46,13 +46,9 @@ public class Projectile : MonoBehaviour {
             {
                 enabledColliders = true;
 
-                foreach (Transform item in transform)
+                foreach (Collider item in transform.GetComponentsInChildren<Collider>())
                 {
-                    Collider collider = item.GetComponent<Collider>();
-                    if (collider)
-                    {
-                        collider.enabled = true;
-                    }
+                    item.enabled = true;
                 }
             }
         }

@@ -58,7 +58,7 @@ public class DefenderBehaviour : UnitBase
                 GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Fighting;
                 attacked = false;
             }
-            else if (curTime < totalLen*0.2f)
+            else if (curTime < totalLen*0.2f && attacked == false)
             {
                 // Do dmg
                 Vector3 mypos = transform.position;

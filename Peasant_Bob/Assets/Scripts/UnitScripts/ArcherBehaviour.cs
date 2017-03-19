@@ -9,6 +9,7 @@ public class ArcherBehaviour : UnitBase {
     float shootRange;
     float cooldown = 0.0f;
 
+    bool attacked = false;
     public float offset = 0.0f;
 
 
@@ -42,7 +43,94 @@ public class ArcherBehaviour : UnitBase {
 
     public override void AttackingActions(AgentsManager.AgentStates state)
     {
+        Animation animationComponent = GetComponentInChildren<Animation>();
 
+        if (animationComponent != null)
+        {
+            float totalLen = animationComponent.GetClip("Peasant_Attack").length;
+            float curTime = animationComponent["Peasant_Attack"].time;
+
+
+            if (curTime <= 0.0f && attacked == true)
+            {
+                // Do somethign else
+                GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Fighting;
+                GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Fighting;
+                attacked = false;
+            }
+            else if (curTime < totalLen * 0.2f && attacked == false)
+            {
+                // Do dmg
+                Vector3 mypos = transform.position;
+                Vector3 lastDir = new Vector3(0, 0, 0);
+                GameObject target = null;
+
+                foreach (var item in enemyAgentManager)
+                {
+                    foreach (var agentList in item.m_agents)
+                    {
+                        foreach (var agent in agentList.Value)
+                        {
+                            Vector3 dir = agent.transform.position - mypos;
+                            if (dir.magnitude < aggroRange)
+                            {
+                                if (target != null && dir.magnitude < lastDir.magnitude)
+                                {
+                                    lastDir = dir;
+                                    target = agent;
+                                }
+                                else if (target == null)
+                                {
+                                    lastDir = dir;
+                                    target = agent;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (target == null)
+                {
+                    attacked = true;
+                    return;
+                }
+
+                Rigidbody rig = target.GetComponent<Rigidbody>();
+                VelocityTracker velTrack = target.GetComponent<VelocityTracker>();
+
+                Vector3 velocity;
+                Vector3 acceleration = Physics.gravity;
+                Vector3 position = transform.position;
+                Vector3 positionObj = target.transform.position + new Vector3(0, 1, 0); // TODO get form collsion box halfway
+                Vector3 velocityObj = Vector3.zero;
+
+                if (rig != null)
+                {
+                    velocityObj = rig.velocity;
+                }
+                else if (velTrack != null)
+                {
+                    velocityObj = velTrack.velocity;
+                }
+
+                Projectile.ProjectileInfo projInfo = GetComponent<UnitInformation>().projectiles[0];
+                //float airTime = projInfo.projectileAirTime;
+                float airTime = (target.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
+
+                velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f)) / airTime;
+
+
+                GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized * offset, Quaternion.identity);
+                //proj.transform.LookAt(proj.transform.position + velocity);
+                Rigidbody rigProj = proj.GetComponent<Rigidbody>();
+                rigProj.AddForce(velocity, ForceMode.VelocityChange);
+                proj.GetComponent<Projectile>().damage = projInfo.damage;
+                proj.GetComponent<Team>().team = m_team.team;
+                proj.GetComponent<Projectile>().EnableColliderAfter(1.0f);
+
+                attacked = true;
+            }
+        }
     }
 
     void AttackUpdate(GameObject attackObj)
@@ -50,44 +138,22 @@ public class ArcherBehaviour : UnitBase {
         if (cooldown <= 0)
         {
             cooldown = GetComponent<UnitInformation>().attackSpeed;
-            Projectile.ProjectileInfo projInfo = GetComponent<UnitInformation>().projectiles[0];
 
-            Rigidbody rig = attackObj.GetComponent<Rigidbody>();
-            VelocityTracker velTrack = attackObj.GetComponent<VelocityTracker>();
 
-            Vector3 velocity;
-            Vector3 acceleration = Physics.gravity;
-            Vector3 position = transform.position;
-            Vector3 positionObj = attackObj.transform.position + new Vector3(0, 1, 0); // TODO get form collsion box halfway
-            Vector3 velocityObj = Vector3.zero;
+            // Start attack animation
+            GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Attacking;
+            GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Attacking;
 
-            if (rig != null)
+            Animation animationComponent = GetComponentInChildren<Animation>();
+
+            if (animationComponent != null)
             {
-                velocityObj = rig.velocity;
-            }
-            else if(velTrack != null)
-            {
-                velocityObj = velTrack.velocity;
+                float totalLen = animationComponent.GetClip("Peasant_Attack").length;
+
+                animationComponent["Peasant_Attack"].speed = totalLen / GetComponent<UnitInformation>().attackSpeed;
+                attacked = false;
             }
 
-            //float airTime = projInfo.projectileAirTime;
-            float airTime = (attackObj.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
-
-            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f))/ airTime;
-
-            
-            
-
-            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized* offset, Quaternion.identity);
-            //proj.transform.LookAt(proj.transform.position + velocity);
-            Rigidbody rigProj = proj.GetComponent<Rigidbody>();
-            rigProj.AddForce(velocity, ForceMode.VelocityChange);
-            proj.GetComponent<Projectile>().damage = projInfo.damage;
-            proj.GetComponent<Team>().team = m_team.team;
-            proj.GetComponent<Projectile>().EnableColliderAfter(1.0f);
-            
-
-            //Set damage
         }
 
         transform.LookAt(attackObj.transform);

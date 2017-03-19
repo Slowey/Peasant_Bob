@@ -877,7 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroRange: 200
-  offset: 0
+  offset: 1
 --- !u!114 &114431479079180644
 MonoBehaviour:
   m_ObjectHideFlags: 1
