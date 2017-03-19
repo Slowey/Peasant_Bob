@@ -127,7 +127,7 @@ public class NavAgent : MonoBehaviour {
             case AgentsManager.AgentStates.Fighting:
             case AgentsManager.AgentStates.Guarding:
             case AgentsManager.AgentStates.LeaveResources:
-                clipToChangeTo = "Peasant_Attack";
+                clipToChangeTo = "Peasant_Harvest";
                 break;
             case AgentsManager.AgentStates.Walking:
                 clipToChangeTo = "Peasant_Run";

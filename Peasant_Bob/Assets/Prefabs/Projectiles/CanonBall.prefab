@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114833465304114900}
   - component: {fileID: 54807631084361552}
   - component: {fileID: 114900057625989196}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CanonBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33654998140282446}
   - component: {fileID: 135981704393071378}
   - component: {fileID: 23079283904944808}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
