@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 65330405279083230}
   - component: {fileID: 114298525164311714}
   - component: {fileID: 114023932860043184}
+  - component: {fileID: 114600344406239902}
   m_Layer: 8
   m_Name: Archery
   m_TagString: Untagged
@@ -136,6 +137,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71f5be15beffb3c49b8310e8002bfe87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114600344406239902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991026482798732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b08e2b530481434995bf16d7357954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114619419310636872

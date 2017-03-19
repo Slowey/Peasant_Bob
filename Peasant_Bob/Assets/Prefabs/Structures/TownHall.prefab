@@ -204,7 +204,7 @@ MonoBehaviour:
   m_maxAgentsAssigned: 1000
   m_agentState: 1
   m_maxDistanceToGatherResources: 1000
-  m_startPeasantCount: 3
+  m_startPeasantCount: 0
   m_peasant: {fileID: 1175835732278254, guid: a183eb6ab8dbb9b498704a96d954480b, type: 2}
 --- !u!114 &114952545947869086
 MonoBehaviour:
