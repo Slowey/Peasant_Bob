@@ -96,6 +96,11 @@ public class AgentsManager : MonoBehaviour {
         return m_agents[AgentStates.Idle].Count > 0 || m_agents[AgentStates.GatheringResource].Count > 0;
     }
 
+    public int GetUnitsAvailableForRecruiting()
+    {
+        return m_agents[AgentStates.Idle].Count + m_agents[AgentStates.GatheringResource].Count + m_agents[AgentStates.Construction].Count + m_agents[AgentStates.Training].Count;
+    }
+
     // Call on destroy
     public bool RemoveUnitFromAgentSystem(GameObject p_agent, AgentStates p_inState)
     {

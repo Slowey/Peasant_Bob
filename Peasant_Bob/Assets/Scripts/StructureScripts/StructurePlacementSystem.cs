@@ -171,9 +171,7 @@ public class StructurePlacementSystem : MonoBehaviour {
 
                     if (Input.GetKey(KeyCode.LeftShift) == false)
                     {
-                        placing = false;
-                        Destroy(currentStructure);
-                        currentStructure = null;
+                        CancelPlace();
                     }
                 }
             }
@@ -240,16 +238,19 @@ public class StructurePlacementSystem : MonoBehaviour {
     public void CancelPlace()
     {
         placing = false;
+        GameObject.Find("BuildingGUI").GetComponent<ShowThisMenu>().ShowThis(false);
         if (currentStructure)
         {
             Destroy(currentStructure);
         }
+        currentStructure = null;
     }
 
     public void StartPlacing(GameObject obj)
     {
         // Cancel any previous
         CancelPlace();
+        GameObject.Find("BuildingGUI").GetComponent<ShowThisMenu>().ShowThis(true);
 
         currentStructurePrefab = obj;
         currentStructure = Instantiate(placeStructurePrefab, transform.position, Quaternion.identity);

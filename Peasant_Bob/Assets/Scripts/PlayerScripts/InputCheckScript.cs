@@ -60,8 +60,8 @@ public class InputCheckScript : MonoBehaviour {
                 if (activeMenu != null)
                     activeMenu.DestroyMenu();
                 activeMenu = null;
-                placeMentSystem.CancelPlace();
             }
+            placeMentSystem.CancelPlace();
             unitPlacementSystem.UnitToPlace = null;
         }
 
