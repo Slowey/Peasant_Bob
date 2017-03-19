@@ -3,23 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherBehavior : UnitBase {
+public class DefenderBehaviour : UnitBase
+{
 
     public float aggroRange = 10.0f;
     float shootRange;
     float cooldown = 0.0f;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         base.Start();
         shootRange = GetComponent<UnitInformation>().range;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         cooldown -= Time.deltaTime;
-	}
+    }
 
     public override void FightingActions(AgentsManager.AgentStates p_state)
     {
@@ -62,12 +65,12 @@ public class ArcherBehavior : UnitBase {
             float airTime = (attackObj.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
             float shootoffset = 0.0f;
 
-            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1,0) - (acceleration * airTime * airTime / 2.0f))/ airTime;
+            velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f)) / airTime;
 
-            
-            
 
-            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized* shootoffset,Quaternion.identity);
+
+
+            GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized * shootoffset, Quaternion.identity);
             //proj.transform.LookAt(proj.transform.position + velocity);
             Rigidbody rigProj = proj.GetComponent<Rigidbody>();
             rigProj.AddForce(velocity, ForceMode.VelocityChange);
@@ -100,7 +103,7 @@ public class ArcherBehavior : UnitBase {
                             lastDir = dir;
                             potential = agent;
                         }
-                        else if(potential == null)
+                        else if (potential == null)
                         {
                             lastDir = dir;
                             potential = agent;
