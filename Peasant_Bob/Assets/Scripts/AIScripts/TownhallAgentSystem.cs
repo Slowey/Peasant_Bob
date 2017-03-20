@@ -22,7 +22,7 @@ public class TownhallAgentSystem : ObjectAgentSystem {
         if (m_idleAgentsAssigned.Count > 0)
         {
             ResourceManager resourceManager = GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
-            GameObject closestResource = resourceManager.FindOneObjectOfType(transform.position, m_maxDistanceToGatherResources, ResourceType.Wood);
+            GameObject closestResource = resourceManager.FindClosestResourceOfType(transform.position, m_maxDistanceToGatherResources, ResourceType.Wood);
             foreach (var item in m_idleAgentsAssigned)
             {
                 item.GetComponent<NavAgent>().SetDestination(closestResource.transform.position, m_agentState);
@@ -34,7 +34,7 @@ public class TownhallAgentSystem : ObjectAgentSystem {
     public void SendNewAgentToGatherResources()
     {
         ResourceManager resourceManager = GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
-        GameObject closestResource = resourceManager.FindOneObjectOfType(transform.position, m_maxDistanceToGatherResources, ResourceType.Wood);
+        GameObject closestResource = resourceManager.FindClosestResourceOfType(transform.position, m_maxDistanceToGatherResources, ResourceType.Wood);
         if (closestResource == null)
         {
             GameObject newAgent = base.AssignAgentToObject();
@@ -44,7 +44,7 @@ public class TownhallAgentSystem : ObjectAgentSystem {
         else
         {
             GameObject newAgent = base.AssignAgentToObject();
-            newAgent.GetComponent<NavAgent>().SetDestination(closestResource.transform.position, m_agentState);
+            newAgent.GetComponent<NavAgent>().SetDestination(newAgent.transform.position, AgentsManager.AgentStates.LeaveResources);
         }
     }
 

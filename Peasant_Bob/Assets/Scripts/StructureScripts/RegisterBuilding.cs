@@ -8,4 +8,9 @@ public class RegisterBuilding : MonoBehaviour {
 	void Start () {
         BuildingTracker.buildingTracker.RegisterNewBuilding(gameObject, GetComponent<Team>().team);
 	}
+
+    private void OnDestroy()
+    {
+        BuildingTracker.buildingTracker.RemoveBuilding(gameObject, GetComponent<Team>().team);
+    }
 }

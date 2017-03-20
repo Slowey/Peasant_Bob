@@ -116,6 +116,15 @@ public class AgentsManager : MonoBehaviour {
             return false;
         }
         m_agents[p_inState].RemoveAt(index);
+        if (p_inState == AgentStates.GatheringResource)
+        {
+            // Tell the townhall to release the agent
+            GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
+            if (townHall != null)
+            {
+                townHall.GetComponent<TownhallAgentSystem>().ReleaseAgent(p_agent);
+            }
+        }
         return true;
     }
     // HELPER FUNCTIONS
