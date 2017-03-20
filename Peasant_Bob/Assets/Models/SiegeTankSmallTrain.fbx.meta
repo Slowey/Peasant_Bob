@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: 268be317b61e90642924a995dc155656
+timeCreated: 1490042047
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: CanonBall
+    100002: CanonBall1
+    100004: CanonBall2
+    100006: CanonBall3
+    100008: CanonTower
+    100010: joint1
+    100012: joint2
+    100014: joint3
+    100016: joint4
+    100018: joint5
+    100020: joint6
+    100022: joint7
+    100024: joint8
+    100026: pCube113
+    100028: polySurface55
+    100030: //RootNode
+    100032: transform1
+    100034: transform2
+    100036: transform3
+    100038: transform4
+    100040: Wheel
+    100042: Wheel1
+    100044: Wheel2
+    400000: CanonBall
+    400002: CanonBall1
+    400004: CanonBall2
+    400006: CanonBall3
+    400008: CanonTower
+    400010: joint1
+    400012: joint2
+    400014: joint3
+    400016: joint4
+    400018: joint5
+    400020: joint6
+    400022: joint7
+    400024: joint8
+    400026: pCube113
+    400028: polySurface55
+    400030: //RootNode
+    400032: transform1
+    400034: transform2
+    400036: transform3
+    400038: transform4
+    400040: Wheel
+    400042: Wheel1
+    400044: Wheel2
+    4300000: Wheel
+    4300002: polySurface55
+    4300004: Wheel1
+    4300006: Wheel2
+    4300008: CanonBall3
+    7400000: Peasant_Train
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: CanonBall3
+    13700002: polySurface55
+    13700004: Wheel
+    13700006: Wheel1
+    13700008: Wheel2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 1
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Peasant_Train
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CanonBall
+        weight: 1
+      - path: CanonBall/transform4
+        weight: 1
+      - path: CanonBall1
+        weight: 1
+      - path: CanonBall1/transform3
+        weight: 1
+      - path: CanonBall2
+        weight: 1
+      - path: CanonBall2/transform2
+        weight: 1
+      - path: CanonBall3
+        weight: 1
+      - path: CanonTower
+        weight: 1
+      - path: CanonTower/polySurface55
+        weight: 1
+      - path: joint1
+        weight: 1
+      - path: joint1/joint2
+        weight: 1
+      - path: joint1/joint2/joint3
+        weight: 1
+      - path: joint1/joint4
+        weight: 1
+      - path: joint1/joint5
+        weight: 1
+      - path: joint1/joint5/joint6
+        weight: 1
+      - path: joint1/joint7
+        weight: 1
+      - path: joint1/joint7/joint8
+        weight: 1
+      - path: pCube113
+        weight: 1
+      - path: pCube113/transform1
+        weight: 1
+      - path: Wheel
+        weight: 1
+      - path: Wheel1
+        weight: 1
+      - path: Wheel2
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

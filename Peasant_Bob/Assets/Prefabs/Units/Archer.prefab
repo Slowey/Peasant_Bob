@@ -954,7 +954,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroRange: 100
+  attackAnimationLength: 1
   offset: 1
+  projectileActivationTime: 0.1
+  animationLeftPercentageShoot: 0.2
+  verticalOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &114431479079180644
 MonoBehaviour:
   m_ObjectHideFlags: 1

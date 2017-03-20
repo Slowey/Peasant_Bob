@@ -7,17 +7,22 @@ public class ArcherBehaviour : UnitBase {
 
     public float aggroRange = 10.0f;
     float shootRange;
-    float cooldown = 0.0f;
+    public float attackAnimationLength = 0.0f;
 
     bool attacked = false;
     public float offset = 0.0f;
+    public float projectileActivationTime = 0.0f;
+    public float animationLeftPercentageShoot = 0.0f;
+    public Vector3 verticalOffset;
+
+    float cooldown = 0.0f;
 
 
 	// Use this for initialization
 	void Start () {
         base.Start();
         shootRange = GetComponent<UnitInformation>().range;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -47,18 +52,18 @@ public class ArcherBehaviour : UnitBase {
 
         if (animationComponent != null)
         {
-            float totalLen = animationComponent.GetClip("Peasant_Attack").length;
-            float curTime = animationComponent["Peasant_Attack"].time;
+            //float totalLen = animationComponent.GetClip("Peasant_Attack").length;
+            float curTime = animationComponent["Peasant_Attack"].normalizedTime;
+            //animationComponent["Peasant_Attack"].play
 
-
-            if (curTime <= 0.0f && attacked == true)
+            if (curTime >= 1.0f && attacked == true)
             {
                 // Do somethign else
                 GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Fighting;
                 GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Fighting;
                 attacked = false;
             }
-            else if (curTime < totalLen * 0.2f && attacked == false)
+            else if (curTime > /*totalLen * */animationLeftPercentageShoot && attacked == false)
             {
                 // Do dmg
                 Vector3 mypos = transform.position;
@@ -154,7 +159,7 @@ public class ArcherBehaviour : UnitBase {
                 {
                     velocityObj = rig.velocity;
                 }
-                else if (velTrack != null)
+                if (velTrack != null)
                 {
                     velocityObj = velTrack.velocity;
                 }
@@ -163,16 +168,16 @@ public class ArcherBehaviour : UnitBase {
                 //float airTime = projInfo.projectileAirTime;
                 float airTime = (target.transform.position - transform.position).magnitude / projInfo.timeDistanceRelation;
 
-                velocity = (positionObj + velocityObj * airTime - position - new Vector3(0, 1, 0) - (acceleration * airTime * airTime / 2.0f)) / airTime;
+                velocity = (positionObj + velocityObj * airTime - position - verticalOffset - (acceleration * airTime * airTime / 2.0f)) / airTime;
 
 
-                GameObject proj = Instantiate(projInfo.projectile, transform.position + velocity.normalized * offset, Quaternion.identity);
+                GameObject proj = Instantiate(projInfo.projectile, transform.position + verticalOffset + velocity.normalized * offset, Quaternion.identity);
                 //proj.transform.LookAt(proj.transform.position + velocity);
                 Rigidbody rigProj = proj.GetComponent<Rigidbody>();
                 rigProj.AddForce(velocity, ForceMode.VelocityChange);
                 proj.GetComponent<Projectile>().damage = projInfo.damage;
                 proj.GetComponent<Team>().team = m_team.team;
-                proj.GetComponent<Projectile>().EnableColliderAfter(0.1f);
+                proj.GetComponent<Projectile>().EnableColliderAfter(projectileActivationTime);
 
                 attacked = true;
             }
@@ -196,10 +201,9 @@ public class ArcherBehaviour : UnitBase {
             {
                 float totalLen = animationComponent.GetClip("Peasant_Attack").length;
 
-                animationComponent["Peasant_Attack"].speed = totalLen / GetComponent<UnitInformation>().attackSpeed;
+                animationComponent["Peasant_Attack"].speed = totalLen / attackAnimationLength;
                 attacked = false;
             }
-
         }
 
         transform.LookAt(attackObj.transform);
