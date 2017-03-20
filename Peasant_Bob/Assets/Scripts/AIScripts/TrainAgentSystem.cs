@@ -46,6 +46,10 @@ public class TrainAgentSystem : ObjectAgentSystem {
                 m_agentManager.unitsOccupiedForTraining--;
             }
         }
+        if (m_agentManager.GetUnitsAvailableForRecruiting() < 0)
+        {
+            CancelSpawning();
+        }
 	}
 
     void StartSpawning()
