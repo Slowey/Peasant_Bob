@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DefenderBehaviour : UnitBase
 {
-
+    public float attackAnimationLength = 0.0f;
+    public float animationLeftPercentageAttack = 0.0f;
     public float aggroRange = 10.0f;
     float shootRange;
     float cooldown = 0.0f;
@@ -47,18 +48,18 @@ public class DefenderBehaviour : UnitBase
 
         if (animationComponent != null)
         {
-            float totalLen = animationComponent.GetClip("Peasant_Attack").length;
-            float curTime = animationComponent["Peasant_Attack"].time;
+            //float totalLen = animationComponent.GetClip("Peasant_Attack").length;
+            float curTime = animationComponent["Peasant_Attack"].normalizedTime;
 
 
-            if (curTime <= 0.0f && attacked == true)
+            if (curTime >= 1.0f && attacked == true)
             {
                 // Do somethign else
                 GetComponent<NavAgent>().m_state = AgentsManager.AgentStates.Fighting;
                 GetComponent<NavAgent>().m_wantedState = AgentsManager.AgentStates.Fighting;
                 attacked = false;
             }
-            else if (curTime < totalLen*0.2f && attacked == false)
+            else if (curTime > /*totalLen**/animationLeftPercentageAttack && attacked == false)
             {
                 // Do dmg
                 Vector3 mypos = transform.position;
@@ -136,7 +137,7 @@ public class DefenderBehaviour : UnitBase
             {
                 float totalLen = animationComponent.GetClip("Peasant_Attack").length;
 
-                animationComponent["Peasant_Attack"].speed = totalLen / GetComponent<UnitInformation>().attackSpeed;
+                animationComponent["Peasant_Attack"].speed = totalLen / attackAnimationLength;
                 attacked = false;
             }
         }

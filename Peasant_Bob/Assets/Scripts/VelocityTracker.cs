@@ -13,7 +13,7 @@ public class VelocityTracker : MonoBehaviour {
 
     void FixedUpdate()
     {
-        velocity = (lastPos - transform.position)/ Time.fixedDeltaTime;
+        velocity = (transform.position - lastPos)/ Time.fixedDeltaTime;
         lastPos = transform.position;
     }
 }

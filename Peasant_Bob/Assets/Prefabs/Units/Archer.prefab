@@ -899,7 +899,7 @@ MonoBehaviour:
   requireBeds: 1
   maxHealth: 150
   range: 50
-  attackSpeed: 1
+  attackSpeed: 2
   attackAnimation: 0
   meleeDamage: 0
   projectiles:
@@ -957,7 +957,7 @@ MonoBehaviour:
   attackAnimationLength: 1
   offset: 1
   projectileActivationTime: 0.1
-  animationLeftPercentageShoot: 0.2
+  animationLeftPercentageShoot: 0.8
   verticalOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &114431479079180644
 MonoBehaviour:
