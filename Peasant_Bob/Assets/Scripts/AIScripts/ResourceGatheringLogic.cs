@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceGatheringLogic : MonoBehaviour {
     public float m_maxResourceCarry;
     public float m_resourceGatherSpeed;
+    public float maxGatherDistance;
     private float m_currentResourceCarry;
     // Use this for initialization
     void Start() {

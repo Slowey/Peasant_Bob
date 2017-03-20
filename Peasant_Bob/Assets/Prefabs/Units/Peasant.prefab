@@ -840,8 +840,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd58c6d784b5734985e410d91492e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxResourceCarry: 10
-  m_resourceGatherSpeed: 1
+  m_maxResourceCarry: 30
+  m_resourceGatherSpeed: 3
+  maxGatherDistance: 50
 --- !u!114 &114419943897982558
 MonoBehaviour:
   m_ObjectHideFlags: 1
