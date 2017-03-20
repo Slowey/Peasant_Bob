@@ -89,7 +89,35 @@ public class ArcherBehaviour : UnitBase {
                     }
                 }
 
-                if (m_team.team == Team.Teams.Red)
+                for (int i = 0; i < (int)Team.Teams.NumberOfTeams; i++)
+                {
+                    if (m_team.team != (Team.Teams)i)
+                    {
+                        var buildings = BuildingTracker.buildingTracker.GetAllBuildingsOnTeam((Team.Teams)i);
+                        if (buildings != null)
+                        {
+                            foreach (var building in buildings)
+                            {
+                                Vector3 dir = building.transform.position - mypos;
+                                if (dir.magnitude < aggroRange)
+                                {
+                                    if (target != null && dir.magnitude < lastDir.magnitude)
+                                    {
+                                        lastDir = dir;
+                                        target = building;
+                                    }
+                                    else if (target == null)
+                                    {
+                                        lastDir = dir;
+                                        target = building;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (m_team.team != GameObject.Find("Player").GetComponent<Team>().team)
                 {
                     Vector3 dirPlay = GameObject.Find("Player").transform.position - mypos;
                     if (dirPlay.magnitude < aggroRange)
@@ -207,7 +235,35 @@ public class ArcherBehaviour : UnitBase {
             }
         }
 
-        if(m_team.team == Team.Teams.Red)
+        for (int i = 0; i < (int)Team.Teams.NumberOfTeams; i++)
+        {
+            if(m_team.team != (Team.Teams)i)
+            {
+                var buildings = BuildingTracker.buildingTracker.GetAllBuildingsOnTeam((Team.Teams)i);
+                if (buildings != null)
+                {
+                    foreach (var building in buildings)
+                    {
+                        Vector3 dir = building.transform.position - mypos;
+                        if (dir.magnitude < aggroRange)
+                        {
+                            if (potential != null && dir.magnitude < lastDir.magnitude)
+                            {
+                                lastDir = dir;
+                                potential = building;
+                            }
+                            else if (potential == null)
+                            {
+                                lastDir = dir;
+                                potential = building;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (m_team.team != GameObject.Find("Player").GetComponent<Team>().team)
         {
             Vector3 dirPlay = GameObject.Find("Player").transform.position - mypos;
             if (dirPlay.magnitude < aggroRange)

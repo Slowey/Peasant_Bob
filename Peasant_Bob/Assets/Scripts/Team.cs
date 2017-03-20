@@ -8,7 +8,7 @@ public class Team : MonoBehaviour {
     {
         Blue,
         Red,
-        Yellow,
+        NumberOfTeams,
     }
 
     public Teams team  = Teams.Blue;
