@@ -9,6 +9,10 @@ public class StructureInformation : MonoBehaviour {
     public float buildTime;
     public float maxHealth;
 
+    public float attackSpeed;
+    public float range;
+    public Projectile.ProjectileInfo[] projectiles;
+
     // Use this for initialization
     void Start () {
 		

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114926172849816426}
   - component: {fileID: 114077727400929344}
   - component: {fileID: 208395679058550764}
+  - component: {fileID: 114242700656807290}
   m_Layer: 8
   m_Name: CanonTower
   m_TagString: Untagged
@@ -100,6 +101,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b08e2b530481434995bf16d7357954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114242700656807290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317323749662104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58f73a4364cc454b91824ff8f7e03d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalOffset: {x: 0, y: 11, z: 0}
+  offset: 0
+  projectileActivationTime: 0.1
 --- !u!114 &114548964102397626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +142,13 @@ MonoBehaviour:
   gridSizeY: 4
   buildTime: 0
   maxHealth: 500
+  attackSpeed: 2
+  range: 75
+  projectiles:
+  - damage: 250
+    timeDistanceRelation: 25
+    projectile: {fileID: 1396871299902510, guid: bae8948937c39c64c81e8ac0655b994f,
+      type: 2}
 --- !u!114 &114926172849816426
 MonoBehaviour:
   m_ObjectHideFlags: 1

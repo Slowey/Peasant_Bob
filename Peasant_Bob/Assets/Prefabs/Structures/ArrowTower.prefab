@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114617080991012392}
   - component: {fileID: 114598546026219030}
   - component: {fileID: 208815618896254184}
+  - component: {fileID: 114527040920833206}
   m_Layer: 8
   m_Name: ArrowTower
   m_TagString: Untagged
@@ -112,6 +113,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 0
+--- !u!114 &114527040920833206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094593621942238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58f73a4364cc454b91824ff8f7e03d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalOffset: {x: 0, y: 12, z: 0}
+  offset: 0
+  projectileActivationTime: 0.1
 --- !u!114 &114598546026219030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +165,13 @@ MonoBehaviour:
   gridSizeY: 4
   buildTime: 0
   maxHealth: 500
+  attackSpeed: 1
+  range: 75
+  projectiles:
+  - damage: 125
+    timeDistanceRelation: 150
+    projectile: {fileID: 1160266822513386, guid: 18a9e1ade41a4eb4db8d3f06fcf92e78,
+      type: 2}
 --- !u!208 &208815618896254184
 NavMeshObstacle:
   m_ObjectHideFlags: 1
