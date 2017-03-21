@@ -169,10 +169,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98fff0baa9549248b65e3d0aedf7608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceCost: 100
   gridSizeX: 6
   gridSizeY: 6
   buildTime: 0
   maxHealth: 500
+  attackSpeed: 0
+  range: 0
+  projectiles: []
 --- !u!114 &114955237512121684
 MonoBehaviour:
   m_ObjectHideFlags: 1

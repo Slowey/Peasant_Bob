@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StructureInformation : MonoBehaviour {
 
+    public int resourceCost;
     public int gridSizeX;
     public int gridSizeY;
     public float buildTime;

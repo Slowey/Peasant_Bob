@@ -118,6 +118,15 @@ public class StructurePlacementSystem : MonoBehaviour {
                     }
                 }
 
+                if (occopied == false)
+                {
+                    if(GameObject.Find("ResourceManager").GetComponent<ResourceManager>().ResourceExists(currentStructurePrefab.GetComponent<StructureInformation>().resourceCost, ResourceType.Wood) == false)
+                    {
+                        occopied = true;
+                    }
+                }
+
+
                 if (occopied)
                 {
                     foreach (Renderer rend in currentStructure.GetComponentsInChildren<Renderer>())
@@ -152,7 +161,7 @@ public class StructurePlacementSystem : MonoBehaviour {
 
                 }
 
-                if (place && occopied == false)
+                if (place && occopied == false && GameObject.Find("ResourceManager").GetComponent<ResourceManager>().ResourceExists(currentStructurePrefab.GetComponent<StructureInformation>().resourceCost, ResourceType.Wood))
                 {
                     for (int y = -(currentStructureGridSize.y / 2); y < (currentStructureGridSize.y / 2); y++)
                     {
@@ -222,6 +231,8 @@ public class StructurePlacementSystem : MonoBehaviour {
             health.SetMaxHealth(sethealth);
             health.SetHealth(sethealth);
         }
+
+        GameObject.Find("ResourceManager").GetComponent<ResourceManager>().TakeResource(currentStructurePrefab.GetComponent<StructureInformation>().resourceCost, ResourceType.Wood);
 
         //MeshFilter filter = obj.GetComponent<MeshFilter>();
         //MeshFilter filterObj = currentStructurePrefab.GetComponent<MeshFilter>();
