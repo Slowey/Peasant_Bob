@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad0206ee21a5c49b84dbd90a4b1392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRange: 100
+  aggroRange: 75
   attackAnimationLength: 1
   offset: 1
   projectileActivationTime: 0.1
@@ -973,8 +973,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_state: 0
   m_wantedState: 0
-  m_okWorkDistance: 2
+  m_okWorkDistance: 4
   m_type: 1
+  nextWalkpoint: {fileID: 0}
 --- !u!114 &114833107440992866
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -15,6 +15,8 @@ public class NavAgent : MonoBehaviour {
     public float m_okWorkDistance;
     public UnitType m_type;
 
+    public Transform nextWalkpoint = null;
+
     UnitBase m_unitBase;
 
     GameObject agentManager;
@@ -42,7 +44,16 @@ public class NavAgent : MonoBehaviour {
         AgentsManager.AgentStates m_previousState = m_state;
         if (Vector3.Distance(agent.destination, transform.position) <= m_okWorkDistance)
         {
-            m_state = m_wantedState;
+            if (nextWalkpoint && nextWalkpoint.childCount != 0)
+            {
+                int nextPoint = Random.Range(0, nextWalkpoint.childCount - 1);
+                nextWalkpoint = nextWalkpoint.GetChild(nextPoint);
+                SetDestination(nextWalkpoint.transform.position, m_wantedState);
+            }
+            else
+            {
+                m_state = m_wantedState;
+            }
         }
         switch (m_wantedState)
         {

@@ -1190,8 +1190,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_state: 4
   m_wantedState: 4
-  m_okWorkDistance: 2
+  m_okWorkDistance: 4
   m_type: 1
+  nextWalkpoint: {fileID: 0}
 --- !u!114 &114095271707792368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1205,7 +1206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimationLength: 1
   animationLeftPercentageAttack: 0.1
-  aggroRange: 100
+  aggroRange: 75
 --- !u!114 &114135323213354870
 MonoBehaviour:
   m_ObjectHideFlags: 1

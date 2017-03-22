@@ -19,6 +19,7 @@ public class WaveSpawner : MonoBehaviour {
     private float timer;
     private float halfWidth;
     private float halfHeight;
+    public Transform firstwalkpoint = null;
     
 	// Use this for initialization
 	void Start () {
@@ -52,7 +53,16 @@ public class WaveSpawner : MonoBehaviour {
 
                         newUnit.GetComponent<Team>().team = GetComponent<Team>().team;
                         Vector3 positionToAttack = enemyBaseCenter.position;//buildingToAttack.GetComponent<ObjectAgentSystem>().FindClosestPositionForAgent(newUnit);
-                        newUnit.GetComponent<NavAgent>().SetDestination(positionToAttack, AgentsManager.AgentStates.Fighting);
+                        if (firstwalkpoint)
+                        {
+                            newUnit.GetComponent<NavAgent>().SetDestination(firstwalkpoint.transform.position, AgentsManager.AgentStates.Fighting);
+                            newUnit.GetComponent<NavAgent>().nextWalkpoint = firstwalkpoint;
+                        }
+                        else
+                        {
+                            newUnit.GetComponent<NavAgent>().SetDestination(positionToAttack, AgentsManager.AgentStates.Fighting);
+                        }
+
 
                         SetTeamColor.SetColorForObject(newUnit, GetComponent<Team>().team);
                     }
