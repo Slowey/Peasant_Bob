@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 114095271707792368}
   - component: {fileID: 114216729351132892}
   - component: {fileID: 136315768107622246}
+  - component: {fileID: 114275605683817600}
   m_Layer: 9
   m_Name: Defender
   m_TagString: Untagged
@@ -1228,6 +1229,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &114275605683817600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926222319910638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ee16054f85d834780145f9352b85d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114542519818878866
 MonoBehaviour:
   m_ObjectHideFlags: 1

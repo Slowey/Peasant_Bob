@@ -13,6 +13,8 @@ public class InputCheckScript : MonoBehaviour {
     UnitPlacementSystem unitPlacementSystem;
 
     StructureMenu activeMenu;
+
+    GameObject lastObjectHit;
 	// Use this for initialization
 	void Start () {
         placeMentSystem = GetComponent<StructurePlacementSystem>();
@@ -22,6 +24,28 @@ public class InputCheckScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        GameObject newObjectHIt = ThrowRay();
+        if (newObjectHIt != lastObjectHit )
+        {
+            if (lastObjectHit != null)
+            {
+                ChangeShader outline = lastObjectHit.transform.GetComponent<ChangeShader>();
+                if (outline != null)
+                {
+                    outline.ReturnObjectToNormal();
+                }
+            }
+            if (newObjectHIt != null)
+            {
+                ChangeShader outline = newObjectHIt.transform.GetComponent<ChangeShader>();
+                if (outline != null)
+                {
+                    outline.OutlineObject();
+                }
+            }
+        }
+        lastObjectHit = newObjectHIt;
+
         unitPlacementSystem.UpdateSystem();
         if(buildSelectSystem.UpdateSystem())
         {
@@ -105,7 +129,32 @@ public class InputCheckScript : MonoBehaviour {
             {
                 unitPlacementSystem.UnitToPlace = navigation.gameObject;
             }
-            // Else if on unti menu
         }
+    }
+
+    GameObject ThrowRay()
+    {
+        GameObject objectHit = null;
+        // Cast ray
+        Vector3 direction;
+        if (camera == null)
+        {
+            direction = transform.forward;
+        }
+        else
+        {
+            direction = camera.transform.forward;
+        }
+
+        Ray newRay = new Ray();
+        newRay.origin = transform.position;
+        newRay.direction = direction;
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(newRay, out hitInfo, 50))
+        {
+            objectHit = hitInfo.transform.gameObject;
+        }
+        return objectHit;
     }
 }

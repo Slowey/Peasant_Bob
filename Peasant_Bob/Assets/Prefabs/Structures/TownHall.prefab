@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 114952545947869086}
   - component: {fileID: 114408035888274806}
   - component: {fileID: 114345527558161812}
+  - component: {fileID: 114468606733164698}
   m_Layer: 8
   m_Name: TownHall
   m_TagString: TownHall
@@ -194,6 +195,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+--- !u!114 &114468606733164698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350227143289514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ee16054f85d834780145f9352b85d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114573910569041268
 MonoBehaviour:
   m_ObjectHideFlags: 1
