@@ -29,18 +29,24 @@ public class InputCheckScript : MonoBehaviour {
         {
             if (lastObjectHit != null)
             {
-                ChangeShader outline = lastObjectHit.transform.GetComponent<ChangeShader>();
-                if (outline != null)
-                {
-                    outline.ReturnObjectToNormal();
-                }
+            
+                    ChangeShader outline = lastObjectHit.transform.GetComponent<ChangeShader>();
+                    if (outline != null)
+                    {
+                        outline.ReturnObjectToNormal();
+                    }
+
             }
             if (newObjectHIt != null)
             {
-                ChangeShader outline = newObjectHIt.transform.GetComponent<ChangeShader>();
-                if (outline != null)
+                Team objectTeam = newObjectHIt.transform.GetComponent<Team>();
+                if (objectTeam != null && objectTeam.team == GetComponent<Team>().team)
                 {
-                    outline.OutlineObject();
+                    ChangeShader outline = newObjectHIt.transform.GetComponent<ChangeShader>();
+                    if (outline != null)
+                    {
+                        outline.OutlineObject();
+                    }
                 }
             }
         }
